@@ -11,7 +11,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>digitalpassport</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>DigitalPassport</name>
+    <packaging>pom</packaging>
+    <name>DigitalPassport</name>
 	<description>d0020e</description>
 	<url/>
 	<licenses>
@@ -20,7 +21,13 @@
 	<developers>
 		<developer/>
 	</developers>
-	<scm>
+    <modules>
+        <module>manufacturer</module>
+		<module>recycler</module>
+		<module>regulator</module>
+		<module>supplier</module>
+	</modules>
+    <scm>
 		<connection/>
 		<developerConnection/>
 		<tag/>
