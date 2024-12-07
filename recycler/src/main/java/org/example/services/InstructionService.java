@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.exceptions.EntryAlreadyExistsException;
 import org.example.exceptions.NoSuchEntryException;
 import org.example.models.RecycleInstructionsEntry;
 import org.example.repositories.InstructionRepository;
@@ -18,8 +19,12 @@ public class InstructionService {
         return instructionRepository.findAll();
     }
 
-    public RecycleInstructionsEntry createInstructionsEntry(String materialId) {
-        return instructionRepository.save(new RecycleInstructionsEntry(materialId));
+    public RecycleInstructionsEntry createInstructionsEntry(String materialId) throws EntryAlreadyExistsException {
+        if(instructionRepository.existsByMaterial(materialId)) {
+            throw new EntryAlreadyExistsException();
+        } else {
+            return instructionRepository.save(new RecycleInstructionsEntry(materialId));
+        }
     }
 
     public RecycleInstructionsEntry getInstructionsEntry(String materialId) throws NoSuchEntryException {

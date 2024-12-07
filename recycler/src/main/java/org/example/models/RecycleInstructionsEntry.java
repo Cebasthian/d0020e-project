@@ -1,6 +1,7 @@
 package org.example.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,10 +13,13 @@ public class RecycleInstructionsEntry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private Integer id;
 
+    @NotNull
     private String materialId;
 
+    @NotNull
     @ElementCollection
     private List<String> instructions;
 
