@@ -6,13 +6,15 @@ import org.example.repositories.InstructionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InstructionService {
 
     @Autowired
     private InstructionRepository instructionRepository;
 
-    public Iterable<RecycleInstructionsEntry> getAllEntries() {
+    public List<RecycleInstructionsEntry> getAllEntries() {
         return instructionRepository.findAll();
     }
 
@@ -20,36 +22,46 @@ public class InstructionService {
         return instructionRepository.save(new RecycleInstructionsEntry(materialId));
     }
 
-    public RecycleInstructionsEntry getInstructionsEntry(String materialId) {
-        return instructionRepository.selectByMaterial(materialId);
-    }
-
-    public void updateInstructionsEntry(RecycleInstructionsEntry entry) throws NoSuchEntryException {
-        if(instructionRepository.existsById(entry.getId())) {
-            instructionRepository.save(entry);
+    public RecycleInstructionsEntry getInstructionsEntry(String materialId) throws NoSuchEntryException {
+        if(instructionRepository.existsByMaterial(materialId)) {
+            return instructionRepository.selectByMaterial(materialId);
         } else {
             throw new NoSuchEntryException();
         }
     }
 
-    public void deleteInstructionsEntry(Integer id) {
-        instructionRepository.deleteById(id);
+    public RecycleInstructionsEntry updateInstructionsEntry(RecycleInstructionsEntry entry) throws NoSuchEntryException {
+        if(instructionRepository.existsById(entry.getId())) {
+            return instructionRepository.save(entry);
+        } else {
+            throw new NoSuchEntryException();
+        }
     }
 
-    public void addInstruction(String materialId, String instruction) {
-        // EV. byta ut det här mot en custom SQL query.
-        RecycleInstructionsEntry entry = instructionRepository.selectByMaterial(materialId);
-        entry.addInstructions(instruction);
-        instructionRepository.save(entry);
+    public void deleteInstructionsEntry(Integer id) throws NoSuchEntryException {
+        if(instructionRepository.existsById(id)) {
+            instructionRepository.deleteById(id);
+        } else {
+            throw new NoSuchEntryException();
+        }
     }
 
-    public void removeInstruction(String materialId, String instruction) {
-        RecycleInstructionsEntry entry = instructionRepository.selectByMaterial(materialId);
-        entry.removeInstruction(instruction);
-        instructionRepository.save(entry);
-    }
 
-    public void reorderInstructions(RecycleInstructionsEntry entry) {
-        updateInstructionsEntry(entry);
-    }
+    // TODO: remove these unused methods
+//    public void addInstruction(String materialId, String instruction) {
+//        // EV. byta ut det här mot en custom SQL query.
+//        RecycleInstructionsEntry entry = instructionRepository.selectByMaterial(materialId);
+//        entry.addInstructions(instruction);
+//        instructionRepository.save(entry);
+//    }
+//
+//    public void removeInstruction(String materialId, String instruction) {
+//        RecycleInstructionsEntry entry = instructionRepository.selectByMaterial(materialId);
+//        entry.removeInstruction(instruction);
+//        instructionRepository.save(entry);
+//    }
+//
+//    public void reorderInstructions(RecycleInstructionsEntry entry) {
+//        updateInstructionsEntry(entry);
+//    }
 }

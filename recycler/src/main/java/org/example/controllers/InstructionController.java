@@ -4,59 +4,42 @@ import org.example.repositories.InstructionRepository;
 import org.example.models.RecycleInstructionsEntry;
 import org.example.services.InstructionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/instruction")
+@RequestMapping("/instructions")
 public class InstructionController {
 
 
     @Autowired
     private InstructionService instructionService;
 
-    @GetMapping("/getAll")
+    @GetMapping("/get-entries")
     public Iterable<RecycleInstructionsEntry> getAllInstructionsEntries() {
         return instructionService.getAllEntries();
     }
 
-    @GetMapping("/instructions/{materialId}")
+    @GetMapping("/get/{materialId}")
     public RecycleInstructionsEntry getInstructionsByMaterial(@PathVariable String materialId) {
         return instructionService.getInstructionsEntry(materialId);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/create-entry")
     public RecycleInstructionsEntry createInstructionsEntry(@RequestBody String materialId) {
         return instructionService.createInstructionsEntry(materialId);
     }
 
-    @PutMapping("/update")
-    public void updateInstructionsEntry(@RequestBody RecycleInstructionsEntry entry) {
-        instructionService.updateInstructionsEntry(entry);
+    @PutMapping("/update-entry")
+    public RecycleInstructionsEntry updateInstructionsEntry(@RequestBody RecycleInstructionsEntry entry) {
+        return instructionService.updateInstructionsEntry(entry);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteInstructionsEntry(@RequestBody Integer id) {
+    @DeleteMapping("/delete-entry/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteInstructionsEntry(@PathVariable Integer id) {
         instructionService.deleteInstructionsEntry(id);
     }
-
-    // Nedanför kanske är onödiga då vi har en PUT för update så man kan använda bara den istället för att komplicera det med fler endpoints.
-    @PutMapping("/addInstruction")
-    public void addInstruction() {
-
-    }
-    @PutMapping("/addManyInstructions")
-    public void addManyInstructions() {
-
-    }
-    @PutMapping("/removeInstruction")
-    public void removeInstruction() {
-
-    }
-    @PutMapping("/reorderInstructions")
-    public void reorderInstructions() {
-
-    }
-
 }

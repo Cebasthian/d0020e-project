@@ -14,7 +14,7 @@ public class RecycleInstructionsEntry {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String material_id;
+    private String materialId;
 
     @ElementCollection
     private List<String> instructions;
@@ -23,8 +23,8 @@ public class RecycleInstructionsEntry {
 
 
 
-    public RecycleInstructionsEntry(String material_id) {
-        this.material_id = material_id;
+    public RecycleInstructionsEntry(String materialId) {
+        this.materialId = materialId;
         this.instructions = new ArrayList<>();
     }
 
@@ -33,7 +33,7 @@ public class RecycleInstructionsEntry {
     }
 
     public String getMaterialId() {
-        return this.material_id;
+        return this.materialId;
     }
 
     public List<String> getInstructions() {
