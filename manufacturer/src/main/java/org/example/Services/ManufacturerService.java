@@ -1,5 +1,6 @@
 package org.example.Services;
 
+import org.example.Entity.PC;
 import org.example.Repositories.PerformanceRepository;
 import org.example.Repositories.ComponentRepository;
 import org.example.Repositories.PCRepository;
@@ -9,6 +10,8 @@ import org.example.Repositories.SizeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ManufacturerService {
@@ -31,15 +34,19 @@ public class ManufacturerService {
         @Autowired
         private PerformanceRepository performanceRepository;
 
-        public void findByID() {
+        public PC findByID() {
+                return getPC_ID();
         }
 
-        public void findALL() {
+        public List<PC> findALL() {
+                return List;
         }
 
-        public void deletePCbyID() {
+        public PC deletePCbyID() {
+                return PC -1;
         }
 
-        public void addPC() {
+        public List<PC> addPC() {
+                return PC;
         }
 }
