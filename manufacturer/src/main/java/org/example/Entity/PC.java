@@ -9,7 +9,7 @@ public class PC {
     @Id
     private int PC_ID;
 
-    private Long component; //??
+    private Long component;
     private String energyClass;
     private int performance;
     private int size;
@@ -21,6 +21,14 @@ public class PC {
 
     public int getPC_ID(){
         return this.PC_ID;                       //return pc for this ID
+    }
+
+    public void set_component(Long Component){
+        this.component = Component;
+    }
+
+    public Long get_component(){
+        return this.component;
     }
 
     public void set_energyClass(String Class){

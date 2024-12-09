@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Repository
 public interface WarrantyRepository extends JpaRepository<Warranty, Integer> {
+
     @GetMapping("/findbyID")
-    public void findbyID(){
+    public int findbyID(int ID){
 
     }
 

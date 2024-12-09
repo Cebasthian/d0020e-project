@@ -21,8 +21,8 @@ public class ManufacturerController {
     }
 
     @GetMapping("/GET_PCbyID")
-    public PC GET_PCbyID(){
-        return manufacturerService.findByID();
+    public PC GET_PCbyID(int ID){
+        return manufacturerService.findByID(ID);
     }
 
     @PostMapping("/POST_PCs")

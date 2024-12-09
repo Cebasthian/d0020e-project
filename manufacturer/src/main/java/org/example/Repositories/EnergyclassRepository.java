@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Repository
 public interface EnergyclassRepository extends JpaRepository<EnergyClass, String> {
 
-    @GetMapping("/findClassbyID")
-    public String findClassbyID(int ID){
-
+   @GetMapping("/findbyID")
+    public String findbyID(int ID){
     }
 
     @GetMapping("/save")

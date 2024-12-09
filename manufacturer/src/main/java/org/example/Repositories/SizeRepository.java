@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Repository
 public interface SizeRepository extends JpaRepository<Size, Integer> {
-    @GetMapping("/findbyID")
-    public void findbyID(){
+
+   @GetMapping("/findbyID")
+    public int findbyID(int ID){
 
     }
 

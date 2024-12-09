@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface PerformanceRepository extends JpaRepository<Performance, Integer> {
 
     @GetMapping("/findbyID")
-    public void findbyID(){
+    public int findbyID(int ID){
 
     }
 

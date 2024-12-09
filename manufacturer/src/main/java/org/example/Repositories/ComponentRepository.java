@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Repository
 public interface ComponentRepository extends JpaRepository<Component, Integer> {
 
-    @GetMapping("/findbyID")
-    public void findbyID(){
+   @GetMapping("/findbyID")
+    public Long findbyID(int ID){
 
     }
 
@@ -17,5 +17,4 @@ public interface ComponentRepository extends JpaRepository<Component, Integer> {
     public void save(){
 
     }
-
 }

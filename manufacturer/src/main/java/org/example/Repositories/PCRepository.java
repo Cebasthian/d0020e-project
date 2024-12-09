@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Repository
 public interface PCRepository extends JpaRepository<PC, String> {
-    @GetMapping("/findbyID")
-    public void findbyID(){
 
+    @GetMapping("/findbyID")
+    public PC findbyID(int ID){
     }
 
     @GetMapping("/save")
@@ -18,7 +18,7 @@ public interface PCRepository extends JpaRepository<PC, String> {
     }
 
     @GetMapping("/deletebyID")
-    public void deletebyID(){
+    public void deletebyID(int ID){
 
     }
 }
