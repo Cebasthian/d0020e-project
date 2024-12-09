@@ -1,23 +1,18 @@
-package org.example;
+package org.example.instructions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.controllers.InstructionController;
 import org.example.models.RecycleInstructionsEntry;
 import org.example.services.InstructionService;
-import org.hibernate.sql.results.jdbc.internal.ResultSetAccess;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.*;
@@ -85,7 +80,7 @@ public class InstructionsControllerTests {
     public void getEntryTest() throws Exception {
         given(instructionService.getInstructionsEntry(entry.getMaterialId())).willReturn(entry);
 
-        ResultActions response = mockMvc.perform(get("/instructions/get/{materialId}", entry.getMaterialId()).accept(MediaType.APPLICATION_JSON));
+        ResultActions response = mockMvc.perform(get("/instructions/get/{material}", entry.getMaterialId()).accept(MediaType.APPLICATION_JSON));
 
         response.andExpect(status().isOk())
                 .andDo(print())

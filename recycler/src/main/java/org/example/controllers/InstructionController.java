@@ -39,8 +39,8 @@ public class InstructionController {
         @ApiResponse(responseCode = "404", description = "Instructions entry not found", content = @Content)
     })
     @GetMapping("/get/{material}")
-    public RecycleInstructionsEntry getInstructionsByMaterial(@PathVariable String materialId) throws NoSuchEntryException {
-        return instructionService.getInstructionsEntry(materialId);
+    public RecycleInstructionsEntry getInstructionsByMaterial(@PathVariable String material) throws NoSuchEntryException {
+        return instructionService.getInstructionsEntry(material);
     }
 
     @ApiResponses({
