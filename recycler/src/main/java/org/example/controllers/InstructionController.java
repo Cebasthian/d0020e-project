@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.exceptions.EntryAlreadyExistsException;
 import org.example.exceptions.NoSuchEntryException;
 import org.example.repositories.InstructionRepository;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "instructions")
 @RestController
 @RequestMapping("/instructions")
 public class InstructionController {
@@ -36,7 +38,7 @@ public class InstructionController {
         @ApiResponse(responseCode = "200", description = "Found instructions", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RecycleInstructionsEntry.class))}),
         @ApiResponse(responseCode = "404", description = "Instructions entry not found", content = @Content)
     })
-    @GetMapping("/get/{materialId}")
+    @GetMapping("/get/{material}")
     public RecycleInstructionsEntry getInstructionsByMaterial(@PathVariable String materialId) throws NoSuchEntryException {
         return instructionService.getInstructionsEntry(materialId);
     }
