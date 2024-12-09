@@ -33,7 +33,7 @@ public class InstructionController {
         return instructionService.getAllEntries();
     }
 
-    @Operation(summary = "Get a specific entry using material id.")
+    @Operation(summary = "Get an entry using material.")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "Found instructions", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RecycleInstructionsEntry.class))}),
         @ApiResponse(responseCode = "404", description = "Instructions entry not found", content = @Content)
@@ -43,6 +43,7 @@ public class InstructionController {
         return instructionService.getInstructionsEntry(material);
     }
 
+    @Operation(summary = "Create a new entry.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Found instructions", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RecycleInstructionsEntry.class))}),
             @ApiResponse(responseCode = "400", description = "Instruction already exists", content = @Content)
@@ -52,6 +53,7 @@ public class InstructionController {
         return instructionService.createInstructionsEntry(materialId);
     }
 
+    @Operation(summary = "Update an entry.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Updated instructions entry", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = RecycleInstructionsEntry.class))}),
             @ApiResponse(responseCode = "404", description = "Instructions entry not found", content = @Content)
@@ -61,6 +63,7 @@ public class InstructionController {
         return instructionService.updateInstructionsEntry(entry);
     }
 
+    @Operation(summary = "Delete an entry using its id")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Deleted instruction entry"),
             @ApiResponse(responseCode = "404", description = "Instructions entry not found", content = @Content)
