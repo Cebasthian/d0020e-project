@@ -1,4 +1,4 @@
-package org.example;
+package org.example.instructions;
 
 import org.example.models.RecycleInstructionsEntry;
 import org.example.repositories.InstructionRepository;

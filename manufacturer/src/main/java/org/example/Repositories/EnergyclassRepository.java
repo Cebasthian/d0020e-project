@@ -1,14 +1,15 @@
 package org.example.Repositories;
 
+import org.example.Entity.EnergyClass;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Repository
-public class EnergyclassRepository {
+public interface EnergyclassRepository extends JpaRepository<EnergyClass, String> {
 
-    @GetMapping("/findbyID")
-    public void findbyID(){
-
+   @GetMapping("/findbyID")
+    public String findbyID(int ID){
     }
 
     @GetMapping("/save")

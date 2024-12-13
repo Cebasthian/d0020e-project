@@ -1,13 +1,15 @@
 package org.example.Repositories;
 
+import org.example.Entity.PC;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Repository
-public class PCRepository {
-    @GetMapping("/findbyID")
-    public void findbyID(){
+public interface PCRepository extends JpaRepository<PC, String> {
 
+    @GetMapping("/findbyID")
+    public PC findbyID(int ID){
     }
 
     @GetMapping("/save")
@@ -16,7 +18,7 @@ public class PCRepository {
     }
 
     @GetMapping("/deletebyID")
-    public void deletebyID(){
+    public void deletebyID(int ID){
 
     }
 }

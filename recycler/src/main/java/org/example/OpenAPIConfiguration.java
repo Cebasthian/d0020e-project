@@ -15,18 +15,24 @@ public class OpenAPIConfiguration {
     @Bean
     public OpenAPI defineOpenApi() {
         Server server = new Server();
-        server.setUrl("http://localhost:8081");
+        server.setUrl("http://localhost:8081/");
         server.setDescription("Recycler");
 
         Contact contact = new Contact();
-        contact.setName("melander");
-        contact.setEmail("melander@mail.se");
+        contact.setName("Samuel M");
+        contact.setEmail("sammel-2@student.ltu.se");
 
         Info information = new Info();
         information
-                .title("title")
+                .title("Recycler API")
                 .version("1.0")
-                .description("description")
+                .description("""
+                        All the endpoints from the Recycler module.
+                        
+                        The instructions endpoints are for an employee creating/updating their own database.
+                        
+                        DPP endpoint(s) are for an employee getting the product passport via the IDS data space.
+                        """)
                 .contact(contact);
 
         return new OpenAPI().info(information).servers(List.of(server));
