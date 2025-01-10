@@ -1,20 +1,29 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Gpu {
+@Table(name = "gpus")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class GPU {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull
     private String componentId;
 
-    @ManyToOne
-    @JoinColumn(name = "materials_id")
-    private Materials materials;
+    @NotNull
+    @OneToMany(mappedBy = "gpu", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Materials> materials = new ArrayList<>();
 
     private String name;
     private Integer weight; // grams
@@ -32,7 +41,7 @@ public class Gpu {
         this.componentId = componentId;
     }
 
-    public void setMaterials() {
+    public void setMaterials(List<Materials> materials) {
         this.materials = materials;
     }
 
@@ -70,7 +79,7 @@ public class Gpu {
 
     // Getters: ##################################################################
 
-    public Materials getMaterials() {
+    public List<Materials> getMaterials() {
         return materials;
     }
 

@@ -1,8 +1,13 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "materials")
 public class Materials {
 
     @Id
@@ -15,6 +20,20 @@ public class Materials {
     private String origin; // Country of origin
     private String materialFlow; // Hur materialet rör sig i supply kedjan?
     private String supplier;
+
+
+    //Behöver testas om detta behövs.
+
+    @ManyToOne
+    @JoinColumn(name = "gpu_id", nullable = false)
+    @JsonBackReference
+    @Schema(hidden=true)
+    private GPU gpu;
+
+    public GPU getGpu() { return gpu;}
+    public void setGpu(GPU gpu) { this.gpu = gpu; }
+
+
 
 
     // Setters: ##################################################################
@@ -60,4 +79,5 @@ public class Materials {
     public String getSupplier() {
         return supplier;
     }
+
 }
