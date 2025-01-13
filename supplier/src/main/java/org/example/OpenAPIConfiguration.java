@@ -29,5 +29,6 @@ public class OpenAPIConfiguration {
                 .contact(contact);
 
         return new OpenAPI().info(information).servers(List.of(server));
+
     }
 }
