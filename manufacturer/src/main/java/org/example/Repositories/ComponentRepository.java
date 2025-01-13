@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Repository
 public interface ComponentRepository extends JpaRepository<Component, Integer> {
 
-   @GetMapping("/findbyID")
-    public Long findbyID(int ID){
-
+   @GetMapping("/findComponent")
+   // Returnera component baserad på ID (PC)
+    public default Long findComponent(int ID){
+        Long x = 123L;
+        return x;
     }
 
-    @GetMapping("/save")
-    public void save(){
-
+    @GetMapping("/saveComponent")
+    // Spara ned component
+    public default void saveComponent(){
     }
 }

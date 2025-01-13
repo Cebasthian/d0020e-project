@@ -9,9 +9,9 @@ public class Component {
     @Id
     private int PC_ID;
 
-    private String typeOfComponent; //gpu, cpu, hdd, sdd, etc..
-    private String modelNumber;
-    private String batchNumber;
+    private String componentType; //gpu, cpu, hdd, sdd, etc..
+    private String componentId;
+    private String name;
 
     public void setPC_ID(int ID){
         this.PC_ID = ID;
@@ -21,27 +21,28 @@ public class Component {
         return this.PC_ID;                       //return pc for this ID
     }
 
-    public void setBatchNumber(String batchNumber) {
-        this.batchNumber = batchNumber;
+    public String getComponentType() {
+        return this.componentType;
     }
 
-    public void setComponentID(int componentID) {
-        this.PC_ID = componentID;
+    public void setComponentType(String componentType) {
+        this.componentType = componentType;
     }
 
-    public void setModelNumber(String modelNumber) {
-        this.modelNumber = modelNumber;
+    public void setComponentId(String componentId) {
+        this.componentId = componentId;
     }
 
-    public String getModelNumber() {
-        return modelNumber;
+    public String getComponentId() {
+        return this.componentId;
     }
 
-    public String getBatchNumber() {
-        return batchNumber;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getComponentID() {
-        return PC_ID;
+    public String getName() {
+        return this.name;
     }
+
 }
