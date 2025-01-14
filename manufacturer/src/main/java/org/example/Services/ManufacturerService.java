@@ -21,6 +21,9 @@ public class ManufacturerService {
 
 
         public PC findByID(int ID) {
+                // använd repositoryns egna metod
+//                return pcRepository.findById(ID);
+
 
                 PC pc1 = new PC();
                 Long C = componentRepository.findComponent(ID);
@@ -41,6 +44,8 @@ public class ManufacturerService {
 
         // Hitta alla datorer och returnera som en lista
         public List<PC> findALL() {
+//                return pcRepository.findAll();
+
                 int x = 0;
                 PC temp = pcRepository.findbyID(x);
                 return new ArrayList<PC>();
@@ -52,7 +57,10 @@ public class ManufacturerService {
         }
 
         // Spara dator i listan/databas
+        // det funkar men skulle bara vela ändra parameterns namn då det tekniskt sett inte är ett ID man skickar utan hela datorn.
         public void addPC(PC ID) {
                 pcRepository.save(ID);
         }
+
+        // behövs en updatePc metod också som jag kommenterade i ManufacturerController
 }

@@ -10,15 +10,20 @@ import java.util.ArrayList;
 public class PC {
 
     @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY) då sätter SpringBoot pc ID själv så det inte blir konflikter i databasen.
     private int PC_ID;
 
     private String productId;
 
+
+    // Jag är lite osäker på hur egentligen det ska göras. Man ska använda @OneToMany på något sätt.
+    // Kolla på Supplier hur dem implementerade ArrayList<Materials> under entity.GPU
     @ElementCollection
+    // private ArrayList<Component> components
     private ArrayList<Integer> components;            //ska vara array av components
 
     private String energyClass;
-    private int dimensions;
+    private int dimensions; // vet inte varför jag tyckte det skulle vara en integer här. kanske är rimligare med String av typen '20x40x10 cm'
     private String lifecycle;
     private int powerRating;
     private String installingInstructions;
@@ -27,6 +32,7 @@ public class PC {
     private String assemblyCarbonFootprint;
     private String warranty;
 
+    // Behövs inte då spring boot sätter id själv
     public void setPC_ID(int ID){
         this.PC_ID = ID;
     }
@@ -35,6 +41,7 @@ public class PC {
         return this.PC_ID;                       //return pc ID
     }
 
+    // istället för 'int ID', ta in 'String ID' som typen är för productId
     public void setProductId(int ID){
         this.productId = String.valueOf(ID);
     }
@@ -43,10 +50,13 @@ public class PC {
         return this.productId;                       //return dpp id
     }
 
+    // ist för 'Long Component' använd 'Component component'
     public void add_component(Long Component){
+        // this.components.add(component); använd ArrayLists egna add metod
         //this.components = Component;          //måste loopa in på ledig plats
     }
 
+    // ArrayList<Component>
     public ArrayList<Integer> get_components(){
         return this.components;
     }

@@ -9,6 +9,11 @@ import java.util.ArrayList;
 
 @Repository
 public interface PCRepository extends JpaRepository<PC, String> {
+                                                // <PC, Integer>
+                                                // Då vi använder Integer som id i databasen. (ej samma som productId som är id för DPP)
+
+
+    // samma här som i ComponentRepository
 
     @GetMapping("/findbyID")
     // Hittar motsvarande dator på ID
