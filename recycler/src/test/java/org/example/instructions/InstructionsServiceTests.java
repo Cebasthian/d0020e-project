@@ -44,7 +44,7 @@ public class InstructionsServiceTests {
     @Test
     @Order(1)
     public void createEntryTest() {
-        given(instructionRepository.save(any(RecycleInstructionsEntry.class))).willReturn(_entry);
+        given(instructionRepository.saveAndFlush(any(RecycleInstructionsEntry.class))).willReturn(_entry);
 
         RecycleInstructionsEntry entry = instructionService.createInstructionsEntry(_material);
 
@@ -80,7 +80,7 @@ public class InstructionsServiceTests {
         given(instructionRepository.existsById(_entry.getId())).willReturn(true);
 //        given(instructionRepository.selectByMaterial(_material)).willReturn(_entry);
         _entry.addInstructions("Inhale");
-        given(instructionRepository.save(any(RecycleInstructionsEntry.class))).willReturn(_entry);
+        given(instructionRepository.saveAndFlush(any(RecycleInstructionsEntry.class))).willReturn(_entry);
 
         RecycleInstructionsEntry updatedEntry = instructionService.updateInstructionsEntry(_entry);
 

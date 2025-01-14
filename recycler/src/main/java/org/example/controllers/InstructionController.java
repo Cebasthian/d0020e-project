@@ -20,6 +20,7 @@ import java.util.List;
 
 @Tag(name = "instructions")
 @RestController
+@CrossOrigin
 @RequestMapping("/instructions")
 public class InstructionController {
 

@@ -23,7 +23,7 @@ public class InstructionService {
         if(instructionRepository.existsByMaterial(materialId)) {
             throw new EntryAlreadyExistsException();
         } else {
-            return instructionRepository.save(new RecycleInstructionsEntry(materialId));
+            return instructionRepository.saveAndFlush(new RecycleInstructionsEntry(materialId));
         }
     }
 
@@ -37,7 +37,7 @@ public class InstructionService {
 
     public RecycleInstructionsEntry updateInstructionsEntry(RecycleInstructionsEntry entry) throws NoSuchEntryException {
         if(instructionRepository.existsById(entry.getId())) {
-            return instructionRepository.save(entry);
+            return instructionRepository.saveAndFlush(entry);
         } else {
             throw new NoSuchEntryException();
         }
