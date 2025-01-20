@@ -1,8 +1,8 @@
 package org.example.Entity;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.ArrayList;
 
@@ -10,20 +10,26 @@ import java.util.ArrayList;
 public class PC {
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY) då sätter SpringBoot pc ID själv så det inte blir konflikter i databasen.
-    private int PC_ID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID;
 
     private String productId;
 
 
     // Jag är lite osäker på hur egentligen det ska göras. Man ska använda @OneToMany på något sätt.
     // Kolla på Supplier hur dem implementerade ArrayList<Materials> under entity.GPU
+
     @ElementCollection
-    // private ArrayList<Component> components
-    private ArrayList<Integer> components;            //ska vara array av components
+    private ArrayList<Integer> components;
+
+    //@NotNull
+    //@OneToMany(mappedBy = "PC", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@JsonManagedReference
+    //private ArrayList<Component> components = new ArrayList<>();
+    //Vet ej varför den inte vill fungera
 
     private String energyClass;
-    private int dimensions; // vet inte varför jag tyckte det skulle vara en integer här. kanske är rimligare med String av typen '20x40x10 cm'
+    private String dimensions; // kanske är rimligare med String av typen '20x40x10 cm'
     private String lifecycle;
     private int powerRating;
     private String installingInstructions;
@@ -33,16 +39,15 @@ public class PC {
     private String warranty;
 
     // Behövs inte då spring boot sätter id själv
-    public void setPC_ID(int ID){
-        this.PC_ID = ID;
-    }
+    //public void setPC_ID(int ID){
+        //this.PC_ID = ID;
+    //}
 
     public int getPC_ID(){
-        return this.PC_ID;                       //return pc ID
+        return this.ID;                       //return pc ID
     }
 
-    // istället för 'int ID', ta in 'String ID' som typen är för productId
-    public void setProductId(int ID){
+    public void setProductId(String ID){
         this.productId = String.valueOf(ID);
     }
 
@@ -69,11 +74,11 @@ public class PC {
         return this.energyClass;
     }
 
-    public void set_dimensions(int Dimensions){
+    public void set_dimensions(String Dimensions){
         this.dimensions = Dimensions;
     }
 
-    public int get_size(){
+    public String get_size(){
         return this.dimensions;
     }
 

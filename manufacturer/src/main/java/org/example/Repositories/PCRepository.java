@@ -8,28 +8,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.ArrayList;
 
 @Repository
-public interface PCRepository extends JpaRepository<PC, String> {
-                                                // <PC, Integer>
-                                                // Då vi använder Integer som id i databasen. (ej samma som productId som är id för DPP)
+public interface PCRepository extends JpaRepository<PC, Integer> {
 
-
-    // samma här som i ComponentRepository
-
-    @GetMapping("/findbyID")
     // Hittar motsvarande dator på ID
     public default PC findbyID(int ID){
         return new PC();
     }
 
     // Lägga in PC i lista/databas
-    @GetMapping("/save")
     public default void save(){
 
     }
 
     // Ta bort en PC
-    @GetMapping("/deletebyID")
     public default void deletebyID(int ID){
+
+    }
+    public default void change(PC pc){
 
     }
 }

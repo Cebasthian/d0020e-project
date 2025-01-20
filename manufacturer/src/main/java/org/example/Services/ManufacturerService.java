@@ -21,34 +21,12 @@ public class ManufacturerService {
 
 
         public PC findByID(int ID) {
-                // använd repositoryns egna metod
-//                return pcRepository.findById(ID);
-
-
-                PC pc1 = new PC();
-                Long C = componentRepository.findComponent(ID);
-               // String EC = energyclassRepository.findbyID(ID);
-                //int perf = performanceRepository.findbyID(ID);
-                //int S = sizeRepository.findbyID(ID);
-                //int W = warrantyRepository.findbyID(ID);
-
-                pc1.setPC_ID(ID);
-                pc1.add_component(C);
-                //pc1.set_energyClass(EC);
-                //pc1.set_performance(perf);
-                //pc1.set_size(S);
-                //pc1.set_warranty(W);
-
-                return pc1;
+                return pcRepository.findbyID(ID);
         }
 
         // Hitta alla datorer och returnera som en lista
         public List<PC> findALL() {
-//                return pcRepository.findAll();
-
-                int x = 0;
-                PC temp = pcRepository.findbyID(x);
-                return new ArrayList<PC>();
+                return pcRepository.findAll();
         }
 
         // Ta bort en PC
@@ -63,4 +41,7 @@ public class ManufacturerService {
         }
 
         // behövs en updatePc metod också som jag kommenterade i ManufacturerController
+        public void updatePC(PC pc) {
+                pcRepository.change(pc);
+        }
 }
