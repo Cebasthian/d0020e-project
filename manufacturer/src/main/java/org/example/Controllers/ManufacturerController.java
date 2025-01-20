@@ -15,41 +15,38 @@ public class ManufacturerController {
     @Autowired
     private ManufacturerService manufacturerService;
 
-    @GetMapping("/GET_PCs")
-    // @GetMapping("/get-all") imo är det bättre att ha mer beskrivande endpoints.
+    @GetMapping("/GET-All-PCs")
     public List<PC> GET_PCs (){
        return manufacturerService.findALL();
     }
 
-    @GetMapping("/GET_PCbyID/{ID}")
-    // @GetMapping("/get/{id}")
+    @GetMapping("/GET/{ID}")
     public PC GET_PCbyID(@PathVariable int ID){
         return manufacturerService.findByID(ID);
     }
 
     // lägg till och posta PC
-    @PostMapping("/POST_PCs")
-    // @PostMapping("/create")
-    // behövs också @RequestBody innan 'PC temp' (spring boot syntax)
-    public void POST_PCs(PC temp){
+    @PostMapping("/CREATE_PCs")
+
+    public void POST_PCs(@RequestBody PC temp){
         manufacturerService.addPC(temp);
     }
 
     // Det makear inte sense att skapa en PC om man vet id redan innan. Så ev ta bort den här metoden
-    @PostMapping("/POST_PCbyID")
-    public PC POST_PCbyID(int ID){
-        return manufacturerService.findByID(ID);
-    }
+    //@PostMapping("/POST_PCbyID")
+    //public PC POST_PCbyID(int ID){
+        //return manufacturerService.findByID(ID);
+    //}
 
     // Saknar en update metod
-//    @PutMapping("/update-pc")
-//    public PC updatePC(@RequestBody PC pc) {
-//        return manufacturerService.updatePC(pc);
-//    }
+   @PutMapping("/update-pc")
+    public void updatePC(@RequestBody PC pc) {
+        manufacturerService.updatePC(pc);
+    }
 
     // Saknar en delete metod
-//    @DeleteMapping("/delete/{id}")
-//    public void deletePC(@PathVariable Integer ID) {
-//        manufacturerService.deletePCbyID(ID);
-//    }
+    @DeleteMapping("/delete/{id}")
+    public void deletePC(@PathVariable Integer ID) {
+        manufacturerService.deletePCbyID(ID);
+    }
 }

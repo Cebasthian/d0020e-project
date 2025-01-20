@@ -10,23 +10,19 @@ public class Component {
 
     // snacka med Sebastian & Tom om det här behövs. De hade något liknande i sin entity.Materials i Supplier. (där de använder @ManyToOne)
     @Id
-    private int PC_ID;
-
-    // Saknas ett ID field
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID;
 
     private String componentType; //gpu, cpu, hdd, sdd, etc..
     private String componentId;
     private String name;
 
     public void setPC_ID(int ID){
-        this.PC_ID = ID;
+        this.ID = ID;
     }
 
     public int getPC_ID(){
-        return this.PC_ID;                       //return pc for this ID
+        return this.ID;                       //return pc for this ID
     }
 
     public String getComponentType() {
