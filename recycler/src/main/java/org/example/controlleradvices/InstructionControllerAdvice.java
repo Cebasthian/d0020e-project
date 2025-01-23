@@ -3,6 +3,7 @@ package org.example.controlleradvices;
 import io.swagger.v3.oas.annotations.Hidden;
 import org.example.exceptions.EntryAlreadyExistsException;
 import org.example.exceptions.NoSuchEntryException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +23,12 @@ public class InstructionControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(EntryAlreadyExistsException.class)
     public ResponseEntity<String> handleEntryAlreadyExists(RuntimeException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleEntryAlreadyExists2(RuntimeException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 

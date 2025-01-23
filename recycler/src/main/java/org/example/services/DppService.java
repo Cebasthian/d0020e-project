@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class DppService {
 
     @Autowired
-    private EDCConnector edcConnector;
+    private EdcConnector edcConnector;
     @Autowired
     private InstructionService instructionService;
 
