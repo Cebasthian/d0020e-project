@@ -1,5 +1,7 @@
 package org.example.controllers;
 
+import com.example.HttpRequester;
+import com.example.dto.FetchCatalogDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,6 +22,9 @@ public class DppController {
     @Autowired
     private DppService dppService;
 
+    @Autowired
+    private HttpRequester httpRequester;
+
     @Operation(summary = "Get the product passport using its productId.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Found product", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))}),
@@ -27,7 +32,13 @@ public class DppController {
     })
     @GetMapping("/{productId}")
     public String getDppData(@PathVariable String productId) {
-        dppService.getDppData(productId);
-        return "placeholder";
+//        dppService.getDppData(productId);
+
+        return httpRequester.get();
+    }
+
+    @GetMapping("/dto")
+    public Object getDto() {
+        return httpRequester.dto();
     }
 }

@@ -39,6 +39,14 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
+<!--        EDC Interface-->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>edc-connector-interface</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>

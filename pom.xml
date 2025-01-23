@@ -26,7 +26,8 @@
 		<module>recycler</module>
 		<module>regulator</module>
 		<module>supplier</module>
-	</modules>
+        <module>edc-connector-interface</module>
+    </modules>
     <scm>
 		<connection/>
 		<developerConnection/>
