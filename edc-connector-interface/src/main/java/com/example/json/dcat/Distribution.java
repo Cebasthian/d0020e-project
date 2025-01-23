@@ -1,6 +1,6 @@
-package com.example.dto.dcat;
+package com.example.json.dcat;
 
-import com.example.dto.dct.Format;
+import com.example.json.dct.Format;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Distribution {

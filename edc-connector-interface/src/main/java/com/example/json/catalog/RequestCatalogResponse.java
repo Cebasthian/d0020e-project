@@ -1,14 +1,12 @@
-package com.example.dto.catalog;
+package com.example.json.catalog;
 
-import com.example.dto.BaseDTO;
-import com.example.dto.dcat.DataSet;
-import com.example.dto.dcat.Service;
-import com.fasterxml.jackson.annotation.JsonGetter;
+import com.example.json.BaseDTO;
+import com.example.json.dcat.DataSet;
+import com.example.json.dcat.Service;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class RequestCatalogResponse extends BaseDTO {
@@ -19,7 +17,7 @@ public class RequestCatalogResponse extends BaseDTO {
     public String type;
 
     @JsonProperty("dcat:dataset")
-    public Object dataset;
+    public List<DataSet> dataset;
 
     @JsonProperty("dcat:service")
     public Service service;
@@ -28,14 +26,15 @@ public class RequestCatalogResponse extends BaseDTO {
     public String participantId;
 
 
-    @JsonGetter
-    public List<DataSet> getDataset() {
+    @JsonSetter("dcat:dataset")
+    public void setDataset(Object dataset) {
+        List<DataSet> list = new ArrayList<>();
         if(dataset instanceof DataSet) {
-            return Arrays.asList((DataSet) this.dataset);
-        } else if(dataset instanceof List<?>) {
-            return (List<DataSet>) this.dataset;
+            list.add((DataSet) dataset);
+        } else if(dataset instanceof List) {
+            list.addAll((List<DataSet>) dataset);
         }
-        return null;
+        this.dataset = list;
     }
 }
 

@@ -1,6 +1,6 @@
-package com.example.dto.dcat;
+package com.example.json.dcat;
 
-import com.example.dto.odrl.HasPolicy;
+import com.example.json.odrl.HasPolicy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;

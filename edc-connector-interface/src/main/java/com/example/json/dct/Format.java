@@ -1,4 +1,4 @@
-package com.example.dto.dct;
+package com.example.json.dct;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

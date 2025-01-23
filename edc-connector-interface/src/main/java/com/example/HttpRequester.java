@@ -1,13 +1,10 @@
 package com.example;
 
-import com.example.dto.catalog.RequestCatalogDTO;
-import com.example.dto.catalog.RequestCatalogResponse;
-import com.example.dto.util.QuerySpec;
+import com.example.json.catalog.RequestCatalogDTO;
+import com.example.json.catalog.RequestCatalogResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
-
-import java.util.ArrayList;
 
 @Component
 public class HttpRequester {

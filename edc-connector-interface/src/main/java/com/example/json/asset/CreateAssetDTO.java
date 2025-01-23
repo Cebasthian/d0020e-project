@@ -1,6 +1,6 @@
-package com.example.dto.asset;
+package com.example.json.asset;
 
-import com.example.dto.BaseDTO;
+import com.example.json.BaseDTO;
 
 public class CreateAssetDTO extends BaseDTO {
 

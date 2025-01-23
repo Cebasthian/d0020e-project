@@ -1,4 +1,4 @@
-package com.example.dto.odrl;
+package com.example.json.odrl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

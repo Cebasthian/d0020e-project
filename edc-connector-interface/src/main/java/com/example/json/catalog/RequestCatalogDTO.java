@@ -1,7 +1,7 @@
-package com.example.dto.catalog;
+package com.example.json.catalog;
 
-import com.example.dto.BaseDTO;
-import com.example.dto.util.QuerySpec;
+import com.example.json.BaseDTO;
+import com.example.json.util.QuerySpec;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;

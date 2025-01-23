@@ -1,4 +1,4 @@
-package com.example.dto.util;
+package com.example.json.util;
 
 import java.util.List;
 
