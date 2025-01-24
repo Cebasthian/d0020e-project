@@ -1,0 +1,174 @@
+[{
+    "@id": "7e90525d-4a08-4ca7-83cc-60c7eb78e592",
+    "@type": "dcat:Catalog",
+    "dcat:dataset": [
+      {
+        "@id": "assetId",
+        "@type": "dcat:Dataset",
+        "odrl:hasPolicy": {
+          "@id": "MQ==:YXNzZXRJZA==:MThhMTY2MDAtYzY2NS00MTk1LTlmMGMtMjU4OTQ3YWZmYjlj",
+          "@type": "odrl:Offer",
+          "odrl:permission": [],
+          "odrl:prohibition": [],
+          "odrl:obligation": []
+        },
+        "dcat:distribution": [
+          {
+            "@type": "dcat:Distribution",
+            "dct:format": {
+              "@id": "HttpData-PULL"
+            },
+            "dcat:accessService": {
+              "@id": "5aec6237-f40c-4f03-8eaf-984d09152551",
+              "@type": "dcat:DataService",
+              "dcat:endpointDescription": "dspace:connector",
+              "dcat:endpointUrl": "http://localhost:19194/protocol",
+              "dcat:endpointURL": "http://localhost:19194/protocol"
+            }
+          },
+          {
+            "@type": "dcat:Distribution",
+            "dct:format": {
+              "@id": "HttpData-PUSH"
+            },
+            "dcat:accessService": {
+              "@id": "5aec6237-f40c-4f03-8eaf-984d09152551",
+              "@type": "dcat:DataService",
+              "dcat:endpointDescription": "dspace:connector",
+              "dcat:endpointUrl": "http://localhost:19194/protocol",
+              "dcat:endpointURL": "http://localhost:19194/protocol"
+            }
+          }
+        ],
+        "name": "product description",
+        "id": "assetId",
+        "contenttype": "application/json"
+      },
+      {
+        "@id": "assetId2",
+        "@type": "dcat:Dataset",
+        "odrl:hasPolicy": {
+          "@id": "MQ==:YXNzZXRJZDI=:YzYzOTI4MmUtYzUwNy00NzQ1LWExOTUtOTQ4MDkxNTQ0M2Nl",
+          "@type": "odrl:Offer",
+          "odrl:permission": [],
+          "odrl:prohibition": [],
+          "odrl:obligation": []
+        },
+        "dcat:distribution": [
+          {
+            "@type": "dcat:Distribution",
+            "dct:format": {
+              "@id": "HttpData-PULL"
+            },
+            "dcat:accessService": {
+              "@id": "5aec6237-f40c-4f03-8eaf-984d09152551",
+              "@type": "dcat:DataService",
+              "dcat:endpointDescription": "dspace:connector",
+              "dcat:endpointUrl": "http://localhost:19194/protocol",
+              "dcat:endpointURL": "http://localhost:19194/protocol"
+            }
+          },
+          {
+            "@type": "dcat:Distribution",
+            "dct:format": {
+              "@id": "HttpData-PUSH"
+            },
+            "dcat:accessService": {
+              "@id": "5aec6237-f40c-4f03-8eaf-984d09152551",
+              "@type": "dcat:DataService",
+              "dcat:endpointDescription": "dspace:connector",
+              "dcat:endpointUrl": "http://localhost:19194/protocol",
+              "dcat:endpointURL": "http://localhost:19194/protocol"
+            }
+          }
+        ],
+        "name": "product description 2",
+        "id": "assetId2",
+        "contenttype": "application/json"
+      }
+    ],
+    "dcat:catalog": [],
+    "dcat:distribution": [],
+    "dcat:service": {
+      "@id": "5aec6237-f40c-4f03-8eaf-984d09152551",
+      "@type": "dcat:DataService",
+      "dcat:endpointDescription": "dspace:connector",
+      "dcat:endpointUrl": "http://localhost:19194/protocol",
+      "dcat:endpointURL": "http://localhost:19194/protocol"
+    },
+    "dspace:participantId": "provider",
+    "@context": {
+      "dcat": "http://www.w3.org/ns/dcat#",
+      "dct": "http://purl.org/dc/terms/",
+      "odrl": "http://www.w3.org/ns/odrl/2/",
+      "dspace": "https://w3id.org/dspace/v0.8/",
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/",
+      "edc": "https://w3id.org/edc/v0.0.1/ns/"
+    }
+  },
+
+  {
+    "@id": "e042deeb-534d-4635-a9e4-c102cb7b3cb1",
+    "@type": "dcat:Catalog",
+    "dcat:dataset": {
+      "@id": "assetId2",
+      "@type": "dcat:Dataset",
+      "odrl:hasPolicy": {
+        "@id": "MQ==:YXNzZXRJZDI=:NDZjN2U0ZWMtOWI2Mi00ODM5LWIwYzQtOTUzNzk2N2NkNGVh",
+        "@type": "odrl:Offer",
+        "odrl:permission": [],
+        "odrl:prohibition": [],
+        "odrl:obligation": []
+      },
+      "dcat:distribution": [
+        {
+          "@type": "dcat:Distribution",
+          "dct:format": {
+            "@id": "HttpData-PULL"
+          },
+          "dcat:accessService": {
+            "@id": "00442b7f-734c-4067-9e6b-e5dad4bd1e3d",
+            "@type": "dcat:DataService",
+            "dcat:endpointDescription": "dspace:connector",
+            "dcat:endpointUrl": "http://localhost:19194/protocol",
+            "dcat:endpointURL": "http://localhost:19194/protocol"
+          }
+        },
+        {
+          "@type": "dcat:Distribution",
+          "dct:format": {
+            "@id": "HttpData-PUSH"
+          },
+          "dcat:accessService": {
+            "@id": "00442b7f-734c-4067-9e6b-e5dad4bd1e3d",
+            "@type": "dcat:DataService",
+            "dcat:endpointDescription": "dspace:connector",
+            "dcat:endpointUrl": "http://localhost:19194/protocol",
+            "dcat:endpointURL": "http://localhost:19194/protocol"
+          }
+        }
+      ],
+      "name": "product description 2",
+      "id": "assetId2",
+      "contenttype": "application/json"
+    },
+    "dcat:catalog": [],
+    "dcat:distribution": [],
+    "dcat:service": {
+      "@id": "00442b7f-734c-4067-9e6b-e5dad4bd1e3d",
+      "@type": "dcat:DataService",
+      "dcat:endpointDescription": "dspace:connector",
+      "dcat:endpointUrl": "http://localhost:19194/protocol",
+      "dcat:endpointURL": "http://localhost:19194/protocol"
+    },
+    "dspace:participantId": "provider",
+    "@context": {
+      "dcat": "http://www.w3.org/ns/dcat#",
+      "dct": "http://purl.org/dc/terms/",
+      "odrl": "http://www.w3.org/ns/odrl/2/",
+      "dspace": "https://w3id.org/dspace/v0.8/",
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/",
+      "edc": "https://w3id.org/edc/v0.0.1/ns/"
+    }
+  }
+]
