@@ -1,4 +1,4 @@
-package org.example.services;
+package org.example.recycler.services;
 
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.recycler.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

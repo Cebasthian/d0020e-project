@@ -1,9 +1,9 @@
-package org.example.services;
+package org.example.recycler.services;
 
-import org.example.exceptions.EntryAlreadyExistsException;
-import org.example.exceptions.NoSuchEntryException;
-import org.example.models.RecycleInstructionsEntry;
-import org.example.repositories.InstructionRepository;
+import org.example.recycler.exceptions.EntryAlreadyExistsException;
+import org.example.recycler.exceptions.NoSuchEntryException;
+import org.example.recycler.models.RecycleInstructionsEntry;
+import org.example.recycler.repositories.InstructionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

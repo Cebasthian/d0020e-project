@@ -1,11 +1,11 @@
-package org.example;
+package org.example.recycler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"org.example", "com.example"})
+@ComponentScan(basePackages = {"org.example", "com.example.*"})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

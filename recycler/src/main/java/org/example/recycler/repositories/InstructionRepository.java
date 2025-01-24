@@ -1,14 +1,11 @@
-package org.example.repositories;
+package org.example.recycler.repositories;
 
 import jakarta.persistence.LockModeType;
-import org.example.models.RecycleInstructionsEntry;
+import org.example.recycler.models.RecycleInstructionsEntry;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-
-import java.util.Optional;
 
 public interface InstructionRepository extends JpaRepository<RecycleInstructionsEntry, Integer> {
 

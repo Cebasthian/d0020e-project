@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Recycler" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="org.example.Application" />
+    <option name="MAIN_CLASS_NAME" value="org.example.recycler.Application" />
     <module name="recycler" />
     <method v="2">
       <option name="Make" enabled="true" />

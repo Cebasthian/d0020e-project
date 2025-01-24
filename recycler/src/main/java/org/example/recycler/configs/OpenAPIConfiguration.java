@@ -1,4 +1,4 @@
-package org.example.configs;
+package org.example.recycler.configs;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;

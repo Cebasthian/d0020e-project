@@ -1,13 +1,13 @@
-package org.example.controllers;
+package org.example.recycler.controllers;
 
-import com.example.HttpRequester;
+import com.example.util.HttpRequester;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.services.DppService;
+import org.example.recycler.services.DppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,10 +32,11 @@ public class DppController {
     public String getDppData(@PathVariable String productId) {
 //        dppService.getDppData(productId);
 
-        return httpRequester.get();
+//        return httpRequester.get();
+        return "hello world";
     }
 
-    @GetMapping("/dto")
+    @GetMapping("/catalog")
     public Object getDto() {
         return httpRequester.dto();
     }

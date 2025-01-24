@@ -1,14 +1,10 @@
-package org.example;
+package org.example.recycler;
 
-import org.example.repositories.InstructionRepository;
-import org.example.models.RecycleInstructionsEntry;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.example.recycler.repositories.InstructionRepository;
+import org.example.recycler.models.RecycleInstructionsEntry;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 
 @Component
 public class TestData implements ApplicationRunner {

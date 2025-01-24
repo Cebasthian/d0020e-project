@@ -1,4 +1,4 @@
-package org.example.controllers;
+package org.example.recycler.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -6,14 +6,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.exceptions.EntryAlreadyExistsException;
-import org.example.exceptions.NoSuchEntryException;
-import org.example.repositories.InstructionRepository;
-import org.example.models.RecycleInstructionsEntry;
-import org.example.services.InstructionService;
+import org.example.recycler.exceptions.EntryAlreadyExistsException;
+import org.example.recycler.exceptions.NoSuchEntryException;
+import org.example.recycler.models.RecycleInstructionsEntry;
+import org.example.recycler.services.InstructionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

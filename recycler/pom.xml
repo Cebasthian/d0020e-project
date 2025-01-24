@@ -40,7 +40,7 @@
             <optional>true</optional>
         </dependency>
 
-<!--        EDC Interface-->
+        <!-- EDC Interface -->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>edc-connector-interface</artifactId>

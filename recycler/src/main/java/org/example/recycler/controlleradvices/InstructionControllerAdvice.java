@@ -1,8 +1,8 @@
-package org.example.controlleradvices;
+package org.example.recycler.controlleradvices;
 
 import io.swagger.v3.oas.annotations.Hidden;
-import org.example.exceptions.EntryAlreadyExistsException;
-import org.example.exceptions.NoSuchEntryException;
+import org.example.recycler.exceptions.EntryAlreadyExistsException;
+import org.example.recycler.exceptions.NoSuchEntryException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
