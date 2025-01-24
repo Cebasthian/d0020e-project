@@ -22,6 +22,8 @@ public class DataSet {
     @JsonProperty("id")
     public String uuid;
 
-    public String description;
+    public String name;
+
+    public String contenttype;
 
 }

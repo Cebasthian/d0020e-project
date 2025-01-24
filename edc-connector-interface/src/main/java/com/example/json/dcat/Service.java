@@ -12,6 +12,6 @@ public class Service {
     @JsonProperty("dct:terms")
     public String terms;
 
-    @JsonProperty("dct.endpointUrl")
+    @JsonProperty("dct:endpointUrl")
     public String endpointUrl;
 }

@@ -11,5 +11,5 @@ public class Distribution {
     public Format format;
 
     @JsonProperty("dcat:accessService")
-    public String accessService;
+    public Object accessService;
 }

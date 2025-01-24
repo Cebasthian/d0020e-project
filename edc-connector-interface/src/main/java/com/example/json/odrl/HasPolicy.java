@@ -1,5 +1,6 @@
 package com.example.json.odrl;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -12,7 +13,8 @@ public class HasPolicy {
     public String type;
 
     @JsonProperty("odrl:permission")
-    public Permission permission;
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    public List<Permission> permission;
 
     @JsonProperty("odrl:prohibition")
     public List<Object> prohibition;

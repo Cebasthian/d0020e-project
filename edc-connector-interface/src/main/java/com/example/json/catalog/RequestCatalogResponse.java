@@ -3,6 +3,7 @@ package com.example.json.catalog;
 import com.example.json.BaseDTO;
 import com.example.json.dcat.DataSet;
 import com.example.json.dcat.Service;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
@@ -17,6 +18,7 @@ public class RequestCatalogResponse extends BaseDTO {
     public String type;
 
     @JsonProperty("dcat:dataset")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     public List<DataSet> dataset;
 
     @JsonProperty("dcat:service")
@@ -26,16 +28,18 @@ public class RequestCatalogResponse extends BaseDTO {
     public String participantId;
 
 
-    @JsonSetter("dcat:dataset")
-    public void setDataset(Object dataset) {
-        List<DataSet> list = new ArrayList<>();
-        if(dataset instanceof DataSet) {
-            list.add((DataSet) dataset);
-        } else if(dataset instanceof List) {
-            list.addAll((List<DataSet>) dataset);
-        }
-        this.dataset = list;
-    }
+//    @JsonSetter("dcat:dataset")
+//    public void setDataset(Object dataset) {
+//        System.out.println(dataset.getClass());
+//
+//        List<DataSet> list = new ArrayList<>();
+////        if(dataset instanceof List) {
+////            list.addAll((List<DataSet>) dataset);
+////        } else {
+////            list.add((DataSet) dataset);
+////        }
+//        this.dataset = list;
+//    }
 }
 
 
