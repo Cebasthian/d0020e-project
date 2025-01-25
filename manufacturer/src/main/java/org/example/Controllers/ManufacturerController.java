@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @Controller
@@ -14,6 +15,12 @@ public class ManufacturerController {
 
     @Autowired
     private ManufacturerService manufacturerService;
+
+    //koden för HTML.
+    @GetMapping("/")
+    public String adminPage() {
+        return "admin";
+    }
 
     @GetMapping("/GET-All-PCs")
     public List<PC> GET_PCs (){
@@ -27,7 +34,6 @@ public class ManufacturerController {
 
     // lägg till och posta PC
     @PostMapping("/CREATE_PCs")
-
     public void POST_PCs(@RequestBody PC temp){
         manufacturerService.addPC(temp);
     }
