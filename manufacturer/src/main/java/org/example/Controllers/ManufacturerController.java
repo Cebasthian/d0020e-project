@@ -19,8 +19,10 @@ public class ManufacturerController {
 
     //koden för HTML.
     @GetMapping("/")
-    public String adminPage() {
-        return "admin";
+    public String adminPage(Model model) {
+        // Retrieve the list of all PCs and add it to the model
+        model.addAttribute("pcs", manufacturerService.findALL());
+        return "admin";  // Thymeleaf will render this HTML file
     }
 
     @GetMapping("/GET-All-PCs")
