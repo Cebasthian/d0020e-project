@@ -7,3 +7,6 @@ Create each database with `dpp` as owner.
 2. Start a `psql` shell and connect to postgres using the superuser credentials used when installing.
 3. Run `CREATE USER dpp WITH PASSWORD 'pass';`
 4. Run `CREATE DATABASE dpp_{module} OWNER dpp;` for each module to create its database.
+
+# EDC Connector
+See [Edc Connector](edc-connector/README.md).

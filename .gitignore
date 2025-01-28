@@ -4,6 +4,12 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Edc connector gradle
+**/build/
+.gradle
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+
 ### STS ###
 .apt_generated
 .classpath
