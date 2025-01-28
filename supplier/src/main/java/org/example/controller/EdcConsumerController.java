@@ -42,7 +42,7 @@ public class EdcConsumerController {
         dto.connectorId = body.connectorId;
         dto.counterPartyAddress = body.counterPartyAddress;
         dto.contractId = body.contractId;
-        dto.assetId = body.assetId;
+//        dto.assetId = body.assetId;
         return edcConsumer.beginTransfer(dto);
     }
 
@@ -76,6 +76,5 @@ public class EdcConsumerController {
         public String connectorId;
         public String counterPartyAddress;
         public String contractId;
-        public String assetId;
     }
 }
