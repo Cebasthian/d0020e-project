@@ -77,14 +77,14 @@ public class EdcConsumer {
         TransferStatus status = checkTransferStatus(transferId);
 
         if(!Objects.equals(status.state, "STARTED")) {
-            return "[EdcConsumer#retrieveData] Status is not STARTED";
+            throw new RuntimeException("Transfer process not done! Use #checkTransferStatus first.");
         }
 
         String checkUrl = "/v3/edrs/" + transferId + "/dataaddress";
         EndpointDataReference data = httpRequester.get(checkUrl).body(EndpointDataReference.class);
 
         if(data == null) {
-            return "[EdcConsumer#retrieveData] Data was null";
+            throw new RuntimeException("EndpointDataReference was null (for some reason)");
         }
 
         return httpRequester.retrieveData(data.endpoint, data.authorization).body(Object.class);

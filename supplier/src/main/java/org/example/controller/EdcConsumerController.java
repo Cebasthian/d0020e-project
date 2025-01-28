@@ -46,6 +46,11 @@ public class EdcConsumerController {
         return edcConsumer.beginTransfer(dto);
     }
 
+    @GetMapping("/transfer/status/{transferId}")
+    public Object checkTransferStatus(@PathVariable String transferId) {
+        return edcConsumer.checkTransferStatus(transferId);
+    }
+
     @GetMapping("/transfer/retrieve/{transferId}")
     public Object retrieveAsset(@PathVariable String transferId) {
 

@@ -1,3 +1,5 @@
+const TARGET_CONNECTOR = "http://localhost:12004/protocol"
+
 async function PullAsset() {
     async function post(endpoint, body) {   
         const res = await fetch("http://localhost:8083/edc-consumer"+endpoint, {
@@ -9,6 +11,7 @@ async function PullAsset() {
         })
         console.log("")
         console.log(`====| ${endpoint} |====`)
+        console.log("Body:", body)
         console.log("Status:", res.status)
         console.log("Status Text:", res.statusText)
         const json = await res.json();
@@ -34,14 +37,14 @@ async function PullAsset() {
 
 
     const catalog = await post("/catalog/get", {
-        targetConnector: "http://localhost:19194/protocol"
+        targetConnector: TARGET_CONNECTOR
     })
     const dataset = catalog["dcat:dataset"][0]
     const assetId = dataset["@id"]
     const policyId = dataset["odrl:hasPolicy"]["@id"]
 
     const negotiation = await post("/contract/negotiate", {
-        targetConnector: "http://localhost:19194/protocol",
+        targetConnector: TARGET_CONNECTOR,
         policy: {
             id: policyId,
             assigner: catalog["dspace:participantId"],
@@ -49,25 +52,25 @@ async function PullAsset() {
         }
     })
 
-    await delay(5000)
-
-    const status = await get(`/contract/status/${negotiation["@id"]}`)
-    const agreementId = status["contractAgreementId"]
+    const status = await startPolling(async () => {
+        return await get(`/contract/status/${negotiation["@id"]}`)
+    }, (status) => status["state"] === "FINALIZED")
 
     const transfer = await post("/transfer/begin", {
         connectorId: status["counterPartyId"],
         counterPartyAddress: status["counterPartyAddress"],
-        contractId: agreementId,
+        contractId: status["contractAgreementId"],
         assetId: assetId
     })
 
-    await delay(1000);
+    await startPolling(async () => {
+        return await get(`/transfer/status/${transfer["@id"]}`)
+    }, (status) => status["state"] === "STARTED")
 
     const asset = await get(`/transfer/retrieve/${transfer["@id"]}`)
 
-    console.log("\n\n=====================")
-    console.log(asset)
-    console.log("=====================")
+    console.log("\n\n==| Asset |==")
+    console.log(JSON.stringify(asset, null, 2))
 
 }
 
@@ -78,4 +81,19 @@ function delay(ms) {
         console.log("\nSleeping for " + ms + " ms")
         setTimeout(() => {resolve()}, ms)
     })
+}
+
+async function startPolling(func, checkFunction) {
+    let loop = true;
+    let ret;
+    while(loop) {
+        const data = await func();
+        if(checkFunction(data)) {
+            loop = false;
+            ret = data;
+        } else {
+            await delay(1000)
+        }
+    }
+    return ret;   
 }
