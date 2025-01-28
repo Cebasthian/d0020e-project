@@ -23,8 +23,30 @@ public class NegotiateContractDTO extends BaseDTO {
         public String id;
 
         public String assigner;
+
+        /* TODO
+        "permission": [],
+        "prohibition": [],
+        "obligation": [],
+         */
+
         public String target;
     }
+
+    /* TODO
+    "callbackAddresses": [
+        {
+          "transactional": false,
+          "uri": "http://callback/url",
+          "events": [
+            "contract.negotiation",
+            "transfer.process"
+          ],
+          "authKey": "auth-key",
+          "authCodeId": "auth-code-id"
+        }
+      ]
+     */
 
 
 }

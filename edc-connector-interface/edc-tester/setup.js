@@ -9,6 +9,7 @@ async function SetupAsset() {
         })
         console.log("")
         console.log(`====| ${endpoint} |====`)
+        console.log("Body:", body)
         console.log("Status:", res.status)
         console.log("Status Text:", res.statusText)
         console.log("JSON:", await res.json())

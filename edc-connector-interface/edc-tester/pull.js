@@ -59,8 +59,7 @@ async function PullAsset() {
     const transfer = await post("/transfer/begin", {
         connectorId: status["counterPartyId"],
         counterPartyAddress: status["counterPartyAddress"],
-        contractId: status["contractAgreementId"],
-        assetId: assetId
+        contractId: status["contractAgreementId"]
     })
 
     await startPolling(async () => {

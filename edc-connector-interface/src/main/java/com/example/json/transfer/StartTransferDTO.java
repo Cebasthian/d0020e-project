@@ -1,4 +1,4 @@
-package com.example.json.asset;
+package com.example.json.transfer;
 
 import com.example.json.BaseDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;

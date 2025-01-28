@@ -8,12 +8,12 @@
 //     }
 // }).then(res => res.json()).then(data => console.log(data))
 
-const url = "http://localhost:8083/edc-consumer/transfer/retrieve/c23e3088-e87a-44cb-a7a3-4a7639d0f560"
-fetch(url, {
-    headers: {
-        "Content-Type": "application/json",
-    }
-}).then(res => res.json()).then(data => console.log(data))
+// const url = "http://localhost:8083/edc-consumer/transfer/retrieve/c23e3088-e87a-44cb-a7a3-4a7639d0f560"
+// fetch(url, {
+//     headers: {
+//         "Content-Type": "application/json",
+//     }
+// }).then(res => res.json()).then(data => console.log(data))
 
 // const id = "c23e3088-e87a-44cb-a7a3-4a7639d0f560"
 // const url = "http://localhost:29193/management/v3/edrs/" + id + "/dataaddress"
@@ -22,3 +22,17 @@ fetch(url, {
 //         "Content-Type": "application/json",
 //     }
 // }).then(res => res.json()).then(data => console.log(data))
+
+const url = "http://localhost:12003/management/v3/policydefinitions/request"
+fetch(url, {
+    headers: {
+        "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({
+        "@context": {
+          "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+        },
+        "@type": "QuerySpec",
+      })
+}).then(res => res.json()).then(data => console.log(data))

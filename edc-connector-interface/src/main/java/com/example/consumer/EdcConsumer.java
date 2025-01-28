@@ -1,17 +1,16 @@
 package com.example.consumer;
 
-import com.example.json.BaseDTO;
-import com.example.json.BaseResponse;
-import com.example.json.asset.StartTransferDTO;
+import com.example.json.transfer.StartTransferDTO;
 import com.example.json.catalog.RequestCatalogDTO;
 import com.example.json.catalog.RequestCatalogResponse;
+import com.example.json.contract.ContractStatus;
 import com.example.json.contract.NegotiateContractDTO;
 import com.example.json.transfer.EndpointDataReference;
 import com.example.json.transfer.TransferStatus;
+import com.example.json.util.CreateResponse;
 import com.example.util.HttpRequester;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClient;
 
 import java.util.Objects;
 
@@ -34,10 +33,12 @@ public class EdcConsumer {
      * @return
      */
     @Deprecated
-    public Object negotiateContract(NegotiateContractDTO dto) {
+    public CreateResponse negotiateContract(NegotiateContractDTO dto) {
         String url = "/v3/contractnegotiations";
 
-        return httpRequester.post(url, dto).body(Object.class);
+
+
+        return httpRequester.post(url, dto).body(CreateResponse.class);
     }
 
     /**
@@ -45,10 +46,10 @@ public class EdcConsumer {
      * @return
      */
     @Deprecated
-    public Object checkNegotiationStatus(String uuid) {
+    public ContractStatus checkNegotiationStatus(String uuid) {
         String url = "/v3/contractnegotiations/" + uuid;
 
-        return httpRequester.get(url).body(Object.class);
+        return httpRequester.get(url).body(ContractStatus.class);
     }
 
     /**
@@ -56,10 +57,10 @@ public class EdcConsumer {
      * @return
      */
     @Deprecated
-    public Object beginTransfer(StartTransferDTO dto) {
+    public CreateResponse beginTransfer(StartTransferDTO dto) {
         String url = "/v3/transferprocesses";
 
-        return httpRequester.post(url, dto).body(Object.class);
+        return httpRequester.post(url, dto).body(CreateResponse.class);
     }
 
     /**
