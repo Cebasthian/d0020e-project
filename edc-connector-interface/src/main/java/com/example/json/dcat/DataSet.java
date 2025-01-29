@@ -1,6 +1,7 @@
 package com.example.json.dcat;
 
 import com.example.json.odrl.HasPolicy;
+import com.example.json.odrl.Policy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class DataSet {
     public String type;
 
     @JsonProperty("odrl:hasPolicy")
-    public HasPolicy policy;
+    public Policy policy;
 
     @JsonProperty("dcat:distribution")
     public List<Distribution> distribution;
