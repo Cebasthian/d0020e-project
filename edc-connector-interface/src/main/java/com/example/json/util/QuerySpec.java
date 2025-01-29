@@ -1,8 +1,14 @@
 package com.example.json.util;
 
+import com.example.json.BaseDTO;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
-public class QuerySpec {
+public class QuerySpec extends BaseDTO {
+    @JsonProperty("@type")
+    public String type = "QuerySpec";
+
     public Integer offset;
     public Integer limit;
     public SortOrder sortOrder;

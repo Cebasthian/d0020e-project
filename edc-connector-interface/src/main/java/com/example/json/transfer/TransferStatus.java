@@ -14,7 +14,7 @@ public class TransferStatus extends BaseDTO {
     public Long stateTimestamp;
 
     @JsonProperty("type")
-    public String transferType;
+    public String connectorType;
 
     // TODO: complete this DTO
 }

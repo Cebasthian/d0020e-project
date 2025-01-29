@@ -1,6 +1,9 @@
 package com.example.json.odrl;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class Permission {
 
@@ -11,8 +14,11 @@ public class Permission {
     public Object action;
 
     @JsonProperty("odrl:constraint")
-    public Object constraint;
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    public List<Object> constraint;
 
+    @JsonProperty("odrl:assigner")
+    public String assigner;
 
 
 }

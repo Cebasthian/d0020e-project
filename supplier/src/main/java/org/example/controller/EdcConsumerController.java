@@ -1,8 +1,12 @@
 package org.example.controller;
 
 import com.example.consumer.EdcConsumer;
-import com.example.json.asset.StartTransferDTO;
+import com.example.json.transfer.StartTransferDTO;
+import com.example.json.catalog.RequestCatalogResponse;
+import com.example.json.contract.ContractStatus;
 import com.example.json.contract.NegotiateContractDTO;
+import com.example.json.transfer.TransferStatus;
+import com.example.json.util.CreateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,39 +19,39 @@ public class EdcConsumerController {
     private EdcConsumer edcConsumer;
 
     @PostMapping("/catalog/get")
-    public Object requestCatalog(@RequestBody GetCatalogDTO body) {
+    public RequestCatalogResponse requestCatalog(@RequestBody GetCatalogDTO body) {
         return edcConsumer.fetchCatalog(body.targetConnector);
     }
 
     @PostMapping("/contract/negotiate")
-    public Object negotiateContract(@RequestBody NegotiateDTO body) {
+    public CreateResponse negotiateContract(@RequestBody NegotiateDTO body) {
         NegotiateContractDTO dto = new NegotiateContractDTO();
-        dto.counterPartyAddress = body.targetConnector;
-        dto.policy.id = body.policy.id;
-        dto.policy.assigner = body.policy.assigner;
-        dto.policy.target = body.policy.targetAsset;
 
-//        return dto;
+        dto.counterPartyAddress = body.targetConnector;
+        dto.policy.policyId = body.policy.id;
+        dto.policy.targetConnectorId = body.policy.assigner;
+        dto.policy.assetId = body.policy.targetAsset;
+
         return edcConsumer.negotiateContract(dto);
     }
 
     @GetMapping("/contract/status/{negotiationId}")
-    public Object checkStatus(@PathVariable String negotiationId) {
+    public ContractStatus checkStatus(@PathVariable String negotiationId) {
         return edcConsumer.checkNegotiationStatus(negotiationId);
     }
 
     @PostMapping("/transfer/begin")
-    public Object beginTransfer(@RequestBody TransferDTO body) {
+    public CreateResponse beginTransfer(@RequestBody TransferDTO body) {
         StartTransferDTO dto = new StartTransferDTO();
         dto.connectorId = body.connectorId;
         dto.counterPartyAddress = body.counterPartyAddress;
         dto.contractId = body.contractId;
-        dto.assetId = body.assetId;
+//        dto.assetId = body.assetId;
         return edcConsumer.beginTransfer(dto);
     }
 
     @GetMapping("/transfer/status/{transferId}")
-    public Object checkTransferStatus(@PathVariable String transferId) {
+    public TransferStatus checkTransferStatus(@PathVariable String transferId) {
         return edcConsumer.checkTransferStatus(transferId);
     }
 
@@ -56,7 +60,6 @@ public class EdcConsumerController {
 
         return edcConsumer.retrieveData(transferId);
     }
-
 
     public static class GetCatalogDTO {
         public String targetConnector;
@@ -76,6 +79,5 @@ public class EdcConsumerController {
         public String connectorId;
         public String counterPartyAddress;
         public String contractId;
-        public String assetId;
     }
 }

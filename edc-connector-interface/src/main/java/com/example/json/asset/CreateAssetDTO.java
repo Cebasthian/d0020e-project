@@ -4,19 +4,23 @@ import com.example.json.BaseDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 
+import java.util.HashMap;
+
 public class CreateAssetDTO extends BaseDTO {
 
     @JsonProperty("@id")
     public String id;
 
-    public Properties properties = new Properties();
+    public HashMap<String, String> properties = new HashMap<>();
+//    public Properties properties = new Properties();
+//    public static class Properties {
+//        public String name;
+//        public String contenttype = "application/json";
+//    }
+
+    public HashMap<String, String> privateProperties = new HashMap<>();
+
     public DataAddress dataAddress = new DataAddress();
-
-    public static class Properties {
-        public String name;
-        public String contenttype = "application/json";
-    }
-
     public static class DataAddress {
         public String type = "HttpData";
         public String name;

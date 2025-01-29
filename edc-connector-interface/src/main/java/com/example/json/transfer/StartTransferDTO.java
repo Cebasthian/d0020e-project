@@ -1,4 +1,4 @@
-package com.example.json.asset;
+package com.example.json.transfer;
 
 import com.example.json.BaseDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,7 +10,6 @@ public class StartTransferDTO extends BaseDTO {
     public String connectorId;
     public String counterPartyAddress;
     public String contractId;
-    public String assetId;
     public String protocol = "dataspace-protocol-http";
     public String transferType = "HttpData-PULL";
 }
