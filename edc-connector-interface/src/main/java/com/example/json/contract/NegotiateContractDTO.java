@@ -1,6 +1,7 @@
 package com.example.json.contract;
 
 import com.example.json.BaseDTO;
+import com.example.json.odrl.Policy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class NegotiateContractDTO extends BaseDTO {
@@ -10,28 +11,8 @@ public class NegotiateContractDTO extends BaseDTO {
     public String counterPartyAddress;
     public String protocol = "dataspace-protocol-http";
 
-    public Policy policy = new Policy();
+    public Policy.Offer policy = new Policy.Offer();
 
-    public static class Policy {
-        @JsonProperty("@context")
-        public String context = "http://www.w3.org/ns/odrl.jsonld";
-
-        @JsonProperty("@type")
-        public String type = "Offer";
-
-        @JsonProperty("@id")
-        public String id;
-
-        public String assigner;
-
-        /* TODO
-        "permission": [],
-        "prohibition": [],
-        "obligation": [],
-         */
-
-        public String target;
-    }
 
     /* TODO
     "callbackAddresses": [

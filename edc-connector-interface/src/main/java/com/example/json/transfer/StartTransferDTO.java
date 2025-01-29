@@ -10,7 +10,6 @@ public class StartTransferDTO extends BaseDTO {
     public String connectorId;
     public String counterPartyAddress;
     public String contractId;
-    public String assetId;
     public String protocol = "dataspace-protocol-http";
     public String transferType = "HttpData-PULL";
 }

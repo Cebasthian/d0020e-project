@@ -2,12 +2,17 @@ package com.example.provider;
 
 import com.example.json.asset.CreateAssetDTO;
 import com.example.json.contract.CreateContractDTO;
+import com.example.json.odrl.Policy;
 import com.example.json.policy.CreatePolicyDTO;
 import com.example.json.util.CreateResponse;
 import com.example.util.HttpRequester;
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
+
+import java.util.List;
+import java.util.UUID;
 
 @Component
 public class EdcProvider {
@@ -16,12 +21,18 @@ public class EdcProvider {
     private HttpRequester httpRequester;
 
 
-    public CreateResponse createAsset(String id, String name, CreateAssetDTO.DataAddress dataAddress) {
+    /**
+     * Creates a new asset and attaches data to it. Note: Fetching the data is retroactive which means
+     * that it is possible to attach data that doesn't exist yet.
+     * @param name Name of the asset.
+     * @param dataAddress A pointer to where the EDC connector can fetch the data attached to the asset.
+     * @return EDC IdResponse json object
+     */
+    public CreateResponse createAsset(String name, CreateAssetDTO.DataAddress dataAddress) {
         String url = "/v3/assets";
 
         CreateAssetDTO dto = new CreateAssetDTO();
-        // TODO: instead of providing id, we generate it using UUID-v4
-        dto.id = id;
+        dto.id = UUID.randomUUID().toString();
         dto.properties.put("name", name);
         dto.properties.put("contenttype", "application/json");
         dto.dataAddress = dataAddress;
@@ -30,42 +41,42 @@ public class EdcProvider {
         return res.body(CreateResponse.class);
     }
 
-    // TODO: Add so we can modify the request. For example permission, prohibitions, obligations.
-
     /**
-     * @deprecated This will need to be updated, method signature will be different once fully implemented.
-     * @param id
-     * @return
+     * Creates a new policy on the EDC connector.
+     * @param id The id associated with the policy. Used when creating contracts.
+     * @param policy Set to null to use default values.
+     * @return EDC IdResponse json object
      */
-    @Deprecated
-    public CreateResponse createPolicy(String id) {
+    public CreateResponse createPolicy(String id, @Nullable Policy policy) {
         String url = "/v3/policydefinitions";
 
         CreatePolicyDTO dto = new CreatePolicyDTO();
         dto.id = id;
 
-        System.out.println(id);
+        if(policy != null) {
+            dto.policy = policy;
+        }
 
         RestClient.ResponseSpec res = httpRequester.post(url, dto);
         return res.body(CreateResponse.class);
     }
 
-    // TODO: Add so we can set assetsSelector (maybe with overloaded method because an empty assetsSelector means it applies to all assets)
     /**
-     * @deprecated Method signature will be updated once fully implemented.
-     * @param id
-     * @param accessPolicyId
-     * @param contractPolicyId
-     * @return
+     * Creates a new contract based on policies.
+     * @param id Contract id.
+     * @param accessPolicyId The internal policy that the connector enforces.
+     * @param contractPolicyId The public policy that other connectors need to comply with.
+     * @param assetSelectors List of selectors for the assets that this contract applies to.
+     * @return EDC IdResponse json object.
      */
-    @Deprecated
-    public CreateResponse createContract(String id, String accessPolicyId, String contractPolicyId) {
+    public CreateResponse createContract(String id, String accessPolicyId, String contractPolicyId, List<CreateContractDTO.AssetSelector> assetSelectors) {
         String url = "/v3/contractdefinitions";
 
         CreateContractDTO dto = new CreateContractDTO();
         dto.id = id;
         dto.accessPolicyId = accessPolicyId;
         dto.contractPolicyId = contractPolicyId;
+        dto.assetsSelector = assetSelectors;
 
         RestClient.ResponseSpec res = httpRequester.post(url, dto);
         return res.body(CreateResponse.class);

@@ -1,6 +1,5 @@
 package com.example.json.odrl;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,4 +23,18 @@ public class Policy {
     public List<Rule> permission = new ArrayList<>();
     public List<Rule> prohibitions = new ArrayList<>();
     public List<Rule> obligation = new ArrayList<>();
+
+    public static class Offer extends Policy {
+        @JsonProperty("@type")
+        public String type = "Offer";
+
+        @JsonProperty("@id")
+        public String policyId;
+
+        @JsonProperty("assigner")
+        public String targetConnectorId;
+
+        @JsonProperty("target")
+        public String assetId;
+    }
 }

@@ -20,6 +20,11 @@ public class EdcConsumer {
     @Autowired
     private HttpRequester httpRequester;
 
+    /**
+     * Gets the catalog of all datasets (assets) from a specific connector.
+     * @param targetConnector Address of the target connector, <b>http://localhost:11004/protocol<b/>
+     * @return A catalog containing datasets.
+     */
     public RequestCatalogResponse fetchCatalog(String targetConnector) {
         String url = "/v3/catalog/request";
 
@@ -29,34 +34,33 @@ public class EdcConsumer {
     }
 
     /**
-     * @deprecated Will probably change return value to something more explicit.
-     * @return
+     * Starts a negotiation regarding an asset.
+     * @param dto The body of the request.
+     * @return EDC IdResponse containing negotiation id.
      */
-    @Deprecated
     public CreateResponse negotiateContract(NegotiateContractDTO dto) {
         String url = "/v3/contractnegotiations";
-
-
 
         return httpRequester.post(url, dto).body(CreateResponse.class);
     }
 
     /**
-     * @deprecated Will probably change return value to something more explicit.
-     * @return
+     * Checks the status of an ongoing negotiation
+     * @param negotiationId The id of the negotiation.
+     * @return State object containing field <i>state</i> that equals FINALIZED when completed.
+     * When finalized, also contains the contract id.
      */
-    @Deprecated
-    public ContractStatus checkNegotiationStatus(String uuid) {
-        String url = "/v3/contractnegotiations/" + uuid;
+    public ContractStatus checkNegotiationStatus(String negotiationId) {
+        String url = "/v3/contractnegotiations/" + negotiationId;
 
         return httpRequester.get(url).body(ContractStatus.class);
     }
 
     /**
-     * @deprecated Will probably change return value to something more explicit.
-     * @return
+     * Starts the transfer of data based on a contract negotiation.
+     * @param dto The body of the request.
+     * @return EDC IdResponse containing transfer id.
      */
-    @Deprecated
     public CreateResponse beginTransfer(StartTransferDTO dto) {
         String url = "/v3/transferprocesses";
 
@@ -64,16 +68,21 @@ public class EdcConsumer {
     }
 
     /**
-     * @deprecated Will probably change return value to something more explicit.
-     * @return
+     * Checks the status of an ongoing transfer process.
+     * @param transferId The id of the transfer.
+     * @return State object containing field <i>state</i> that equals STARTED when ready.
      */
-    @Deprecated
-    public TransferStatus checkTransferStatus(String uuid) {
-        String url = "/v3/transferprocesses/" + uuid;
+    public TransferStatus checkTransferStatus(String transferId) {
+        String url = "/v3/transferprocesses/" + transferId;
 
         return httpRequester.get(url).body(TransferStatus.class);
     }
 
+    /**
+     * Checks status of the transfer and if ready, retrieves the data from the connector.
+     * @param transferId The id of the transfer.
+     * @return The data attached to the asset requested.
+     */
     public Object retrieveData(String transferId) {
         TransferStatus status = checkTransferStatus(transferId);
 

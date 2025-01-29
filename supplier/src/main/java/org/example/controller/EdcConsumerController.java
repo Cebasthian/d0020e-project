@@ -26,12 +26,12 @@ public class EdcConsumerController {
     @PostMapping("/contract/negotiate")
     public CreateResponse negotiateContract(@RequestBody NegotiateDTO body) {
         NegotiateContractDTO dto = new NegotiateContractDTO();
-        dto.counterPartyAddress = body.targetConnector;
-        dto.policy.id = body.policy.id;
-        dto.policy.assigner = body.policy.assigner;
-        dto.policy.target = body.policy.targetAsset;
 
-//        return dto;
+        dto.counterPartyAddress = body.targetConnector;
+        dto.policy.policyId = body.policy.id;
+        dto.policy.targetConnectorId = body.policy.assigner;
+        dto.policy.assetId = body.policy.targetAsset;
+
         return edcConsumer.negotiateContract(dto);
     }
 
