@@ -1,8 +1,9 @@
-const TARGET_CONNECTOR = "http://localhost:12004/protocol"
+const PROVIDER = "http://localhost:12004/protocol"
+const TARGET_MODULE = "http://localhost:8083/edc-consumer"
 
 async function PullAsset() {
     async function post(endpoint, body) {   
-        const res = await fetch("http://localhost:8083/edc-consumer"+endpoint, {
+        const res = await fetch(TARGET_MODULE+endpoint, {
             method: "post",
             body: JSON.stringify(body),
             headers: {
@@ -20,7 +21,7 @@ async function PullAsset() {
     }
 
     async function get(endpoint) {
-        const res = await fetch("http://localhost:8083/edc-consumer"+endpoint, {
+        const res = await fetch(TARGET_MODULE+endpoint, {
             method: "get",
             headers: {
                 "Content-Type": "application/json"
@@ -37,14 +38,14 @@ async function PullAsset() {
 
 
     const catalog = await post("/catalog/get", {
-        targetConnector: TARGET_CONNECTOR
+        targetConnector: PROVIDER
     })
     const dataset = catalog["dcat:dataset"][0]
     const assetId = dataset["@id"]
     const policyId = dataset["odrl:hasPolicy"]["@id"]
 
     const negotiation = await post("/contract/negotiate", {
-        targetConnector: TARGET_CONNECTOR,
+        targetConnector: PROVIDER,
         policy: {
             id: policyId,
             assigner: catalog["dspace:participantId"],
