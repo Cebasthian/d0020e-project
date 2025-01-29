@@ -1,20 +1,8 @@
-FROM gradle:jdk17 AS build
-
-COPY --chown=gradle:gradle . /home/gradle/project/
-WORKDIR /home/gradle/project/
-RUN gradle build --no-daemon
-
-FROM openjdk:17-slim
+FROM eclipse-temurin:21-jre-jammy AS build
 
 WORKDIR /app
-COPY --from=build /home/gradle/project/build/libs/connector.jar /app
 
-ENV EDC_FS_CONFIG=$EDC_FS_CONFIG
+COPY build/libs/connector.jar .
+COPY configs/ configs/
 
-EXPOSE 9191
-EXPOSE 9192
-EXPOSE 9193
-EXPOSE 9194
-EXPOSE 9291
-
-ENTRYPOINT java -jar connector.jar
+CMD ["java", "-Dedc.keystore=certs/cert.pfx", "-Dedc.keystore.password=123456", "-Dedc.fs.config=configs/default.properties", "-jar", "connector.jar"]
