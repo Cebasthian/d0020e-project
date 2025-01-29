@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  supplier-edc-connector:
+    build:
+      context: ./edc-connector
+    command: ["java", "-Dedc.keystore=certs/cert.pfx", "-Dedc.keystore.password=123456", "-Dedc.fs.config=configs/supplier.properties", "-jar", "connector.jar"]
+    ports:
+      - "13000:8080"
+      - "13001:8080"
+    volumes:
+      - ./edc-connector/configs:/app/configs
+
+  manufacturer-edc-connector:
+    build:
+      context: ./edc-connector
+    command: ["java", "-Dedc.keystore=certs/cert.pfx", "-Dedc.keystore.password=123456", "-Dedc.fs.config=configs/manufacturer.properties", "-jar", "connector.jar"]
+    ports:
+      - "11000:8080"
+      - "11001:8080"
+    volumes:
+      - ./edc-connector/configs:/app/configs
+
+  recycler-edc-connector:
+    build:
+      context: ./edc-connector
+    command: ["java", "-Dedc.keystore=certs/cert.pfx", "-Dedc.keystore.password=123456", "-Dedc.fs.config=configs/recycler.properties", "-jar", "connector.jar"]
+    ports:
+      - "12000:8080"
+      - "12001:8080"
+    volumes:
+      - ./edc-connector/configs:/app/configs

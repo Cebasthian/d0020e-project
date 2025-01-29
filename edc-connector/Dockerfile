@@ -1,20 +1,15 @@
-FROM gradle:jdk17 AS build
+# Use an OpenJDK base image
+FROM eclipse-temurin:21-jre-jammy AS build
 
-COPY --chown=gradle:gradle . /home/gradle/project/
-WORKDIR /home/gradle/project/
-RUN gradle build --no-daemon
-
-FROM openjdk:17-slim
-
+# Set the working directory
 WORKDIR /app
-COPY --from=build /home/gradle/project/build/libs/connector.jar /app
 
-ENV EDC_FS_CONFIG=$EDC_FS_CONFIG
+# Copy the connector JAR and configs into the container
+COPY build/libs/connector.jar .
+COPY configs/ configs/
 
-EXPOSE 9191
-EXPOSE 9192
-EXPOSE 9193
-EXPOSE 9194
-EXPOSE 9291
+# Expose any necessary ports (replace 8080 with your application's port if different)
+EXPOSE 8080
 
-ENTRYPOINT java -jar connector.jar
+# Default command (can be overridden by Docker Compose)
+CMD ["java", "-Dedc.keystore=certs/cert.pfx", "-Dedc.keystore.password=123456", "-Dedc.fs.config=configs/default.properties", "-jar", "connector.jar"]
