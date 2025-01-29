@@ -20,9 +20,14 @@ public class Policy {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String id;
 
-    public List<Rule> permission = new ArrayList<>();
-    public List<Rule> prohibitions = new ArrayList<>();
-    public List<Rule> obligation = new ArrayList<>();
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public List<Rule> permission;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public List<Rule> prohibitions;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public List<Rule> obligation;
 
     public static class Offer extends Policy {
         @JsonProperty("@type")
