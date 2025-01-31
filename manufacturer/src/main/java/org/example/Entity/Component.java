@@ -1,17 +1,21 @@
 package org.example.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "components")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Component {
 
-    // snacka med Sebastian & Tom om det här behövs. De hade något liknande i sin entity.Materials i Supplier. (där de använder @ManyToOne)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
+
+    @ManyToOne
+    @JoinColumn(name = "PC")
+    private PC PC;
 
     private String componentType; //gpu, cpu, hdd, sdd, etc..
     private String componentId;
