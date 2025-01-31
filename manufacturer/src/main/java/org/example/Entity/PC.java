@@ -1,12 +1,16 @@
 package org.example.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "PCs")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PC {
 
     @Id
@@ -15,18 +19,10 @@ public class PC {
 
     private String productId;
 
-
-    // Jag är lite osäker på hur egentligen det ska göras. Man ska använda @OneToMany på något sätt.
-    // Kolla på Supplier hur dem implementerade ArrayList<Materials> under entity.GPU
-
-    @ElementCollection
-    private ArrayList<Integer> components;
-
-    //@NotNull
-    //@OneToMany(mappedBy = "PC", cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JsonManagedReference
-    //private ArrayList<Component> components = new ArrayList<>();
-    //Vet ej varför den inte vill fungera
+    @NotNull
+    @OneToMany(mappedBy = "PC", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Component> components = new ArrayList<>();
 
     private String energyClass;
     private String dimensions; // kanske är rimligare med String av typen '20x40x10 cm'
@@ -37,11 +33,6 @@ public class PC {
     private String repairInstructions;
     private String assemblyCarbonFootprint;
     private String warranty;
-
-    // Behövs inte då spring boot sätter id själv
-    //public void setPC_ID(int ID){
-        //this.PC_ID = ID;
-    //}
 
     public int getPC_ID(){
         return this.ID;                       //return pc ID
@@ -55,14 +46,11 @@ public class PC {
         return this.productId;                       //return dpp id
     }
 
-    // ist för 'Long Component' använd 'Component component'
-    public void add_component(Long Component){
-        // this.components.add(component); använd ArrayLists egna add metod
-        //this.components = Component;          //måste loopa in på ledig plats
+    public void add_component(Component Component){
+        this.components.add(Component);
     }
 
-    // ArrayList<Component>
-    public ArrayList<Integer> get_components(){
+    public List<Component> get_components(){
         return this.components;
     }
 

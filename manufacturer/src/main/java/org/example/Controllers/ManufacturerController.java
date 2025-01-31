@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-// @RequestMapping("/pc") // genom att ha denna annotation så tvingar den alla endpoints att börja med /pc. Alltså kommer en endpoint att vara: http://localhost:8080/pc/get-all
 public class ManufacturerController {
 
     @Autowired
@@ -21,18 +20,18 @@ public class ManufacturerController {
     @GetMapping("/")
     public String adminPage(Model model) {
         // Retrieve the list of all PCs and add it to the model
-        model.addAttribute("pcs", manufacturerService.findALL());
+        model.addAttribute("pcs", manufacturerService.findAll());
         return "admin";  // Thymeleaf will render this HTML file
     }
 
     @GetMapping("/GET-All-PCs")
     public List<PC> GET_PCs (){
-       return manufacturerService.findALL();
+       return manufacturerService.findAll();
     }
 
     @GetMapping("/GET/{ID}")
     public PC GET_PCbyID(@PathVariable int ID){
-        return manufacturerService.findByID(ID);
+        return manufacturerService.findbyID(ID);
     }
 
     // lägg till och posta PC
@@ -47,13 +46,11 @@ public class ManufacturerController {
         //return manufacturerService.findByID(ID);
     //}
 
-    // Saknar en update metod
    @PutMapping("/update-pc")
     public void updatePC(@RequestBody PC pc) {
         manufacturerService.updatePC(pc);
     }
 
-    // Saknar en delete metod
     @DeleteMapping("/delete/{id}")
     public void deletePC(@PathVariable Integer ID) {
         manufacturerService.deletePCbyID(ID);

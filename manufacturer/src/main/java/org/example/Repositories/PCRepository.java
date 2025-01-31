@@ -1,11 +1,22 @@
 package org.example.Repositories;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
+import jakarta.persistence.PersistenceContext;
 import org.example.Entity.PC;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static jakarta.persistence.LockModeType.*;
 
 @Repository
 public interface PCRepository extends JpaRepository<PC, Integer> {
@@ -15,16 +26,22 @@ public interface PCRepository extends JpaRepository<PC, Integer> {
         return new PC();
     }
 
-    // Lägga in PC i lista/databas
-    public default void save(){
-
-    }
+    // Lägga in alla värden för PC i databas
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    PC saveAndFlush(PC PC);
 
     // Ta bort en PC
     public default void deletebyID(int ID){
+        //hitta dator med input id och ta bort från lista
 
     }
     public default void change(PC pc){
 
+    }
+
+    //SQL query som ska hämta ut alla PCs
+    public default List<PC> findAll(){
+        List<PC> PCs = new ArrayList<>();
+        return PCs;
     }
 }

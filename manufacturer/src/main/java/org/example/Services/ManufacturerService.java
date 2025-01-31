@@ -20,12 +20,12 @@ public class ManufacturerService {
         private PCRepository pcRepository;
 
 
-        public PC findByID(int ID) {
+        public PC findbyID(int ID) {
                 return pcRepository.findbyID(ID);
         }
 
         // Hitta alla datorer och returnera som en lista
-        public List<PC> findALL() {
+        public List<PC> findAll() {
                 return pcRepository.findAll();
         }
 
@@ -35,12 +35,10 @@ public class ManufacturerService {
         }
 
         // Spara dator i listan/databas
-        // det funkar men skulle bara vela ändra parameterns namn då det tekniskt sett inte är ett ID man skickar utan hela datorn.
-        public void addPC(PC ID) {
-                pcRepository.save(ID);
+        public void addPC(PC PC) {
+                pcRepository.saveAndFlush(PC);
         }
 
-        // behövs en updatePc metod också som jag kommenterade i ManufacturerController
         public void updatePC(PC pc) {
                 pcRepository.change(pc);
         }
