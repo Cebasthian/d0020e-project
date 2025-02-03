@@ -20,6 +20,11 @@ public class EdcConsumer {
     @Autowired
     private HttpRequester httpRequester;
 
+    public Object getConnectors() {
+        return httpRequester.getConnectorsMetadata();
+    }
+
+
     /**
      * Gets the catalog of all datasets (assets) from a specific connector.
      * @param targetConnector Address of the target connector, <b>http://localhost:11004/protocol<b/>

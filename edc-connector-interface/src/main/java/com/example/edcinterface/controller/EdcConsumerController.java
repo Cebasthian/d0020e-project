@@ -26,6 +26,16 @@ public class EdcConsumerController {
     private EdcConsumer edcConsumer;
 
 
+    @Operation(summary = "Get connectors", description = "Fetch the metadata of all active connectors. Note that these are hardcoded for demonstration purposes.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Found connectors"),
+    })
+    @GetMapping("/connectors")
+    public Object getConnectors() {
+        return edcConsumer.getConnectors();
+    }
+
+
     @Operation(summary = "Get catalog", description = "Fetch catalog from a target connector.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Found catalog"),
