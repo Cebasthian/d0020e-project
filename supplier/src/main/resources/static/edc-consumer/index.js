@@ -39,7 +39,15 @@ async function get(endpoint) {
     return json;
 }
 
+/* CONNECTOR METADATA */
 
+async function getMetadata() {
+    await get("/connectors")
+}
+
+document.getElementById("get-metadata").addEventListener("click", async () => {
+    await getMetadata()
+})
 
 
 
