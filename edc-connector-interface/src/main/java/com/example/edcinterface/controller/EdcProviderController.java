@@ -1,22 +1,17 @@
-package org.example.recycler.controllers;
+package com.example.edcinterface.controller;
 
-import com.example.json.asset.CreateAssetDTO;
-import com.example.json.odrl.Policy;
-import com.example.json.util.CreateResponse;
-import com.example.provider.EdcProvider;
-import io.swagger.v3.oas.annotations.Hidden;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.example.edcinterface.json.asset.CreateAssetDTO;
+import com.example.edcinterface.json.odrl.Policy;
+import com.example.edcinterface.json.util.CreateResponse;
+import com.example.edcinterface.provider.EdcProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
-@Tag(name = "connector endpoints")
-@RestController
 @RequestMapping("/edc-provider")
 @CrossOrigin
 public class EdcProviderController {
-
     @Autowired
     private EdcProvider edcProvider;
 
@@ -40,24 +35,19 @@ public class EdcProviderController {
         return edcProvider.createContract(body.id, body.accessPolicyId, body.contractPolicyId, Collections.emptyList());
     }
 
-    @Hidden
     public static class NewAssetDTO {
         public String name;
         public String baseUrl;
     }
 
-    @Hidden
     public static class NewContractDTO {
         public String id;
         public String accessPolicyId;
         public String contractPolicyId;
     }
 
-    @Hidden
     public static class NewPolicyDTO {
         public String id;
         public Policy policy;
     }
-
-
 }
