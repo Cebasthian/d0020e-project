@@ -3,15 +3,23 @@
 
 ---
 
-# PostgreSQL database
-Install PostgreSQL.
-Create a user named `dpp` with password `pass`.
-Create each database with `dpp` as owner.
+## 1. Installation
 
-1. Download Postgresql from [their website](https://www.postgresql.org/download/).
-2. Start a `psql` shell and connect to postgres using the superuser credentials used when installing.
-3. Run `CREATE USER dpp WITH PASSWORD 'pass';`
-4. Run `CREATE DATABASE dpp_{module} OWNER dpp;` for each module to create its database.
+### 1.1 PostgreSQL Database
+TODO: docker container
+1. Make sure you have a PostgreSQL instance up and running.
+2. Create a user with the name `dpp` and password `pass`, `CREATE USER dpp WITH PASSWORD 'pass';`.
+3. Create the databases using `CREATE DATABASE dpp_{module} OWNER dpp;` where `{module}` is `manufacturer`, `recycler`, and `supplier`.
 
-# EDC Connector
-See [Edc Connector](edc-connector/README.md).
+### 1.2 Edc Connectors
+The connectors are run via docker containers. Simply run `docker compose up` in root.
+
+See [Edc Connectors](edc-connector/README.md) for more information on how to start without docker.  
+
+### 1.3 Spring boot modules
+TODO: docker containers
+
+Simply open the project in IntelliJ IDEA, wait for maven dependencies to download, and run the configuration `All Modules`.
+
+## 2. Usage
+To be written
