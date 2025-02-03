@@ -7,22 +7,39 @@ import com.example.edcinterface.json.contract.NegotiateContractDTO;
 import com.example.edcinterface.json.transfer.StartTransferDTO;
 import com.example.edcinterface.json.transfer.TransferStatus;
 import com.example.edcinterface.json.util.CreateResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 @CrossOrigin
 @RequestMapping("/edc-consumer")
+@Tag(name = "Edc Consumer", description = "Endpoints related to consume assets in an edc dataspace.")
 public class EdcConsumerController {
 
     @Autowired
     private EdcConsumer edcConsumer;
 
+
+    @Operation(summary = "Get catalog", description = "Fetch catalog from a target connector.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Found catalog"),
+    })
     @PostMapping("/catalog/get")
     public RequestCatalogResponse requestCatalog(@RequestBody GetCatalogDTO body) {
         return edcConsumer.fetchCatalog(body.targetConnector);
     }
 
+
+    @Operation(summary = "Negotiate contract", description = "Begin a contract negotiation related to an asset.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Contract initialized"),
+    })
     @PostMapping("/contract/negotiate")
     public CreateResponse negotiateContract(@RequestBody NegotiateDTO body) {
         NegotiateContractDTO dto = new NegotiateContractDTO();
@@ -35,11 +52,21 @@ public class EdcConsumerController {
         return edcConsumer.negotiateContract(dto);
     }
 
+
+    @Operation(summary = "Negotiation status", description = "Check the status on a contract negotiation.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Negotiation found"),
+    })
     @GetMapping("/contract/status/{negotiationId}")
     public ContractStatus checkStatus(@PathVariable String negotiationId) {
         return edcConsumer.checkNegotiationStatus(negotiationId);
     }
 
+
+    @Operation(summary = "Begin data transfer", description = "Start a consumer pull data transfer.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Transfer initialized"),
+    })
     @PostMapping("/transfer/begin")
     public CreateResponse beginTransfer(@RequestBody TransferDTO body) {
         StartTransferDTO dto = new StartTransferDTO();
@@ -50,16 +77,27 @@ public class EdcConsumerController {
         return edcConsumer.beginTransfer(dto);
     }
 
+
+    @Operation(summary = "Transfer status", description = "Check the status on a transfer process.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Transfer process found"),
+    })
     @GetMapping("/transfer/status/{transferId}")
     public TransferStatus checkTransferStatus(@PathVariable String transferId) {
         return edcConsumer.checkTransferStatus(transferId);
     }
 
+
+    @Operation(summary = "Retrieve asset", description = "Fetch the actual data attached to the asset.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Asset retrieved"),
+    })
     @GetMapping("/transfer/retrieve/{transferId}")
     public Object retrieveAsset(@PathVariable String transferId) {
 
         return edcConsumer.retrieveData(transferId);
     }
+
 
     public static class GetCatalogDTO {
         public String targetConnector;
