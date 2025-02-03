@@ -1,6 +1,6 @@
 package org.example.recycler.controllers;
 
-import com.example.util.HttpRequester;
+import com.example.edcinterface.util.HttpRequester;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,19 +25,14 @@ public class DppController {
 
     @Operation(summary = "Get the product passport using its productId.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Found product", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = String.class))}),
+            @ApiResponse(responseCode = "200", description = "Found product", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Object.class))}),
             @ApiResponse(responseCode = "404", description = "Product not found", content = @Content)
     })
     @GetMapping("/{productId}")
-    public String getDppData(@PathVariable String productId) {
+    public Object getDppData(@PathVariable String productId) {
 //        dppService.getDppData(productId);
 
 //        return httpRequester.get();
         return "hello world";
-    }
-
-    @GetMapping("/catalog")
-    public Object getDto() {
-        return httpRequester.dto();
     }
 }
