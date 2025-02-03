@@ -1,15 +1,69 @@
 networks:
   edc-network:
-    driver: bridge
     ipam:
       config:
         - subnet: 172.22.0.0/24
 
+volumes:
+  supplier-db-data:
+  recycler-db-data:
+  manufacturer-db-data:
+
+
 services:
-  manufacturer-edc-connector:
+
+################ Database configuration:
+
+  manufacturer-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: dpp_manufacturer
+      POSTGRES_USER: dpp
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - manufacturer-db-data:/var/lib/postgresql/data
+    networks:
+      - edc-network
+
+
+  recycler-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: dpp_recycler
+      POSTGRES_USER: dpp
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - recycler-db-data:/var/lib/postgresql/data
+    networks:
+      - edc-network
+
+
+  supplier-db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: dpp_supplier
+      POSTGRES_USER: dpp
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - supplier-db-data:/var/lib/postgresql/data
+    networks:
+      - edc-network
+
+
+
+
+
+
+  ################ Running module + corresponding connector in the same container:
+
+  manufacturer-with-connector:
     build:
-      context: ./edc-connector
-    command: ["java", "-Dedc.keystore=certs/cert.pfx", "-Dedc.keystore.password=123456", "-Dedc.fs.config=configs/manufacturer.properties", "-jar", "connector.jar"]
+      dockerfile: ./manufacturer/Dockerfile
+    container_name: manufacturer
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://manufacturer:5432/dpp_manufacturer
+      SPRING_DATASOURCE_USERNAME: dpp
+      SPRING_DATASOURCE_PASSWORD: pass
     ports:
       - "11000:11000"
       - "11001:11001"
@@ -17,18 +71,25 @@ services:
       - "11003:11003"
       - "11004:11004"
       - "11005:11005"
+      - "127.0.0.1:8080:8080" # PS: ONLY USED FOR DEMONSTRATING
+      #- "8080:8080" # PS: ONLY USED FOR DEMONSTRATING
     volumes:
       - ./edc-connector/configs:/app/configs
     networks:
       edc-network:
         ipv4_address: 172.22.0.10
-
+    depends_on:
+      - manufacturer-db
 
 
   recycler-edc-connector:
     build:
-      context: ./edc-connector
-    command: ["java", "-Dedc.keystore=certs/cert.pfx", "-Dedc.keystore.password=123456", "-Dedc.fs.config=configs/recycler.properties", "-jar", "connector.jar"]
+      dockerfile: ./recycler/Dockerfile
+    container_name: recycler
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://recycler-db:5432/dpp_recycler
+      SPRING_DATASOURCE_USERNAME: dpp
+      SPRING_DATASOURCE_PASSWORD: pass
     ports:
       - "12000:12000"
       - "12001:12001"
@@ -36,17 +97,25 @@ services:
       - "12003:12003"
       - "12004:12004"
       - "12005:12005"
+      - "127.0.0.1:8081:8081" # PS: ONLY USED FOR DEMONSTRATING
+      #- "8081:8081" # PS: ONLY USED FOR DEMONSTRATING
     volumes:
       - ./edc-connector/configs:/app/configs
     networks:
       edc-network:
         ipv4_address: 172.22.0.11
+    depends_on:
+      - recycler-db
 
 
-  supplier-edc-connector:
+  supplier-with-connector:
     build:
-      context: ./edc-connector
-    command: ["java", "-Dedc.keystore=certs/cert.pfx", "-Dedc.keystore.password=123456", "-Dedc.fs.config=configs/supplier.properties", "-jar", "connector.jar"]
+      dockerfile: ./supplier/Dockerfile
+    container_name: supplier
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://supplier-db:5432/dpp_supplier
+      SPRING_DATASOURCE_USERNAME: dpp
+      SPRING_DATASOURCE_PASSWORD: pass
     ports:
       - "13000:13000"
       - "13001:13001"
@@ -54,9 +123,12 @@ services:
       - "13003:13003"
       - "13004:13004"
       - "13005:13005"
+      - "127.0.0.1:8082:8082" # PS: ONLY USED FOR DEMONSTRATING
+      #- "8082:8082" # PS: ONLY USED FOR DEMONSTRATING
     volumes:
       - ./edc-connector/configs:/app/configs
     networks:
       edc-network:
         ipv4_address: 172.22.0.12
-
+    depends_on:
+      - supplier-db
