@@ -61,7 +61,7 @@ services:
       dockerfile: ./manufacturer/Dockerfile
     container_name: manufacturer
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://manufacturer:5432/dpp_manufacturer
+      SPRING_DATASOURCE_URL: jdbc:postgresql://manufacturer-db:5432/dpp_manufacturer
       SPRING_DATASOURCE_USERNAME: dpp
       SPRING_DATASOURCE_PASSWORD: pass
     ports:

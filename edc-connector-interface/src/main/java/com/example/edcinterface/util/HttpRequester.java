@@ -66,6 +66,7 @@ public class HttpRequester {
                 Object info = client.get().uri("http://"+host+metadataPath).retrieve().body(Object.class);
                 metadata.add(info);
             } catch (Exception exception) {
+                System.out.println("Connector " + host + " is not running.");
                 // Probably that the connector is not running.
             }
         }
