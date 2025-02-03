@@ -1,3 +1,8 @@
+# D0020E Project
+![build](https://github.com/Cebasthian/d0020e-project/actions/workflows/maven.yml/badge.svg)
+
+---
+
 # PostgreSQL database
 Install PostgreSQL.
 Create a user named `dpp` with password `pass`.
