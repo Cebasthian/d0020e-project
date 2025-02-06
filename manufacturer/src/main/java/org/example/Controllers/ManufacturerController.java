@@ -1,5 +1,10 @@
 package org.example.Controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.example.Entity.PC;
 import org.example.Services.ManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +15,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/PCs")
 public class ManufacturerController {
 
     @Autowired
     private ManufacturerService manufacturerService;
 
+    @Operation(summary = "Adminpage", description = "Retrieve the list of all PCs and add it to the model")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description ="Successfully added PC",content =
+    @Content(mediaType = "application/json", schema = @Schema(implementation = PC.class))),
+    @ApiResponse(responseCode = "500", description = "Error")
+})
     //koden för HTML.
     @GetMapping("/")
     public String adminPage(Model model) {
@@ -24,15 +36,36 @@ public class ManufacturerController {
         return "admin";  // Thymeleaf will render this HTML file
     }
 
+    @Operation(summary = "Get all PCs", description = "Retrieve the list of all PCs")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description ="Successfully retrieved PCs",content =
+            @Content(mediaType = "application/json", schema = @Schema(implementation = PC.class))),
+            @ApiResponse(responseCode = "500", description = "Error")
+    })
+
     @GetMapping("/GET-All-PCs")
     public List<PC> GET_PCs (){
        return manufacturerService.findAll();
     }
 
+    @Operation(summary = "Get PC", description = "Retrieve a certain PC")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description ="Successfully retrieved a PC",content =
+            @Content(mediaType = "application/json", schema = @Schema(implementation = PC.class))),
+            @ApiResponse(responseCode = "500", description = "Error")
+    })
+
     @GetMapping("/GET/{ID}")
     public PC GET_PCbyID(@PathVariable int ID){
         return manufacturerService.findbyID(ID);
     }
+
+    @Operation(summary = "Create PC", description = "Create a PC")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description ="Successfully created a PC",content =
+            @Content(mediaType = "application/json", schema = @Schema(implementation = PC.class))),
+            @ApiResponse(responseCode = "500", description = "Error")
+    })
 
     // lägg till och posta PC
     @PostMapping("/CREATE_PCs")
@@ -46,10 +79,24 @@ public class ManufacturerController {
         //return manufacturerService.findByID(ID);
     //}
 
+    @Operation(summary = "Update PC", description = "Update information about PC")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description ="Successfully updated PC",content =
+            @Content(mediaType = "application/json", schema = @Schema(implementation = PC.class))),
+            @ApiResponse(responseCode = "500", description = "Error")
+    })
+
    @PutMapping("/update-pc")
     public void updatePC(@RequestBody PC pc) {
         manufacturerService.updatePC(pc);
     }
+
+    @Operation(summary = "Delete PC", description = "Remove a PC from database")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description ="Successfully removed a PC",content =
+            @Content(mediaType = "application/json", schema = @Schema(implementation = PC.class))),
+            @ApiResponse(responseCode = "500", description = "Error")
+    })
 
     @DeleteMapping("/delete/{id}")
     public void deletePC(@PathVariable Integer ID) {
