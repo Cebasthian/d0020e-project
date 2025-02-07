@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ManufacturerService {
@@ -20,8 +21,8 @@ public class ManufacturerService {
         private PCRepository pcRepository;
 
 
-        public PC findbyID(int ID) {
-                return pcRepository.findbyID(ID);
+        public Optional<PC> findbyID(Long ID) {
+                return pcRepository.findByID(ID);
         }
 
         // Hitta alla datorer och returnera som en lista
@@ -30,8 +31,8 @@ public class ManufacturerService {
         }
 
         // Ta bort en PC
-        public void deletePCbyID(int ID) {
-                pcRepository.deletebyID(ID);
+        public void deletePCbyID(Long ID) {
+                pcRepository.deleteById(ID);
         }
 
         // Spara dator i listan/databas
@@ -39,7 +40,7 @@ public class ManufacturerService {
                 pcRepository.saveAndFlush(PC);
         }
 
-        public void updatePC(PC pc) {
-                pcRepository.change(pc);
+        public void updatePC(Long ID) {
+                pcRepository.change(ID);
         }
 }

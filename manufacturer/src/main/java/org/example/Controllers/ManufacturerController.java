@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
+
 import org.example.Entity.PC;
 import org.example.Services.ManufacturerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/PCs")
@@ -56,7 +59,7 @@ public class ManufacturerController {
     })
 
     @GetMapping("/GET/{ID}")
-    public PC GET_PCbyID(@PathVariable int ID){
+    public Optional<PC> GET_PCbyID(@PathVariable Long ID){
         return manufacturerService.findbyID(ID);
     }
 
@@ -87,8 +90,8 @@ public class ManufacturerController {
     })
 
    @PutMapping("/update-pc")
-    public void updatePC(@RequestBody PC pc) {
-        manufacturerService.updatePC(pc);
+    public void updatePC(@RequestBody Long ID) {
+        manufacturerService.updatePC(ID);
     }
 
     @Operation(summary = "Delete PC", description = "Remove a PC from database")
@@ -98,8 +101,8 @@ public class ManufacturerController {
             @ApiResponse(responseCode = "500", description = "Error")
     })
 
-    @DeleteMapping("/delete/{id}")
-    public void deletePC(@PathVariable Integer ID) {
+    @DeleteMapping("/delete/{ID}")
+    public void deletePC(@PathVariable Long ID) {
         manufacturerService.deletePCbyID(ID);
     }
 }

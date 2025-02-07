@@ -15,7 +15,7 @@ public class PC {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private Long ID;
 
     private String productId;
 
@@ -34,7 +34,7 @@ public class PC {
     private String assemblyCarbonFootprint;
     private String warranty;
 
-    public int getPC_ID(){
+    public Long getPC_ID(){
         return this.ID;                       //return pc ID
     }
 
