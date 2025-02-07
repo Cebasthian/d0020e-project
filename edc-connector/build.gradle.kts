@@ -37,7 +37,8 @@ dependencies {
     implementation(libs.edc.data.plane.http)
     implementation(libs.edc.data.plane.iam)
 
-
+    implementation(libs.slf4j.api)
+    implementation(libs.logback.classic)
 
 //    implementation(libs.edc.boot)
 //    implementation(libs.edc.connector.core)

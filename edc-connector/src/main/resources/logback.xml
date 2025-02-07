@@ -1,0 +1,15 @@
+<!-- IMPORTANT: https://www.slf4j.org/api/org/apache/log4j/Level.html to adjust amount of error messages. -->
+
+
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    </appender>
+
+    <!-- Root logger set to INFO level by default -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!-- Debug-level logging for EDC packages -->
+    <logger name="org.eclipse.edc" level="TRACE"/>
+</configuration>
