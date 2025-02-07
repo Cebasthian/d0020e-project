@@ -2,6 +2,8 @@ package org.example.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
@@ -15,6 +17,7 @@ public class PC {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(requiredMode = RequiredMode.REQUIRED)
     private Long ID;
 
     private String productId;
@@ -22,24 +25,35 @@ public class PC {
     @NotNull
     @OneToMany(mappedBy = "PC", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
+    @Schema(requiredMode = RequiredMode.REQUIRED)
     private List<Component> components = new ArrayList<>();
 
+    @Schema(requiredMode = RequiredMode.REQUIRED)
     private String energyClass;
+
+    @Schema(requiredMode = RequiredMode.REQUIRED)
     private String dimensions; // kanske är rimligare med String av typen '20x40x10 cm'
+
     private String lifecycle;
+
+    @Schema(requiredMode = RequiredMode.REQUIRED)
     private int powerRating;
+
     private String installingInstructions;
     private String maintenanceInstructions;
     private String repairInstructions;
     private String assemblyCarbonFootprint;
+
+    @Schema(requiredMode = RequiredMode.REQUIRED)
     private String warranty;
 
+    @Schema(hidden = true)
     public Long getPC_ID(){
         return this.ID;                       //return pc ID
     }
 
     public void setProductId(String ID){
-        this.productId = String.valueOf(ID);
+        this.productId = ID;
     }
 
     public String getProductId(){
@@ -50,7 +64,8 @@ public class PC {
         this.components.add(Component);
     }
 
-    public List<Component> get_components(){
+    @Schema(hidden = true)
+    public List<Component> getComponents(){
         return this.components;
     }
 
@@ -58,14 +73,17 @@ public class PC {
         this.energyClass = Class;
     }
 
+    @Schema(hidden = true)
     public String get_energyClass(){
         return this.energyClass;
     }
 
+    @Schema(hidden = true)
     public void set_dimensions(String Dimensions){
         this.dimensions = Dimensions;
     }
 
+    @Schema(hidden = true)
     public String get_size(){
         return this.dimensions;
     }
@@ -82,6 +100,7 @@ public class PC {
         this.powerRating = powerRating;
     }
 
+    @Schema(hidden = true)
     public int get_powerRating(){
         return this.powerRating;
     }
@@ -122,6 +141,7 @@ public class PC {
         this.warranty = warnt;
     }
 
+    @Schema(hidden = true)
     public String get_warranty(){
         return this.warranty;
     }

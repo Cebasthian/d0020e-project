@@ -22,7 +22,7 @@ public class ManufacturerService {
 
 
         public Optional<PC> findbyID(Long ID) {
-                return pcRepository.findByID(ID);
+                return pcRepository.findById(ID);
         }
 
         // Hitta alla datorer och returnera som en lista

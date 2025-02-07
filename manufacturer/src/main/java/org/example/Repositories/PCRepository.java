@@ -28,20 +28,20 @@ public interface PCRepository extends JpaRepository<PC, Long> {
     //}
 
     // Lägga in alla värden för PC i databas
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    PC saveAndFlush(PC PC);
+    //@Lock(LockModeType.PESSIMISTIC_WRITE)
+    //PC saveAndFlush(PC PC);
 
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    Optional<PC> findByID(Long ID);
+    //@Lock(LockModeType.PESSIMISTIC_WRITE)
+    //Optional<PC> findByID(Long ID);
 
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    void deleteById (Long ID);
+    //@Lock(LockModeType.PESSIMISTIC_WRITE)
+    //void deleteById (Long ID);
 
     //@Lock(LockModeType.PESSIMISTIC_WRITE)
     //void updateById(Long ID);
 
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
-    List<PC> findAll();
+    //@Lock(LockModeType.PESSIMISTIC_WRITE)
+    //List<PC> findAll();
 
     // Ta bort en PC
     //public default void deletebyID(int ID){
