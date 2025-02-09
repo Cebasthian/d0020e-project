@@ -1,6 +1,8 @@
 package org.example.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,22 +13,24 @@ public class Component {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "PC")
+    @JsonBackReference
+    @Schema(hidden = true)
     private PC PC;
 
     private String componentType; //gpu, cpu, hdd, sdd, etc..
     private String componentId;
     private String name;
 
-    public void setPC_ID(int ID){
-        this.ID = ID;
-    }
+    //public void setID(int ID){
+        //this.ID = ID;
+    //}
 
-    public int getPC_ID(){
-        return this.ID;                       //return pc for this ID
+    public int getID(){
+        return this.id;                       //return pc for this ID
     }
 
     public String getComponentType() {
