@@ -1,0 +1,29 @@
+:root {
+    font-family: sans-serif;
+}
+
+body {
+    max-width: 500px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.module {
+    display: flex;
+    flex-direction: column;
+
+    
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+button{
+    margin-top: 5px;
+}

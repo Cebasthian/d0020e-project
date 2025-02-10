@@ -1,5 +1,5 @@
 const TARGET_MODULE = "/edc-provider"
-const ASSET_URL = "http://localhost:8081/instructions/get"
+const ASSET_URL = "http://localhost:8083/gpus/1"
 
 async function post(endpoint, body) {   
     const res = await fetch(TARGET_MODULE+endpoint, {
@@ -46,7 +46,7 @@ async function createContract(contractId, accessPolicyId, contractPolicyId) {
 }
 
 document.getElementById("example").addEventListener("click", () => {
-    document.getElementById("asset-name").value = "All Instructions";
+    document.getElementById("asset-name").value = "RTX 3080";
     document.getElementById("asset-url").value = ASSET_URL;
 
     document.getElementById("policy-id").value = "myPolicy1";
