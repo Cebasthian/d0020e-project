@@ -65,12 +65,12 @@ services:
       SPRING_DATASOURCE_USERNAME: dpp
       SPRING_DATASOURCE_PASSWORD: pass
     ports:
-      - "11000:11000"
-      - "11001:11001"
-      - "11002:11002"
-      - "11003:11003"
-      - "11004:11004"
-      - "11005:11005"
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+      - "10003:10003"
+      - "10004:10004"
+      - "10005:10005"
       - "127.0.0.1:8080:8080" # PS: ONLY USED FOR DEMONSTRATING
       #- "8080:8080" # PS: ONLY USED FOR DEMONSTRATING
     volumes:
@@ -91,12 +91,12 @@ services:
       SPRING_DATASOURCE_USERNAME: dpp
       SPRING_DATASOURCE_PASSWORD: pass
     ports:
-      - "12000:12000"
-      - "12001:12001"
-      - "12002:12002"
-      - "12003:12003"
-      - "12004:12004"
-      - "12005:12005"
+      - "11000:11000"
+      - "11001:11001"
+      - "11002:11002"
+      - "11003:11003"
+      - "11004:11004"
+      - "11005:11005"
       - "127.0.0.1:8081:8081" # PS: ONLY USED FOR DEMONSTRATING
       #- "8081:8081" # PS: ONLY USED FOR DEMONSTRATING
     volumes:
@@ -129,6 +129,6 @@ services:
       - ./edc-connector/configs:/app/configs
     networks:
       edc-network:
-        ipv4_address: 172.22.0.12
+        ipv4_address: 172.22.0.13
     depends_on:
       - supplier-db
