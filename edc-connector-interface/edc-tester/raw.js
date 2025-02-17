@@ -23,10 +23,11 @@
 //     }
 // }).then(res => res.json()).then(data => console.log(data))
 
-const url = "http://localhost:12003/management/v3/policydefinitions/request"
+const url = "http://localhost:11003/management/v3/assets/request"
 fetch(url, {
     headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json;charset=utf-8",
+        "Accept": "application/json"
     },
     method: "POST",
     body: JSON.stringify({
@@ -34,5 +35,6 @@ fetch(url, {
           "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
         },
         "@type": "QuerySpec",
-      })
+      }),
+      mode: "no-cors"
 }).then(res => res.json()).then(data => console.log(data))
