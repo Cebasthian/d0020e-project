@@ -1,8 +1,10 @@
 package com.example.edcinterface.controller;
 
 import com.example.edcinterface.json.asset.CreateAssetDTO;
+import com.example.edcinterface.json.asset.GetAssetsDTO;
 import com.example.edcinterface.json.odrl.Policy;
 import com.example.edcinterface.json.util.CreateResponse;
+import com.example.edcinterface.json.util.QuerySpec;
 import com.example.edcinterface.provider.EdcProvider;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 
 @RequestMapping("/edc-provider")
 @CrossOrigin
@@ -34,6 +37,13 @@ public class EdcProviderController {
         dataAddress.baseUrl = body.baseUrl;
 
         return edcProvider.createAsset(body.name, dataAddress);
+    }
+
+    @GetMapping("/assets")
+    public Object getAssets() {
+        QuerySpec spec = new QuerySpec(0, 1000, QuerySpec.SortOrder.ASC, "", List.of());
+
+        return edcProvider.getAssets(new GetAssetsDTO());
     }
 
 

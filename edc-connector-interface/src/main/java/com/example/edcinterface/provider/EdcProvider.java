@@ -1,10 +1,12 @@
 package com.example.edcinterface.provider;
 
+import com.example.edcinterface.json.BaseDTO;
 import com.example.edcinterface.json.asset.CreateAssetDTO;
 import com.example.edcinterface.json.contract.CreateContractDTO;
 import com.example.edcinterface.json.odrl.Policy;
 import com.example.edcinterface.json.policy.CreatePolicyDTO;
 import com.example.edcinterface.json.util.CreateResponse;
+import com.example.edcinterface.json.util.QuerySpec;
 import com.example.edcinterface.util.HttpRequester;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,12 @@ public class EdcProvider {
 
         RestClient.ResponseSpec res = httpRequester.post(url, dto);
         return res.body(CreateResponse.class);
+    }
+
+    public Object getAssets(BaseDTO querySpec) {
+        String url = "/v3/assets/request";
+
+        return httpRequester.post(url, querySpec).body(Object.class);
     }
 
     /**

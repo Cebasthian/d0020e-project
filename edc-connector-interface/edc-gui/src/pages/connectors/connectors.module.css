@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+}
+
+.connector {
+    color: var(--main-card-text);
+
+    & > p {
+        margin: 5px 0;
+    }
+
+    & > h3 {
+        color: var(--main-card-text-emphazise);
+        padding: 0;
+        margin: 5px 0;
+    }
+}
+
+.fields {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 15px 0 0 0;
+}
+
+
+.attribute {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+    margin: 15px;
+    gap: 10px;
+
+    & > div {
+        font-size: smaller;
+        display: flex;
+        flex-direction: column;
+
+        & > span:first-child {
+            font-weight: 200;
+        }
+
+        & > span:nth-child(2) {
+            font-weight: bold;
+        }
+    }
+}
