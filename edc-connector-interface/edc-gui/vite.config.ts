@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
         "/edc-provider": {
-            target: "http://localhost:8081/edc-provider",
+            target: "http://localhost:8083/edc-provider",
             changeOrigin: true,
             rewrite: (path) => path.replace(/^\/edc-provider/, ''),
         },

@@ -1,0 +1,46 @@
+.container {
+    padding: 15px;
+}
+
+.catalog-assets {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.asset {
+    color: var(--main-card-text);
+    display: flex;
+    flex-direction: column;
+
+    & > p {
+        margin: 5px 0;
+    }
+
+    & > h3 {
+        color: var(--main-card-text-emphazise);
+        padding: 0;
+        margin: 5px 0;
+    }
+}
+
+.negotiate {
+    margin: 15px 0 0 0;
+}
+
+.negotiate-button {
+    background: var(--accent);
+    color: var(--accent-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    gap: 6px;
+    text-align: center;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: var(--main-card-shadow);
+}

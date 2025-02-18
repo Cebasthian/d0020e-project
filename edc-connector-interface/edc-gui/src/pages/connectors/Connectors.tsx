@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import Icon from "../../components/icon/Icon";
+import Attribute from "../../components/field/Attribute";
+import Fields from "../../components/field/Fields";
 import SubLayout from "../../components/layout/SubLayout";
 import { EdcMetadata } from "../../types/edc";
 import { getConnectors } from "../../util/edc_interface";
@@ -39,24 +40,10 @@ function ConnectorComponent({
         <div className={"card " + styles.connector}>
             <h3>{metadata.name}</h3>
             <p>{metadata.description}</p>
-            <div className={styles.fields}>
-                <div className={styles.attribute}>
-                    <Icon>link</Icon>
-                    <div>
-                        <span>ENDPOINT</span>
-                        <span>
-                            <a href={metadata.protocolAddress}>{metadata.protocolAddress}</a>
-                        </span>
-                    </div>
-                </div>
-                <div className={styles.attribute}>
-                    <Icon>id_card</Icon>
-                    <div>
-                        <span>PARTICIPANT ID</span>
-                        <span>{metadata.participantId}</span>
-                    </div>
-                </div>
-            </div>
+            <Fields>
+                <Attribute icon="link" text="ENDPOINT" value={(<a href={metadata.protocolAddress}>{metadata.protocolAddress}</a>)} />
+                <Attribute icon="id_card" text="PARTICIPANT ID" value={metadata.participantId} />
+            </Fields>
         </div>
         </>
     )

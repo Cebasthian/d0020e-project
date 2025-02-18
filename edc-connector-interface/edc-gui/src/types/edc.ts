@@ -1,3 +1,5 @@
+import { DcatDataset, DcatService } from "./dcat";
+
 export type EdcMetadata = {
     description: string;
     hostname: string;
@@ -18,18 +20,39 @@ export type Base = {
 };
 
 export type EdcAsset = Base & {
-    "@id": string
-    "@type": "Asset",
+    "@id": string;
+    "@type": "Asset";
     properties: {
-        "name": string,
-        "id": string,
-        "contenttype": "application/json"
-    },
-    "dataAddress": {
-        "@type": "DataAddress",
-        "proxyPath": string,
-        "type": "HttpData",
-        "name": string,
-        "baseUrl": string,
-    }
+        name: string;
+        id: string;
+        contenttype: "application/json";
+    };
+    dataAddress: {
+        "@type": "DataAddress";
+        proxyPath: string;
+        type: "HttpData";
+        name: string;
+        baseUrl: string;
+    };
+};
+
+export type EdcCatalog = Base & {
+    "@id": string;
+    "@type": "dcat:Catalog";
+    "dcat:dataset": DcatDataset[];
+    "dcat:service": DcatService;
+    "dspace:participantId": string;
+};
+
+export type EdcNegotiation = Base & {
+    "@type": "ContractNegotiation";
+    "@id": string;
+    type: string;
+    protocol: "dataspace-protocol-http";
+    state: string;
+    counterPartyId: string;
+    counterPartyAddress: string;
+    callbackAddresses: unknown[];
+    createdAt: number;
+    contractAgreementId?: string;
 };

@@ -1,13 +1,17 @@
 .container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 15px;
     padding: 15px;
 }
 
-.connector {
+.negotiations {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.negotiation {
     color: var(--main-card-text);
+    display: flex;
+    flex-direction: column;
 
     & > p {
         margin: 5px 0;

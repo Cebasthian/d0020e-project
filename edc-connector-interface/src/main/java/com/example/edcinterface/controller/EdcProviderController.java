@@ -4,6 +4,7 @@ import com.example.edcinterface.json.asset.CreateAssetDTO;
 import com.example.edcinterface.json.asset.GetAssetsDTO;
 import com.example.edcinterface.json.odrl.Policy;
 import com.example.edcinterface.json.util.CreateResponse;
+import com.example.edcinterface.json.util.EmptyQuerySpec;
 import com.example.edcinterface.json.util.QuerySpec;
 import com.example.edcinterface.provider.EdcProvider;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,9 +42,9 @@ public class EdcProviderController {
 
     @GetMapping("/assets")
     public Object getAssets() {
-        QuerySpec spec = new QuerySpec(0, 1000, QuerySpec.SortOrder.ASC, "", List.of());
+//        QuerySpec spec = new QuerySpec(0, 1000, QuerySpec.SortOrder.ASC, "", List.of());
 
-        return edcProvider.getAssets(new GetAssetsDTO());
+        return edcProvider.getAssets(new EmptyQuerySpec());
     }
 
 
