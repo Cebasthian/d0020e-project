@@ -1,5 +1,6 @@
 package com.example.edcinterface.consumer;
 
+import com.example.edcinterface.json.BaseDTO;
 import com.example.edcinterface.json.transfer.StartTransferDTO;
 import com.example.edcinterface.json.catalog.RequestCatalogDTO;
 import com.example.edcinterface.json.catalog.RequestCatalogResponse;
@@ -47,6 +48,12 @@ public class EdcConsumer {
         String url = "/v3/contractnegotiations";
 
         return httpRequester.post(url, dto).body(CreateResponse.class);
+    }
+
+    public Object getNegotiations(BaseDTO querySpec) {
+        String url = "/v3/contractnegotiations/request";
+
+        return httpRequester.post(url, querySpec).body(Object.class);
     }
 
     /**

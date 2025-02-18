@@ -1,4 +1,6 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import Attribute from "../../../components/field/Attribute";
+import Fields from "../../../components/field/Fields";
 import Icon from "../../../components/icon/Icon";
 import SubLayout from "../../../components/layout/SubLayout";
 import Modal from "../../../components/modal/Modal";
@@ -24,7 +26,7 @@ export default function MyAssets() {
         setShowModal(true)
     }
 
-    const create = async () => {
+    const create = useCallback(async () => {
         
         if(!name) {
             setError("Name is invalid")
@@ -42,7 +44,7 @@ export default function MyAssets() {
 
         setShowModal(false);
         refresh();
-    }
+    }, [address, name, refresh])
 
     const modal = useMemo(() => {
         return (
@@ -65,7 +67,7 @@ export default function MyAssets() {
                 </div>
             </Modal>
         );
-    }, [name, address, error]);
+    }, [name, address, error, create]);
 
     return (
         <>
@@ -79,14 +81,32 @@ export default function MyAssets() {
                             <Icon>add_circle</Icon> Create New Asset
                         </button>
                     </div>
-                    {assets?.map((e) => (
-                        <div key={e["@id"]} className="card">
-                            <pre>{JSON.stringify(e, null, 4)}</pre>
-                        </div>
-                    ))}
+                    <div className={styles['my-assets']}>
+                        {assets.map((e) => <AssetComponent key={e["@id"]} asset={e} />)}
+                    </div>
                 </div>
             </SubLayout>
             {showModal ? modal : ""}
         </>
     );
+}
+
+type AssetProps = {
+    asset: EdcAsset
+}
+
+function AssetComponent({
+    asset
+}: AssetProps) {
+    return(
+        <>
+        <div className={"card " + styles.asset}>
+            <h3>{asset.properties.name}</h3>
+            <Fields>
+                <Attribute icon="download" text="DATA ADDRESS" value={<a href={asset.dataAddress.baseUrl}>{asset.dataAddress.baseUrl}</a>} />
+                <Attribute icon="fingerprint" text="ASSET ID" value={asset["@id"]} />
+            </Fields>
+        </div>
+        </>
+    )
 }

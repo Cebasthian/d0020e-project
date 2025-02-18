@@ -1,12 +1,14 @@
 package com.example.edcinterface.controller;
 
 import com.example.edcinterface.consumer.EdcConsumer;
+import com.example.edcinterface.json.BaseDTO;
 import com.example.edcinterface.json.catalog.RequestCatalogResponse;
 import com.example.edcinterface.json.contract.ContractStatus;
 import com.example.edcinterface.json.contract.NegotiateContractDTO;
 import com.example.edcinterface.json.transfer.StartTransferDTO;
 import com.example.edcinterface.json.transfer.TransferStatus;
 import com.example.edcinterface.json.util.CreateResponse;
+import com.example.edcinterface.json.util.EmptyQuerySpec;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -60,6 +62,11 @@ public class EdcConsumerController {
         dto.policy.assetId = body.policy.targetAsset;
 
         return edcConsumer.negotiateContract(dto);
+    }
+
+    @GetMapping("/contract/negotiations")
+    public Object getNegotiations() {
+        return edcConsumer.getNegotiations(new EmptyQuerySpec());
     }
 
 
