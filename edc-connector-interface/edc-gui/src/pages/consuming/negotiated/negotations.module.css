@@ -12,6 +12,7 @@
     color: var(--main-card-text);
     display: flex;
     flex-direction: column;
+    margin: 5px;
 
     & > p {
         margin: 5px 0;

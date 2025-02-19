@@ -45,14 +45,24 @@ async function del(url: string, body?: unknown) {
  * @param options Rate is the delay between requests, Callback runs with the response data before the validator.
  * @returns The final response after the validation functions returns true.
  */
-async function poll<T>(url: string, validator: (json: T) => boolean, {rate, callback}: {rate?: number, callback?: (json: T) => void}) {
+async function poll<T>(url: string, validator: (json: T) => boolean, options?: {rate?: number, callback?: (json: T) => void, maxTries?: number}) {
     let cont = true;
     let json;
+    let tries = 0;
+    const maxTries = options?.maxTries || 1000;
     while(cont) {
+        tries++;
+        if(tries > maxTries) {
+            cont = false;
+            throw new Error("Polling timeout")
+        }
+
         json = await (await get(url, {cache: "no-store"})).json()
-        if(callback) callback(json)
-        cont = validator(json)
-        if(!cont) await delay(rate||100)
+        if(options?.callback) options.callback(json)
+        cont = !validator(json)
+        if(cont) {
+            await delay(options?.rate || 100)
+        }
     }
     return json as T;
 }

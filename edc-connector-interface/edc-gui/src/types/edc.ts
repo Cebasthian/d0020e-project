@@ -38,10 +38,10 @@ export type EdcAsset = Base & {
 
 export type EdcCatalog = Base & {
     "@id": string;
-    "@type": "dcat:Catalog";
-    "dcat:dataset": DcatDataset[];
-    "dcat:service": DcatService;
-    "dspace:participantId": string;
+    "@type": "Catalog";
+    dataset: DcatDataset[];
+    service: DcatService;
+    participantId: string;
 };
 
 export type EdcNegotiation = Base & {
@@ -55,4 +55,24 @@ export type EdcNegotiation = Base & {
     callbackAddresses: unknown[];
     createdAt: number;
     contractAgreementId?: string;
+};
+
+export type EdcAgreeement = Base & {
+    "@type": "https://w3id.org/edc/v0.0.1/ns/ContractAgreement";
+    "@id": "negotiation-id";
+    providerId: "provider-id";
+    consumerId: "consumer-id";
+    assetId: "asset-id";
+    contractSigningDate: 1688465655;
+    policy: {
+        "@context": "http://www.w3.org/ns/odrl.jsonld";
+        "@type": "Set";
+        "@id": "offer-id";
+        permission: [
+            {
+                target: "asset-id";
+                action: "display";
+            }
+        ];
+    };
 };
