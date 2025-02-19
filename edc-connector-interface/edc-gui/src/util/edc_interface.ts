@@ -1,4 +1,4 @@
-import { EdcCatalog, EdcMetadata } from "../types/edc";
+import { EdcAgreeement, EdcCatalog, EdcMetadata, EdcNegotiation } from "../types/edc";
 import { OdrlHasPolicy } from "../types/odrl";
 import { http } from "./http";
 
@@ -41,3 +41,17 @@ export async function negotiateContract(policy: OdrlHasPolicy, targetConnectorAd
         }
     })).json()
 }
+
+export async function pollNegotiationState(negotiationId: string, stateCallback?: (state: string) => void) {
+    return http.poll(
+        `/edc-consumer/contract/status/${negotiationId}`, 
+        (data: EdcNegotiation) => data.state === "FINALIZED",
+        {callback: (json) => {
+            if(stateCallback) stateCallback(json.state)
+        }, rate: 100, maxTries: 100}
+    )
+}
+
+export async function getAgreement(agreementId: string): Promise<EdcAgreeement> {
+    return (await http.get(`/edc-consumer/contract/agreement/${agreementId}`)).json()
+} 

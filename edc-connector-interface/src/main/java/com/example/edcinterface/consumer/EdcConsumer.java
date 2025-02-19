@@ -68,6 +68,12 @@ public class EdcConsumer {
         return httpRequester.get(url).body(ContractStatus.class);
     }
 
+    public Object getAgreement(String negotiationId) {
+        String url = "/v3/contractagreements/" + negotiationId;
+
+        return httpRequester.get(url).body(Object.class);
+    }
+
     /**
      * Starts the transfer of data based on a contract negotiation.
      * @param dto The body of the request.

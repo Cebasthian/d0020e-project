@@ -5,6 +5,7 @@ import Icon from "../../../components/icon/Icon";
 import SubLayout from "../../../components/layout/SubLayout";
 import { OdrlHasPolicy } from "../../../types/odrl";
 import { getCatalog, getConnectors, negotiateContract } from "../../../util/edc_interface";
+import { jsonLd } from "../../../util/json_ld";
 import styles from "./catalog.module.css";
 
 type AssetItem = {
@@ -25,14 +26,15 @@ export default function Catalog() {
             const connectors = await getConnectors();
             const arr: AssetItem[] = []
             for(let i = 0; i < connectors.length; i++) {
-                const catalog = await getCatalog(connectors[i].protocolAddress)
-                catalog["dcat:dataset"].forEach(dataset => {
+                const catalog = jsonLd.removeNamespace(await getCatalog(connectors[i].protocolAddress))
+
+                catalog.dataset.forEach(dataset => {
                     arr.push({
-                        participantId: catalog["dspace:participantId"],
+                        participantId: catalog.participantId,
                         connectorAddress: connectors[i].protocolAddress,
                         name: dataset.name,
                         id: dataset.id,
-                        policy: dataset["odrl:hasPolicy"],
+                        policy: dataset.hasPolicy,
                     })
                 })
             }

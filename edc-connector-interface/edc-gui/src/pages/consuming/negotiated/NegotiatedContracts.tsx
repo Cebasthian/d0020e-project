@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
 import Attribute from "../../../components/field/Attribute";
 import Fields from "../../../components/field/Fields";
 import Icon from "../../../components/icon/Icon";
 import SubLayout from "../../../components/layout/SubLayout";
-import { EdcNegotiation } from "../../../types/edc";
+import { EdcAgreeement, EdcNegotiation } from "../../../types/edc";
+import { getAgreement, pollNegotiationState } from "../../../util/edc_interface";
+import { jsonLd } from "../../../util/json_ld";
 import { useGetter } from "../../../util/useGetter";
 import styles from "./negotations.module.css";
 
@@ -27,10 +30,36 @@ function ContractComponent({
     negotiation
 }: {negotiation: EdcNegotiation}) {
 
+
+
+    const [agreement, setAgreement] = useState<EdcAgreeement | null>(null)
+    const [state, setState] = useState<string>(negotiation.state)
+
+    useEffect(() => {
+
+        async function req() {
+            if(negotiation.state === "TERMINATED") return;
+
+            let agreementId = negotiation.contractAgreementId || negotiation["@id"];
+            if(negotiation.state !== "FINALIZED") {
+                const json = await pollNegotiationState(negotiation["@id"], e => setState(e))
+                if(json.contractAgreementId) agreementId = json.contractAgreementId;
+            }
+
+            const agree = jsonLd.removeNamespace(await getAgreement(agreementId));
+            setAgreement(agree)
+        }
+
+        req();
+
+    }, [negotiation])
+
     // TODO:
     // Begin Transfer function
     // If state != finalized : start polling until finalized
     // else : fetch agreement info
+
+
     
 
     // const negotiate = useCallback(async () => {
@@ -41,14 +70,17 @@ function ContractComponent({
     return(
         <>
         <div className={"card " + styles.negotiation}>
-            <h3>{negotiation["@id"]}</h3>
+            <h3>{negotiation.type}</h3>
             <Fields>
                 <Attribute icon="id_card" text="PARTICIPANT ID" value={negotiation.counterPartyId} />
                 <Attribute icon="fingerprint" text="NEGOTIATION ID" value={negotiation["@id"]} />
             </Fields>        
             <Fields>
-                <Attribute icon="monitor_heart" text="STATE" value={negotiation.state} />
-                {negotiation.contractAgreementId? <Attribute icon="verified" text="AGREEMENT ID" value={negotiation.contractAgreementId} /> : ""}
+                <Attribute icon="monitor_heart" text="STATE" value={state} />
+            </Fields>
+            <Fields>
+                {agreement ? <Attribute icon="verified" text="AGREEMENT ID" value={agreement["@id"]} /> : ""}
+                {agreement ? <Attribute icon="calendar_month" text="SIGN DATE" value={new Date((agreement.contractSigningDate || 0)*1000).toISOString()} /> : ""}
             </Fields>
             <div className={styles.negotiate}>
                 <button className={styles['negotiate-button']}>
@@ -56,6 +88,9 @@ function ContractComponent({
                     Transfer
                 </button>
             </div>
+            <pre>
+                {JSON.stringify(agreement, null, 4)}
+            </pre>
         </div>
         </>
     )

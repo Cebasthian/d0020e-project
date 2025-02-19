@@ -6,6 +6,7 @@ import SubLayout from "../../../components/layout/SubLayout";
 import Modal from "../../../components/modal/Modal";
 import { EdcAsset } from "../../../types/edc";
 import { createAsset } from "../../../util/edc_interface";
+import { isUrl } from "../../../util/regex";
 import { useGetter } from "../../../util/useGetter";
 import styles from "./my-assets.module.css";
 
@@ -33,8 +34,7 @@ export default function MyAssets() {
             return;
         }
 
-        const http_regex = /^https?:\/\//g
-        if(!http_regex.test(address)) {
+        if(!isUrl(address)) {
             setError("Address is not a valid URL")
             return;
         }

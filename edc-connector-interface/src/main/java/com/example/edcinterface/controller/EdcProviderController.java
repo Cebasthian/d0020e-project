@@ -40,10 +40,12 @@ public class EdcProviderController {
         return edcProvider.createAsset(body.name, dataAddress);
     }
 
+    @Operation(summary = "Get assets", description = "Fetches all the created assets from the connector.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Assets found"),
+    })
     @GetMapping("/assets")
     public Object getAssets() {
-//        QuerySpec spec = new QuerySpec(0, 1000, QuerySpec.SortOrder.ASC, "", List.of());
-
         return edcProvider.getAssets(new EmptyQuerySpec());
     }
 
@@ -57,6 +59,14 @@ public class EdcProviderController {
         return edcProvider.createPolicy(body.id, body.policy);
     }
 
+    @Operation(summary = "Get policies", description = "Fetches all the created policy definitions from the connector.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Policy definitions found"),
+    })
+    @GetMapping("/policies")
+    public Object getPolicies() {
+        return edcProvider.getPolicies(new EmptyQuerySpec());
+    }
 
     @Operation(summary = "Create contract definition")
     @ApiResponses({
@@ -65,6 +75,15 @@ public class EdcProviderController {
     @PostMapping("/contracts/create")
     public CreateResponse createContract(@RequestBody NewContractDTO body) {
         return edcProvider.createContract(body.id, body.accessPolicyId, body.contractPolicyId, Collections.emptyList());
+    }
+
+    @Operation(summary = "Get contracts", description = "Fetches all the created contract definitions from the connector.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Contract definitions found"),
+    })
+    @GetMapping("/contracts")
+    public Object getContracts() {
+        return edcProvider.getContracts(new EmptyQuerySpec());
     }
 
 

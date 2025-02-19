@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import { SpringErrorMessage } from "../types/spring";
+import { jsonLd } from "./json_ld";
 
 export const fetcher = async (url: string) => {
     const res = await fetch(url)
@@ -33,7 +34,7 @@ export function useGetter<T>(url: string, fallbackData: T) {
     const refresh = () => mutate();
 
     return {
-        data: data || fallbackData,
+        data: jsonLd.removeNamespace(data) || fallbackData,
         refresh
     }
 }

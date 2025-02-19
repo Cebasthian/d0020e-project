@@ -69,6 +69,12 @@ public class EdcProvider {
         return res.body(CreateResponse.class);
     }
 
+    public Object getPolicies(BaseDTO querySpec) {
+        String url = "/v3/policydefinitions/request";
+
+        return httpRequester.post(url, querySpec).body(Object.class);
+    }
+
     /**
      * Creates a new contract based on policies.
      * @param id Contract id.
@@ -88,5 +94,11 @@ public class EdcProvider {
 
         RestClient.ResponseSpec res = httpRequester.post(url, dto);
         return res.body(CreateResponse.class);
+    }
+
+    public Object getContracts(BaseDTO querySpec) {
+        String url = "/v3/contractdefinitions/request";
+
+        return httpRequester.post(url, querySpec).body(Object.class);
     }
 }

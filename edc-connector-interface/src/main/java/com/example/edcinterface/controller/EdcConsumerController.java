@@ -79,6 +79,11 @@ public class EdcConsumerController {
         return edcConsumer.checkNegotiationStatus(negotiationId);
     }
 
+    @GetMapping("/contract/agreement/{negotiationId}")
+    public Object getAgreement(@PathVariable String negotiationId) {
+        return edcConsumer.getAgreement(negotiationId);
+    }
+
 
     @Operation(summary = "Begin data transfer", description = "Start a consumer pull data transfer.")
     @ApiResponses({
