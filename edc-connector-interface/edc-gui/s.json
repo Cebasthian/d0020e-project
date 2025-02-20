@@ -1,0 +1,31 @@
+{
+    "counterPartyAddress": "http://localhost:13004/protocol",
+    "protocol": "dataspace-protocol-http",
+    "policy": {
+        "permission": [
+            {
+                "odrl:action": {
+                    "@id": "odrl:use"
+                },
+                "odrl:constraint": {
+                    "odrl:leftOperand": {
+                        "@id": "edc:identity"
+                    },
+                    "odrl:operator": {
+                        "@id": "odrl:eq"
+                    },
+                    "odrl:rightOperand": "trusted"
+                }
+            }
+        ],
+        "@context": "http://www.w3.org/ns/odrl.jsonld",
+        "@type": "Offer",
+        "@id": "bXlDb250cmFjdDE=:YTg1N2YwZWQtZGQxYi00NThkLWI2ZDEtMzkxNmVkODlkZjBh:ZjU2MWIzMjAtZGVkNS00OWFmLWJhMDEtNDVhOGI3NTQwMmVk",
+        "assigner": "supplier",
+        "target": "a857f0ed-dd1b-458d-b6d1-3916ed89df0a"
+    },
+    "@context": {
+        "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "ContractRequest"
+}

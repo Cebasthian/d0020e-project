@@ -10,7 +10,7 @@ export default function Sidebar() {
                 <img src="logo.png"/>
             </div>
 
-            <NavButton icon="token" href="/dashboard">Dashboard</NavButton>
+            {/* <NavButton icon="token" href="/dashboard">Dashboard</NavButton> */}
             <NavButton icon="hub" href="/connectors">Connectors</NavButton>
 
             <div className={styles.group}>

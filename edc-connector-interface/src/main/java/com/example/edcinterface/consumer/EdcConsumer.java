@@ -1,6 +1,7 @@
 package com.example.edcinterface.consumer;
 
 import com.example.edcinterface.json.BaseDTO;
+import com.example.edcinterface.json.SuperBaseDTO;
 import com.example.edcinterface.json.transfer.StartTransferDTO;
 import com.example.edcinterface.json.catalog.RequestCatalogDTO;
 import com.example.edcinterface.json.catalog.RequestCatalogResponse;
@@ -9,6 +10,7 @@ import com.example.edcinterface.json.contract.NegotiateContractDTO;
 import com.example.edcinterface.json.transfer.EndpointDataReference;
 import com.example.edcinterface.json.transfer.TransferStatus;
 import com.example.edcinterface.json.util.CreateResponse;
+import com.example.edcinterface.json.util.EmptyQuerySpec;
 import com.example.edcinterface.util.HttpRequester;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,11 +33,13 @@ public class EdcConsumer {
      * @param targetConnector Address of the target connector, <b>http://localhost:11004/protocol<b/>
      * @return A catalog containing datasets.
      */
+//    public Object fetchCatalog(String targetConnector) {
     public RequestCatalogResponse fetchCatalog(String targetConnector) {
         String url = "/v3/catalog/request";
 
         RequestCatalogDTO dto = new RequestCatalogDTO(targetConnector);
 
+//        return httpRequester.post(url, dto).body(Object.class);
         return httpRequester.post(url, dto).body(RequestCatalogResponse.class);
     }
 
@@ -83,6 +87,12 @@ public class EdcConsumer {
         String url = "/v3/transferprocesses";
 
         return httpRequester.post(url, dto).body(CreateResponse.class);
+    }
+
+    public Object getTransfers(BaseDTO dto) {
+        String url = "/v3/transferprocesses/request";
+
+        return httpRequester.post(url, dto).body(Object.class);
     }
 
     /**

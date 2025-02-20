@@ -2,7 +2,7 @@
   <configuration default="false" name="All Modules" type="CompoundRunConfigurationType">
     <toRun name="Manufacturer" type="Application" />
     <toRun name="Recycler" type="Application" />
-    <toRun name="Regulator" type="Application" />
+    <toRun name="Adversary" type="Application" />
     <toRun name="Supplier" type="Application" />
     <method v="2" />
   </configuration>

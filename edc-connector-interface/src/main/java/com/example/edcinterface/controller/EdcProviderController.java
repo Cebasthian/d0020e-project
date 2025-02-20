@@ -2,11 +2,14 @@ package com.example.edcinterface.controller;
 
 import com.example.edcinterface.json.asset.CreateAssetDTO;
 import com.example.edcinterface.json.asset.GetAssetsDTO;
+import com.example.edcinterface.json.contract.CreateContractDTO;
 import com.example.edcinterface.json.odrl.Policy;
 import com.example.edcinterface.json.util.CreateResponse;
 import com.example.edcinterface.json.util.EmptyQuerySpec;
 import com.example.edcinterface.json.util.QuerySpec;
 import com.example.edcinterface.provider.EdcProvider;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -50,6 +53,10 @@ public class EdcProviderController {
     }
 
 
+
+
+
+
     @Operation(summary = "Create policy definition")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Policy definition created"),
@@ -68,6 +75,11 @@ public class EdcProviderController {
         return edcProvider.getPolicies(new EmptyQuerySpec());
     }
 
+
+
+
+
+
     @Operation(summary = "Create contract definition")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Contract definition created"),
@@ -75,6 +87,11 @@ public class EdcProviderController {
     @PostMapping("/contracts/create")
     public CreateResponse createContract(@RequestBody NewContractDTO body) {
         return edcProvider.createContract(body.id, body.accessPolicyId, body.contractPolicyId, Collections.emptyList());
+    }
+
+    @PostMapping("/contracts/create/v2")
+    public CreateResponse createContractV2(@RequestBody CreateContractDTO dto) {
+        return edcProvider.createContract(dto);
     }
 
     @Operation(summary = "Get contracts", description = "Fetches all the created contract definitions from the connector.")
@@ -85,6 +102,9 @@ public class EdcProviderController {
     public Object getContracts() {
         return edcProvider.getContracts(new EmptyQuerySpec());
     }
+
+
+
 
 
     public static class NewAssetDTO {

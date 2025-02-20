@@ -24,3 +24,24 @@
         margin: 5px 0;
     }
 }
+
+.transfer {
+    margin: 15px 0 0 0;
+}
+
+.transfer-button {
+    background: var(--accent);
+    color: var(--accent-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    gap: 6px;
+    text-align: center;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: var(--main-card-shadow);
+}

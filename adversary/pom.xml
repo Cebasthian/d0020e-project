@@ -10,12 +10,22 @@
     </parent>
 
     <groupId>org.example</groupId>
-    <artifactId>regulator</artifactId>
+    <artifactId>adversary</artifactId>
 
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <!-- EDC Interface -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>edc-connector-interface</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
