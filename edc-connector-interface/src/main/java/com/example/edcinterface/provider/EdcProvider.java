@@ -1,10 +1,12 @@
 package com.example.edcinterface.provider;
 
+import com.example.edcinterface.json.BaseDTO;
 import com.example.edcinterface.json.asset.CreateAssetDTO;
 import com.example.edcinterface.json.contract.CreateContractDTO;
 import com.example.edcinterface.json.odrl.Policy;
 import com.example.edcinterface.json.policy.CreatePolicyDTO;
 import com.example.edcinterface.json.util.CreateResponse;
+import com.example.edcinterface.json.util.QuerySpec;
 import com.example.edcinterface.util.HttpRequester;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,12 @@ public class EdcProvider {
         return res.body(CreateResponse.class);
     }
 
+    public Object getAssets(BaseDTO querySpec) {
+        String url = "/v3/assets/request";
+
+        return httpRequester.post(url, querySpec).body(Object.class);
+    }
+
     /**
      * Creates a new policy on the EDC connector.
      * @param id The id associated with the policy. Used when creating contracts.
@@ -54,11 +62,17 @@ public class EdcProvider {
         dto.id = id;
 
         if(policy != null) {
-            dto.policy = policy;
+            dto.policy.permission = policy.permission;
         }
 
         RestClient.ResponseSpec res = httpRequester.post(url, dto);
         return res.body(CreateResponse.class);
+    }
+
+    public Object getPolicies(BaseDTO querySpec) {
+        String url = "/v3/policydefinitions/request";
+
+        return httpRequester.post(url, querySpec).body(Object.class);
     }
 
     /**
@@ -80,5 +94,17 @@ public class EdcProvider {
 
         RestClient.ResponseSpec res = httpRequester.post(url, dto);
         return res.body(CreateResponse.class);
+    }
+
+    public CreateResponse createContract(CreateContractDTO dto) {
+        String url = "/v3/contractdefinitions";
+        RestClient.ResponseSpec res = httpRequester.post(url, dto);
+        return res.body(CreateResponse.class);
+    }
+
+    public Object getContracts(BaseDTO querySpec) {
+        String url = "/v3/contractdefinitions/request";
+
+        return httpRequester.post(url, querySpec).body(Object.class);
     }
 }

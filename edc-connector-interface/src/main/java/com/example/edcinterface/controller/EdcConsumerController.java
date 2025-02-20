@@ -1,12 +1,20 @@
 package com.example.edcinterface.controller;
 
 import com.example.edcinterface.consumer.EdcConsumer;
+import com.example.edcinterface.json.BaseDTO;
 import com.example.edcinterface.json.catalog.RequestCatalogResponse;
 import com.example.edcinterface.json.contract.ContractStatus;
 import com.example.edcinterface.json.contract.NegotiateContractDTO;
+import com.example.edcinterface.json.odrl.Policy;
+import com.example.edcinterface.json.odrl.Rule;
 import com.example.edcinterface.json.transfer.StartTransferDTO;
 import com.example.edcinterface.json.transfer.TransferStatus;
 import com.example.edcinterface.json.util.CreateResponse;
+import com.example.edcinterface.json.util.EmptyQuerySpec;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,6 +23,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @CrossOrigin
@@ -41,6 +51,7 @@ public class EdcConsumerController {
             @ApiResponse(responseCode = "200", description = "Found catalog"),
     })
     @PostMapping("/catalog/get")
+//    public Object requestCatalog(@RequestBody GetCatalogDTO body) {
     public RequestCatalogResponse requestCatalog(@RequestBody GetCatalogDTO body) {
         return edcConsumer.fetchCatalog(body.targetConnector);
     }
@@ -62,6 +73,24 @@ public class EdcConsumerController {
         return edcConsumer.negotiateContract(dto);
     }
 
+    @PostMapping("/contract/negotiate/v2")
+    public CreateResponse negotiateContractV2(@RequestBody NegotiateV2DTO body) {
+        NegotiateContractDTO dto = new NegotiateContractDTO();
+
+        dto.counterPartyAddress = body.targetConnector;
+        dto.policy.policyId = body.id;
+        dto.policy.targetConnectorId = body.assigner;
+        dto.policy.assetId = body.targetAsset;
+        dto.policy.permission = body.permission;
+
+        return edcConsumer.negotiateContract(dto);
+    }
+
+    @GetMapping("/contract/negotiations")
+    public Object getNegotiations() {
+        return edcConsumer.getNegotiations(new EmptyQuerySpec());
+    }
+
 
     @Operation(summary = "Negotiation status", description = "Check the status on a contract negotiation.")
     @ApiResponses({
@@ -70,6 +99,11 @@ public class EdcConsumerController {
     @GetMapping("/contract/status/{negotiationId}")
     public ContractStatus checkStatus(@PathVariable String negotiationId) {
         return edcConsumer.checkNegotiationStatus(negotiationId);
+    }
+
+    @GetMapping("/contract/agreement/{negotiationId}")
+    public Object getAgreement(@PathVariable String negotiationId) {
+        return edcConsumer.getAgreement(negotiationId);
     }
 
 
@@ -85,6 +119,11 @@ public class EdcConsumerController {
         dto.contractId = body.contractId;
 //        dto.assetId = body.assetId;
         return edcConsumer.beginTransfer(dto);
+    }
+
+    @GetMapping("/transfer")
+    public Object getTransfers() {
+        return edcConsumer.getTransfers(new EmptyQuerySpec());
     }
 
 
@@ -121,6 +160,16 @@ public class EdcConsumerController {
             public String assigner;
             public String targetAsset;
         }
+    }
+
+    public static class NegotiateV2DTO {
+        public String targetConnector;
+        public String id;
+        public String assigner;
+        public String targetAsset;
+
+        @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+        public List<Object> permission;
     }
 
     public static class TransferDTO {

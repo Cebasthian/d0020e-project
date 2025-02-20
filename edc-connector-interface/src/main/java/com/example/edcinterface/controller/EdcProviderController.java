@@ -1,9 +1,15 @@
 package com.example.edcinterface.controller;
 
 import com.example.edcinterface.json.asset.CreateAssetDTO;
+import com.example.edcinterface.json.asset.GetAssetsDTO;
+import com.example.edcinterface.json.contract.CreateContractDTO;
 import com.example.edcinterface.json.odrl.Policy;
 import com.example.edcinterface.json.util.CreateResponse;
+import com.example.edcinterface.json.util.EmptyQuerySpec;
+import com.example.edcinterface.json.util.QuerySpec;
 import com.example.edcinterface.provider.EdcProvider;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -12,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 
 @RequestMapping("/edc-provider")
 @CrossOrigin
@@ -36,6 +43,19 @@ public class EdcProviderController {
         return edcProvider.createAsset(body.name, dataAddress);
     }
 
+    @Operation(summary = "Get assets", description = "Fetches all the created assets from the connector.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Assets found"),
+    })
+    @GetMapping("/assets")
+    public Object getAssets() {
+        return edcProvider.getAssets(new EmptyQuerySpec());
+    }
+
+
+
+
+
 
     @Operation(summary = "Create policy definition")
     @ApiResponses({
@@ -46,6 +66,19 @@ public class EdcProviderController {
         return edcProvider.createPolicy(body.id, body.policy);
     }
 
+    @Operation(summary = "Get policies", description = "Fetches all the created policy definitions from the connector.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Policy definitions found"),
+    })
+    @GetMapping("/policies")
+    public Object getPolicies() {
+        return edcProvider.getPolicies(new EmptyQuerySpec());
+    }
+
+
+
+
+
 
     @Operation(summary = "Create contract definition")
     @ApiResponses({
@@ -55,6 +88,23 @@ public class EdcProviderController {
     public CreateResponse createContract(@RequestBody NewContractDTO body) {
         return edcProvider.createContract(body.id, body.accessPolicyId, body.contractPolicyId, Collections.emptyList());
     }
+
+    @PostMapping("/contracts/create/v2")
+    public CreateResponse createContractV2(@RequestBody CreateContractDTO dto) {
+        return edcProvider.createContract(dto);
+    }
+
+    @Operation(summary = "Get contracts", description = "Fetches all the created contract definitions from the connector.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Contract definitions found"),
+    })
+    @GetMapping("/contracts")
+    public Object getContracts() {
+        return edcProvider.getContracts(new EmptyQuerySpec());
+    }
+
+
+
 
 
     public static class NewAssetDTO {

@@ -2,7 +2,7 @@ package com.example.edcinterface.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BaseDTO {
+public class BaseDTO extends SuperBaseDTO {
 
     @JsonProperty("@context")
     public Context context = new Context();

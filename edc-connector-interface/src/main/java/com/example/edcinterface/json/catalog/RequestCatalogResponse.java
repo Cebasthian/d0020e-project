@@ -17,7 +17,7 @@ public class RequestCatalogResponse extends BaseDTO {
 
     @JsonProperty("dcat:dataset")
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    public List<DataSet> dataset;
+    public List<Object> dataset;
 
     @JsonProperty("dcat:service")
     public Service service;

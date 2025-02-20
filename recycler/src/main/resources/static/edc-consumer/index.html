@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+        <h1>Recycler EDC Consumer</h1>
+        <label>
+            <span>Target Connector Address</span>
+            <input id="target-connector-address" value="http://supplier:13004/protocol">
+        </label>
+
+        <div class="container">
+            <div class="module">
+                <h2>Get connector metadata</h2>
+
+                <button id="get-metadata">Get</button>
+            </div>
+
+            <div class="module">
+                <h2>Get catalog</h2>
+
+                <button id="get-catalog">Get</button>
+            </div>
+
+            <div class="module">
+                <h2>Negotiate contract</h2>
+                <label>
+                    <span>Policy ID</span>
+                    <input id="negotiate-policy-id" placeholder="MyQ:BaHe:4S56S">
+                </label>
+
+                <label>
+                    <span>Connector ID</span>
+                    <input id="negotiate-target-id" placeholder="recycler">
+                </label>
+
+                <label>
+                    <span>Asset ID</span>
+                    <input id="negotiate-asset-id" placeholder="uuid-v4-asset-id">
+                </label>
+
+                <button id="negotiate">Negotiate</button>
+            </div>
+
+            <div class="module">
+                <h2>Check negotiation status</h2>
+                <label>
+                    <span>Negotiation ID</span>
+                    <input id="negotation-id" placeholder="uuid-v4-negotiation-id">
+                </label>
+
+                <button id="check-negotiation-status">Check</button>
+            </div>
+
+            <div class="module">
+                <h2>Start transfer</h2>
+                <label>
+                    <span>Connector ID</span>
+                    <input id="transfer-connector-id" placeholder="recycler">
+                </label>
+
+                <label>
+                    <span>Counter Party Address</span>
+                    <input id="transfer-connector-address" placeholder="">
+                    <span style="font-size: smaller;">Maybe always equal to target connector address, needs more research.</span>
+                </label>
+
+                <label>
+                    <span>Agreement ID</span>
+                    <input id="transfer-agreement-id" placeholder="uuid-v4-agreement-id">
+                </label>
+
+                <button id="start-transfer">Transfer</button>
+            </div>
+
+            <div class="module">
+                <h2>Handle transfer</h2>
+                <label>
+                    <span>Transfer ID</span>
+                    <input id="transfer-id" placeholder="uuid-v4-transfer-id">
+                </label>
+
+                <button id="check-transfer-status">Check Status</button>
+                <button id="retrieve-data">Retrieve Data</button>
+            </div>
+
+            <div style="height: 200px;"></div>
+        </div>
+
+        <script src="index.js" defer></script>
+    </body>
+</html>
