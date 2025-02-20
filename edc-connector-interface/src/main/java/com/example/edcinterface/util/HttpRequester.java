@@ -1,6 +1,7 @@
 package com.example.edcinterface.util;
 
 import com.example.edcinterface.json.BaseDTO;
+import com.example.edcinterface.json.SuperBaseDTO;
 import com.example.edcinterface.json.catalog.RequestCatalogDTO;
 import com.example.edcinterface.json.catalog.RequestCatalogResponse;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +32,7 @@ public class HttpRequester {
         return "http://"+connectorHostname+":"+connectorPort+managementPath;
     }
 
-    public RestClient.ResponseSpec post(String endpoint, BaseDTO body) {
+    public RestClient.ResponseSpec post(String endpoint, SuperBaseDTO body) {
         RestClient client = RestClient.builder()
                 .baseUrl(getConnectorAddress())
                 .defaultHeader("Content-Type", "application/json")
@@ -48,7 +49,7 @@ public class HttpRequester {
     }
 
     public RestClient.ResponseSpec retrieveData(String endpoint, String authorization) {
-        System.out.println("URL: " + endpoint + " | Auth: " + authorization);
+//        System.out.println("URL: " + endpoint + " | Auth: " + authorization);
 
         RestClient client = RestClient.builder()
 //                .defaultHeader("Content-Type", "application/json")

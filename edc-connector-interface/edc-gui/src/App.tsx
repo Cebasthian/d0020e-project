@@ -5,7 +5,6 @@ import Connectors from "./pages/connectors/Connectors";
 import Catalog from "./pages/consuming/catalog/Catalog";
 import NegotiatedContracts from "./pages/consuming/negotiated/NegotiatedContracts";
 import Transfers from "./pages/consuming/transfers/Transfers";
-import Dashboard from "./pages/dashboard/Dashboard";
 import MyAssets from "./pages/providing/assets/MyAssets";
 import MyContracts from "./pages/providing/contracts/MyContracts";
 import MyPolicies from "./pages/providing/policies/MyPolicies";
@@ -17,9 +16,9 @@ function App() {
         {/* <BrowserRouter> */}
         <BrowserRouter basename="/edc/">
             <Routes>
-                <Route path="/" element={<Navigate to="/dashboard" replace/>}/>
+                <Route path="/" element={<Navigate to="/connectors" replace/>}/>
                 <Route element={<Layout/>}>
-                    <Route path="/dashboard" element={<Dashboard/>} />
+                    {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
                     <Route path="/connectors" element={<Connectors/>} />
                     {/* Providing */}
                     <Route path="/assets" element={<MyAssets/>} />

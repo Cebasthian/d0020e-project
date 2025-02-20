@@ -2,11 +2,11 @@
     padding: 15px;
 }
 
-.create-policy {
+.create-contract {
     margin: 0 0 15px;
 }
 
-.create-policy-button {
+.create-contract-button {
     background: var(--accent);
     color: var(--accent-color);
     display: flex;
@@ -68,13 +68,13 @@
     justify-content: flex-end;
 }
 
-.my-policies {
+.my-contracts {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.policy {
+.contract {
     color: var(--main-card-text);
     margin: 5px;
 

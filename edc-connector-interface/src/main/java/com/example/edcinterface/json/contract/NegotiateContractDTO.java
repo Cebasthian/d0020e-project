@@ -1,10 +1,11 @@
 package com.example.edcinterface.json.contract;
 
 import com.example.edcinterface.json.BaseDTO;
+import com.example.edcinterface.json.SuperBaseDTO;
 import com.example.edcinterface.json.odrl.Policy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class NegotiateContractDTO extends BaseDTO {
+public class NegotiateContractDTO extends SuperBaseDTO {
     @JsonProperty("@type")
     public String type = "ContractRequest";
 
@@ -12,7 +13,6 @@ public class NegotiateContractDTO extends BaseDTO {
     public String protocol = "dataspace-protocol-http";
 
     public Policy.Offer policy = new Policy.Offer();
-
 
     /* TODO
     "callbackAddresses": [

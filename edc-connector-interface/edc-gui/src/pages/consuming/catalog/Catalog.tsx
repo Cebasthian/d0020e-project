@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Attribute from "../../../components/field/Attribute";
 import Fields from "../../../components/field/Fields";
 import Icon from "../../../components/icon/Icon";
@@ -6,6 +6,7 @@ import SubLayout from "../../../components/layout/SubLayout";
 import { OdrlHasPolicy } from "../../../types/odrl";
 import { getCatalog, getConnectors, negotiateContract } from "../../../util/edc_interface";
 import { jsonLd } from "../../../util/json_ld";
+import { PolicyToString } from "../../../util/lib";
 import styles from "./catalog.module.css";
 
 type AssetItem = {
@@ -26,7 +27,7 @@ export default function Catalog() {
             const connectors = await getConnectors();
             const arr: AssetItem[] = []
             for(let i = 0; i < connectors.length; i++) {
-                const catalog = jsonLd.removeNamespace(await getCatalog(connectors[i].protocolAddress))
+                const catalog = jsonLd.removeNamespaceShallow(await getCatalog(connectors[i].protocolAddress))
 
                 catalog.dataset.forEach(dataset => {
                     arr.push({
@@ -34,7 +35,7 @@ export default function Catalog() {
                         connectorAddress: connectors[i].protocolAddress,
                         name: dataset.name,
                         id: dataset.id,
-                        policy: dataset.hasPolicy,
+                        policy: jsonLd.removeNamespaceShallow(dataset).hasPolicy,
                     })
                 })
             }
@@ -67,6 +68,10 @@ function AssetComponent({
         console.log(json)
     }, [asset])
 
+    const policy = useMemo(() => {
+        return PolicyToString(jsonLd.removeNamespace(asset.policy))
+    }, [asset])
+
     return(
         <>
         <div className={"card " + styles.asset}>
@@ -75,6 +80,9 @@ function AssetComponent({
             <Fields>
                 <Attribute icon="fingerprint" text="ASSET ID" value={asset.id} />
                 <Attribute icon="id_card" text="PARTICIPANT ID" value={asset.participantId} />
+            </Fields>
+            <Fields>
+                <Attribute icon="policy" text="CONTRACT POLICY" value={policy} />
             </Fields>
             <div className={styles.negotiate}>
                 <button className={styles['negotiate-button']} onClick={negotiate}>

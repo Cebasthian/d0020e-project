@@ -4,6 +4,8 @@ import com.example.edcinterface.json.BaseDTO;
 import com.example.edcinterface.json.odrl.Policy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+
 public class CreatePolicyDTO extends BaseDTO {
     @JsonProperty("@id")
     public String id;
@@ -15,6 +17,9 @@ public class CreatePolicyDTO extends BaseDTO {
 
     public CreatePolicyDTO() {
         policy.type = "Set";
+        policy.permission = new ArrayList<>();
+        policy.obligation = new ArrayList<>();
+        policy.prohibitions = new ArrayList<>();
     }
 
 //    // https://eclipse-edc.github.io/documentation/for-adopters/control-plane/#policies-and-policy-definitions

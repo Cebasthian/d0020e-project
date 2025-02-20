@@ -62,7 +62,7 @@ public class EdcProvider {
         dto.id = id;
 
         if(policy != null) {
-            dto.policy = policy;
+            dto.policy.permission = policy.permission;
         }
 
         RestClient.ResponseSpec res = httpRequester.post(url, dto);
@@ -92,6 +92,12 @@ public class EdcProvider {
         dto.contractPolicyId = contractPolicyId;
         dto.assetsSelector = assetSelectors;
 
+        RestClient.ResponseSpec res = httpRequester.post(url, dto);
+        return res.body(CreateResponse.class);
+    }
+
+    public CreateResponse createContract(CreateContractDTO dto) {
+        String url = "/v3/contractdefinitions";
         RestClient.ResponseSpec res = httpRequester.post(url, dto);
         return res.body(CreateResponse.class);
     }

@@ -22,15 +22,15 @@ public class Policy {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    public List<Rule> permission;
+    public List<Object> permission;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    public List<Rule> prohibitions;
+    public List<Object> prohibitions;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    public List<Rule> obligation;
+    public List<Object> obligation;
 
     public static class Offer extends Policy {
         @JsonProperty("@type")
@@ -44,5 +44,6 @@ public class Policy {
 
         @JsonProperty("target")
         public String assetId;
+
     }
 }

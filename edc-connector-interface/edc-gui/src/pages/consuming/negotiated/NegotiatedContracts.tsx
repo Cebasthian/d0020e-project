@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Attribute from "../../../components/field/Attribute";
 import Fields from "../../../components/field/Fields";
 import Icon from "../../../components/icon/Icon";
 import SubLayout from "../../../components/layout/SubLayout";
 import { EdcAgreeement, EdcNegotiation } from "../../../types/edc";
-import { getAgreement, pollNegotiationState } from "../../../util/edc_interface";
+import { beginTransfer, getAgreement, pollNegotiationState } from "../../../util/edc_interface";
 import { jsonLd } from "../../../util/json_ld";
 import { useGetter } from "../../../util/useGetter";
 import styles from "./negotations.module.css";
@@ -67,6 +67,17 @@ function ContractComponent({
     //     console.log(json)
     // }, [asset])
 
+    const transfer = useCallback(async () => {
+        if(!agreement) return; 
+
+        const json = await beginTransfer({
+            connectorId: negotiation.counterPartyId,
+            counterPartyAddress: negotiation.counterPartyAddress,
+            contractId: agreement["@id"]
+        })
+        console.log(json)
+    }, [negotiation, agreement])
+
     return(
         <>
         <div className={"card " + styles.negotiation}>
@@ -82,15 +93,16 @@ function ContractComponent({
                 {agreement ? <Attribute icon="verified" text="AGREEMENT ID" value={agreement["@id"]} /> : ""}
                 {agreement ? <Attribute icon="calendar_month" text="SIGN DATE" value={new Date((agreement.contractSigningDate || 0)*1000).toISOString()} /> : ""}
             </Fields>
-            <div className={styles.negotiate}>
-                <button className={styles['negotiate-button']}>
-                    <Icon>sync_alt</Icon>
-                    Transfer
-                </button>
-            </div>
-            <pre>
-                {JSON.stringify(agreement, null, 4)}
-            </pre>
+            {
+                negotiation.type === "CONSUMER" ? (
+                    <div className={styles.transfer}>
+                        <button onClick={transfer} disabled={agreement === null} className={styles['transfer-button']}>
+                            <Icon>cloud_download</Icon>
+                            Transfer
+                        </button>
+                    </div>
+                ) : ""
+            }
         </div>
         </>
     )
