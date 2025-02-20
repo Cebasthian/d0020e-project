@@ -24,7 +24,7 @@
     <modules>
         <module>manufacturer</module>
 		<module>recycler</module>
-		<module>regulator</module>
+		<module>adversary</module>
 		<module>supplier</module>
         <module>edc-connector-interface</module>
     </modules>
