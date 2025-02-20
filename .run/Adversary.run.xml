@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Regulator" type="Application" factoryName="Application">
+  <configuration default="false" name="Adversary" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="org.example.Application" />
-    <module name="regulator" />
+    <module name="adversary" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
