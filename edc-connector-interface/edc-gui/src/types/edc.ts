@@ -1,4 +1,5 @@
 import { DcatDataset, DcatService } from "./dcat";
+import { OdrlHasPolicy } from "./odrl";
 
 export type EdcMetadata = {
     description: string;
@@ -19,6 +20,8 @@ export type Base = {
     };
 };
 
+/* PROVIDING */
+
 export type EdcAsset = Base & {
     "@id": string;
     "@type": "Asset";
@@ -35,6 +38,30 @@ export type EdcAsset = Base & {
         baseUrl: string;
     };
 };
+
+export type EdcPolicyDefinition = Base & {
+    "@id": string;
+    "@type": "PolicyDefinition",
+    createdAt: number,
+    policy: OdrlHasPolicy
+};
+
+export type EdcContractDefinition = Base & {
+    "@id": string;
+    "@type": "ContractDefinition";
+    accessPolicyId: string;
+    contractPolicyId: string;
+    assetsSelector: AssetsSelector[];
+};
+
+export type AssetsSelector = {
+    "@type": "https://w3id.org/edc/v0.0.1/ns/Criterion";
+    operandLeft: string;
+    operator: string;
+    operandRight: string;
+};
+
+/* CONSUMING */
 
 export type EdcCatalog = Base & {
     "@id": string;
@@ -76,3 +103,17 @@ export type EdcAgreeement = Base & {
         ];
     };
 };
+
+
+export type EdcTransfer = Base & {
+    "@id": string,
+    "@type": "TransferProcess",
+    "state": "REQUESTED" | "STARTED" | "SUSPENDED" | "RESUMED" | "COMPLETED" | "TERMINATED",
+    "stateTimestamp": number,
+    "type": string,
+    "callbackAddresses": unknown[],
+    "correlationId": string,
+    "assetId": string,
+    "contractId": string,
+    "transferType": string,
+}

@@ -2,13 +2,13 @@
     padding: 15px;
 }
 
-.negotiations {
+.transfers {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.negotiation {
+.transfer {
     color: var(--main-card-text);
     display: flex;
     flex-direction: column;
@@ -25,11 +25,11 @@
     }
 }
 
-.transfer {
+.retrieve {
     margin: 15px 0 0 0;
 }
 
-.transfer-button {
+.retrieve-button {
     background: var(--accent);
     color: var(--accent-color);
     display: flex;

@@ -16,4 +16,5 @@
     padding: 15px;
     background: var(--main-card-background);
     box-shadow: var(--main-card-shadow);
+    border-radius: 10px;
 }

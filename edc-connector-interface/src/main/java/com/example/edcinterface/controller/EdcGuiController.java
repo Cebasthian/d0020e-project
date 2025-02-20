@@ -7,7 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/edc")
 public class EdcGuiController {
-    @GetMapping()
+    @GetMapping(value={
+            "/",
+            "/connectors",
+            "/assets",
+            "/policies",
+            "/contracts",
+            "/catalog",
+            "/negotiated-contracts",
+            "/transfers",
+    })
     public String home() {
         return "redirect:/edc/index.html";
     }
