@@ -48,9 +48,12 @@ public interface PCRepository extends JpaRepository<PC, Long> {
         //hitta dator med input id och ta bort från lista
 
     //}
-    public default void change(Long ID){
-
-    }
+    /*
+    @Modifying
+    @Transactional
+    @Query("UPDATE PC u SET u.productId = :productId WHERE u.id = :id")
+    void updatePC(@Param("id") Long id, @Param("productId") String productId);
+    */
 
     //SQL query som ska hämta ut alla PCs
     //public default List<PC> findAll(){

@@ -1,5 +1,7 @@
 package org.example.Services;
 
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 import org.example.Entity.*;
 import org.example.Repositories.ComponentRepository;
 import org.example.Repositories.PCRepository;
@@ -40,7 +42,46 @@ public class ManufacturerService {
                 pcRepository.saveAndFlush(PC);
         }
 
-        public void updatePC(Long ID) {
-                pcRepository.change(ID);
+        @Transactional
+        public void updatePCField(Long id, String fieldName, String value) {
+                PC pc = pcRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("PC not found"));
+
+
+                switch (fieldName) {
+                        case "productId":
+                                pc.setProductId(value);
+                                break;
+                        case "energyClass":
+                                pc.setEnergyClass(value);
+                                break;
+                        case "dimensions":
+                                pc.setDimensions(value);
+                                break;
+                        case "lifecycle":
+                                pc.setLifecycle(value);
+                                break;
+                        case "powerRating":
+                                pc.setPowerRating(Integer.parseInt(value));
+                                break;
+                        case "installingInstructions":
+                                pc.setInstallingInstructions(value);
+                                break;
+                        case "maintenanceInstructions":
+                                pc.setMaintenanceInstructions(value);
+                                break;
+                        case "repairInstructions":
+                                pc.setRepairInstructions(value);
+                                break;
+                        case "assemblyCarbonFootprint":
+                                pc.setAssemblyCarbonFootprint(value);
+                                break;
+                        case "warranty":
+                                pc.setWarranty(value);
+                                break;
+                        default:
+                                throw new IllegalArgumentException("Invalid field name");
+                }
+
+                pcRepository.save(pc);
         }
 }

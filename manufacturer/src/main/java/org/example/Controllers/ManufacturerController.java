@@ -89,9 +89,10 @@ public class ManufacturerController {
             @ApiResponse(responseCode = "500", description = "Error")
     })
 
-   @PutMapping("/update-pc")
-    public void updatePC(@RequestBody Long ID) {
-        manufacturerService.updatePC(ID);
+   @PutMapping("/update-pc/{id}")
+    public void updatePC(@PathVariable Long id, @RequestParam String fieldName, @RequestParam String value) {
+        //manufacturerService.updatePC(id, productId);
+        manufacturerService.updatePCField(id, fieldName, value);
     }
 
     @Operation(summary = "Delete PC", description = "Remove a PC from database")
