@@ -90,9 +90,9 @@ public class ManufacturerController {
     })
 
    @PutMapping("/update-pc/{id}")
-    public void updatePC(@PathVariable Long id, @RequestParam String fieldName, @RequestParam String value) {
-        //manufacturerService.updatePC(id, productId);
-        manufacturerService.updatePCField(id, fieldName, value);
+    public void updatePC(@PathVariable Long id, @RequestParam(required = false) String productId, @RequestParam(required = false) String energyClass, @RequestParam(required = false) String dimensions, @RequestParam(required = false) String lifecycle, @RequestParam(required = false) int powerRating, @RequestParam(required = false) String installingInstructions, @RequestParam(required = false) String maintenanceInstructions, @RequestParam(required = false) String repairInstructions, @RequestParam(required = false) String assemblyCarbonFootprint, @RequestParam(required = false) String warranty) {
+        manufacturerService.updatePCField(id, productId, energyClass, dimensions, lifecycle, powerRating, installingInstructions, maintenanceInstructions, repairInstructions, assemblyCarbonFootprint, warranty);
+
     }
 
     @Operation(summary = "Delete PC", description = "Remove a PC from database")

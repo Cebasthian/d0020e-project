@@ -52,7 +52,7 @@ public interface PCRepository extends JpaRepository<PC, Long> {
     @Modifying
     @Transactional
     @Query("UPDATE PC u SET u.productId = :productId WHERE u.id = :id")
-    void updatePC(@Param("id") Long id, @Param("productId") String productId);
+    void updateProductid(@Param("id") Long id, @Param("productId") String productId);
     */
 
     //SQL query som ska hämta ut alla PCs
