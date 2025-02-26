@@ -23,7 +23,7 @@
 </form>
 
 <!-- Table to Display PCs -->
-<h2>List of PCs</h2>
+<h2>List of PC</h2>
 <table>
   <thead>
   <tr>
@@ -38,7 +38,7 @@
 </table>
 
 <script>
-  const baseUrl = '/PCs/GET-All-PCs';
+  const baseUrl = 'http://localhost:8080/PCs/';
 
   const pcList = document.getElementById('pc-list'); // Fix ID for the table body
   const addPcForm = document.getElementById('add-pc-form'); // Fix ID for the form
@@ -47,7 +47,7 @@
   // Fetch all PCs and update the table
   async function fetchPCs() {
     try {
-      const response = await fetch(baseUrl);
+      const response = await fetch(baseUrl + 'GET-All-PCs');
       const pcs = await response.json(); // Convert response to JSON
       pcList.innerHTML = ''; // Clear table before reloading
       pcs.forEach(pc => {
@@ -70,7 +70,7 @@
     const pc = { name: pcNameInput.value }; // Create PC object
 
     try {
-      const response = await fetch('/PCs/CREATE_PCs', {
+      const response = await fetch( baseUrl + 'CREATE_PCs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pc),
@@ -91,7 +91,7 @@
   // Delete a PC
   async function deletePC(id) {
     try {
-      await fetch(`/PCs/delete/${id}`, { method: 'DELETE' });
+      await fetch(baseUrl + `delete/${id}`, { method: 'DELETE' });
       fetchPCs(); // Refresh the table
     } catch (error) {
       console.error("Error deleting PC:", error);
