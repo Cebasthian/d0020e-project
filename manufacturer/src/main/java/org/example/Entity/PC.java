@@ -22,7 +22,7 @@ public class PC {
     private String productId;
 
     //@NotNull
-    @OneToMany(mappedBy = "PC", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pc", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Component> components = new ArrayList<>();
 
@@ -54,8 +54,9 @@ public class PC {
         return this.productId;                       //return dpp id
     }
 
-    public void addComponent(Component Component){
-        this.components.add(Component);
+    public void addComponent(Component component){
+        component.setPc(this);
+        this.components.add(component);
     }
 
     public void setComponent(int id, String newComponentType, String newComponentId, String newComponentName) {

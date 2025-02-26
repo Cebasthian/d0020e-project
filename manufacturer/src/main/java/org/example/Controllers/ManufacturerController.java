@@ -72,15 +72,10 @@ public class ManufacturerController {
 
     // lägg till och posta PC
     @PostMapping("/CREATE_PCs")
-    public void POST_PCs(@RequestBody PC temp){
-        manufacturerService.addPC(temp);
+    public void POST_PCs(@RequestParam(required = false) String productId, @RequestParam(required = false) String energyClass, @RequestParam(required = false) String dimensions, @RequestParam(required = false) String lifecycle, @RequestParam(defaultValue = "0") int powerRating, @RequestParam(required = false) String installingInstructions, @RequestParam(required = false) String maintenanceInstructions, @RequestParam(required = false) String repairInstructions, @RequestParam(required = false) String assemblyCarbonFootprint, @RequestParam(required = false) String warranty, @RequestParam(required = false) String componentType, @RequestParam(required = false) String componentId, @RequestParam(required = false) String componentName){
+        manufacturerService.addPC(productId, energyClass, dimensions, lifecycle, powerRating, installingInstructions, maintenanceInstructions, repairInstructions, assemblyCarbonFootprint, warranty, componentType, componentId, componentName);
     }
 
-    // Det makear inte sense att skapa en PC om man vet id redan innan. Så ev ta bort den här metoden
-    //@PostMapping("/POST_PCbyID")
-    //public PC POST_PCbyID(int ID){
-        //return manufacturerService.findByID(ID);
-    //}
 
     @Operation(summary = "Update PC", description = "Update information about PC")
     @ApiResponses(value = {

@@ -38,8 +38,24 @@ public class ManufacturerService {
         }
 
         // Spara dator i listan/databas
-        public void addPC(PC PC) {
-                pcRepository.saveAndFlush(PC);
+        public void addPC(String productId, String energyClass, String dimensions, String lifecycle, int powerRating, String installingInstructions, String maintenanceInstructions, String repairInstructions, String assemblyCarbonFootprint, String warranty, String componentType, String componentId, String componentName){
+                PC newPc = new PC();
+                newPc.setProductId(productId);
+                newPc.setEnergyClass(energyClass);
+                newPc.setDimensions(dimensions);
+                newPc.setLifecycle(lifecycle);
+                newPc.setPowerRating(powerRating);
+                newPc.setInstallingInstructions(installingInstructions);
+                newPc.setMaintenanceInstructions(maintenanceInstructions);
+                newPc.setRepairInstructions(repairInstructions);
+                newPc.setAssemblyCarbonFootprint(assemblyCarbonFootprint);
+                newPc.setWarranty(warranty);
+                Component newComponent = new Component();
+                newComponent.setComponentId(componentId);
+                newComponent.setName(componentName);
+                newComponent.setComponentType(componentType);
+                newPc.addComponent(newComponent);
+                pcRepository.saveAndFlush(newPc);
         }
 
         @Transactional

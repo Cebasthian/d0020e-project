@@ -16,10 +16,10 @@ public class Component {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "PC")
+    @JoinColumn(name = "pc_id")
     @JsonBackReference
     @Schema(hidden = true)
-    private PC PC;
+    private PC pc;
 
     private String componentType; //gpu, cpu, hdd, sdd, etc..
     private String componentId;
@@ -55,6 +55,10 @@ public class Component {
 
     public String getName() {
         return this.name;
+    }
+
+    public void setPc(PC pc) {
+        this.pc = pc;
     }
 
 }
