@@ -27,11 +27,11 @@ public class OpenAPIConfiguration {
                 .title("Recycler API")
                 .version("1.0")
                 .description("""
-                        All the endpoints from the Recycler module.
+                        ## Edc (Provider/Consumer)
+                        Manage the Edc Connector. Create asset, policy, and contract definitions. Communicate with other connectors
                         
-                        The instructions endpoints are for an employee creating/updating their own database.
-                        
-                        DPP endpoint(s) are for an employee getting the product passport via the IDS data space.
+                        ## Instructions
+                        Manage stored recycling instructions.
                         """)
                 .contact(contact);
 

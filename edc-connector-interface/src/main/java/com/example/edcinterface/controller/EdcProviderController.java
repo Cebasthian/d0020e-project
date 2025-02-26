@@ -89,6 +89,10 @@ public class EdcProviderController {
         return edcProvider.createContract(body.id, body.accessPolicyId, body.contractPolicyId, Collections.emptyList());
     }
 
+    @Operation(summary = "Create contract definition V2", description = "V2 Allows for asset selection.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Contract definition created"),
+    })
     @PostMapping("/contracts/create/v2")
     public CreateResponse createContractV2(@RequestBody CreateContractDTO dto) {
         return edcProvider.createContract(dto);

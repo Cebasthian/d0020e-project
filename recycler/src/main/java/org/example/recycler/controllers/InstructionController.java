@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "instructions")
+@Tag(name = "Instructions", description = "For managing recycling instructions.")
 @RestController
 @CrossOrigin
 @RequestMapping("/instructions")
@@ -27,7 +27,7 @@ public class InstructionController {
     private InstructionService instructionService;
 
     @Operation(summary = "Get all entries in the database.")
-    @GetMapping("/get-entries")
+    @GetMapping("/get")
     public List<RecycleInstructionsEntry> getAllInstructionsEntries() {
         return instructionService.getAllEntries();
     }

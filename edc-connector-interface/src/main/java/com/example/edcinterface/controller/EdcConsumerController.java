@@ -73,6 +73,10 @@ public class EdcConsumerController {
         return edcConsumer.negotiateContract(dto);
     }
 
+    @Operation(summary = "Negotiate contract V2", description = "Begin a contract negotiation related to an asset. V2 uses a less(?) general approach more suitable for the new edc-gui.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Contract initialized"),
+    })
     @PostMapping("/contract/negotiate/v2")
     public CreateResponse negotiateContractV2(@RequestBody NegotiateV2DTO body) {
         NegotiateContractDTO dto = new NegotiateContractDTO();
@@ -86,6 +90,10 @@ public class EdcConsumerController {
         return edcConsumer.negotiateContract(dto);
     }
 
+    @Operation(summary = "Get contract negotiations", description = "Fetches all negotiations from the connector. Both consumer and provider.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Negotiations found"),
+    })
     @GetMapping("/contract/negotiations")
     public Object getNegotiations() {
         return edcConsumer.getNegotiations(new EmptyQuerySpec());
@@ -101,6 +109,10 @@ public class EdcConsumerController {
         return edcConsumer.checkNegotiationStatus(negotiationId);
     }
 
+    @Operation(summary = "Get agreement", description = "Gets the contract agreement from a finalized negotiation.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Agreements found"),
+    })
     @GetMapping("/contract/agreement/{negotiationId}")
     public Object getAgreement(@PathVariable String negotiationId) {
         return edcConsumer.getAgreement(negotiationId);
@@ -121,6 +133,10 @@ public class EdcConsumerController {
         return edcConsumer.beginTransfer(dto);
     }
 
+    @Operation(summary = "Get transfer processes", description = "Fetches all transfer processes from the connector.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Transfers found"),
+    })
     @GetMapping("/transfer")
     public Object getTransfers() {
         return edcConsumer.getTransfers(new EmptyQuerySpec());
