@@ -32,12 +32,11 @@ public class ManufacturerController {
     @ApiResponse(responseCode = "500", description = "Error")
 })
     //koden för HTML.
-    @GetMapping("/")
-    public String adminPage(Model model) {
-        // Retrieve the list of all PCs and add it to the model
-        model.addAttribute("pcs", manufacturerService.findAll());
-        return "admin";  // Thymeleaf will render this HTML file
+    @GetMapping("/admin")
+    public String getAdminPage() {
+        return "admin";
     }
+
 
     @Operation(summary = "Get all PCs", description = "Retrieve the list of all PCs")
     @ApiResponses(value = {
