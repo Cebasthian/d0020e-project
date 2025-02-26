@@ -43,9 +43,10 @@ public class ManufacturerService {
         }
 
         @Transactional
-        public void updatePCField(Long id, String productId, String energyClass, String dimensions, String lifecycle, int powerRating, String installingInstructions, String maintenanceInstructions, String repairInstructions, String assemblyCarbonFootprint, String warranty) {
+        public void updatePCField(Long id, String productId, String energyClass, String dimensions, String lifecycle, int powerRating, String installingInstructions, String maintenanceInstructions, String repairInstructions, String assemblyCarbonFootprint, String warranty, int idForComponent, String componentType, String componentId, String componentName) {
 
                 PC pc = pcRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("PC not found"));
+                pc.setComponent(idForComponent, componentType, componentId, componentName);
                 if(productId != null){
                         //pcRepository.updateProductid(id, productId);
                         pc.setProductId(productId);

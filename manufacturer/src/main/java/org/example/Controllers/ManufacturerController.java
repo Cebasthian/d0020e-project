@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/PCs")
 public class ManufacturerController {
 
@@ -32,12 +33,11 @@ public class ManufacturerController {
     @ApiResponse(responseCode = "500", description = "Error")
 })
     //koden för HTML.
-    @GetMapping("/")
-    public String adminPage(Model model) {
-        // Retrieve the list of all PCs and add it to the model
-        model.addAttribute("pcs", manufacturerService.findAll());
-        return "admin";  // Thymeleaf will render this HTML file
+    @GetMapping("/admin")
+    public String getAdminPage() {
+        return "admin";
     }
+
 
     @Operation(summary = "Get all PCs", description = "Retrieve the list of all PCs")
     @ApiResponses(value = {
@@ -89,11 +89,12 @@ public class ManufacturerController {
             @ApiResponse(responseCode = "500", description = "Error")
     })
 
-   @PutMapping("/update-pc/{id}")
-    public void updatePC(@PathVariable Long id, @RequestParam(required = false) String productId, @RequestParam(required = false) String energyClass, @RequestParam(required = false) String dimensions, @RequestParam(required = false) String lifecycle, @RequestParam(required = false) int powerRating, @RequestParam(required = false) String installingInstructions, @RequestParam(required = false) String maintenanceInstructions, @RequestParam(required = false) String repairInstructions, @RequestParam(required = false) String assemblyCarbonFootprint, @RequestParam(required = false) String warranty) {
-        manufacturerService.updatePCField(id, productId, energyClass, dimensions, lifecycle, powerRating, installingInstructions, maintenanceInstructions, repairInstructions, assemblyCarbonFootprint, warranty);
+    @PutMapping("/update-pc/{id}")
+    public void updatePC(@PathVariable Long id, @RequestParam(required = false) String productId, @RequestParam(required = false) String energyClass, @RequestParam(required = false) String dimensions, @RequestParam(required = false) String lifecycle, @RequestParam(defaultValue = "0") int powerRating, @RequestParam(required = false) String installingInstructions, @RequestParam(required = false) String maintenanceInstructions, @RequestParam(required = false) String repairInstructions, @RequestParam(required = false) String assemblyCarbonFootprint, @RequestParam(required = false) String warranty, @RequestParam(defaultValue = "0") int idForComponent, @RequestParam(required = false) String componentType, @RequestParam(required = false) String componentId, @RequestParam(required = false) String componentName) {
+        manufacturerService.updatePCField(id, productId, energyClass, dimensions, lifecycle, powerRating, installingInstructions, maintenanceInstructions, repairInstructions, assemblyCarbonFootprint, warranty, idForComponent, componentType, componentId, componentName);
 
     }
+
 
     @Operation(summary = "Delete PC", description = "Remove a PC from database")
     @ApiResponses(value = {

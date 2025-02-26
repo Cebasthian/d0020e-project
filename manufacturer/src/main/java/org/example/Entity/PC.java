@@ -58,6 +58,20 @@ public class PC {
         this.components.add(Component);
     }
 
+    public void setComponent(int id, String newComponentType, String newComponentId, String newComponentName) {
+        if(id != 0){
+            for (Component component : components) {
+                if (component.getID() == id) {
+                    if(newComponentType != null){component.setComponentType(newComponentType);}
+                    if(newComponentId != null){component.setComponentId(newComponentId);}
+                    if(newComponentName != null){component.setName(newComponentName);}
+
+                    break; // Exit loop once found
+                }
+            }
+        }
+    }
+
     //@Schema(hidden = true)
     public List<Component> getComponents(){
         return this.components;

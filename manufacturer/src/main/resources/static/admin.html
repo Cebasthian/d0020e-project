@@ -1,0 +1,107 @@
+<!-- This file is used to store regular HTML code incase thymeleaf code doesn't work which it doesn't right now because I can't add Spring Web Dependency to import: import org.springframework.ui.Model;-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital passport</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Added table from www.https://getbootstrap.com/. -->
+
+</head>
+<body>
+<h1>
+  <img class="logo" src="loggo.png" alt="Logo image">
+</h1>
+<h2>Admin - Manage PCs</h2>
+
+<!-- Input Form -->
+<form id="add-pc-form">
+  <label for="pc-name">Enter PC Name:</label>
+  <input type="text" id="pc-name" placeholder="PC Name">
+  <button type="submit">Add PC</button>
+</form>
+
+<!-- Table to Display PCs -->
+<h2>List of PC</h2>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>PC Name</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody id="pc-list">
+  <!-- Rows will be added dynamically -->
+  </tbody>
+</table>
+
+<script>
+  const baseUrl = 'http://localhost:8080/PCs/';
+
+  const pcList = document.getElementById('pc-list'); // Fix ID for the table body
+  const addPcForm = document.getElementById('add-pc-form'); // Fix ID for the form
+  const pcNameInput = document.getElementById('pc-name'); // Fix ID for input field
+
+  // Fetch all PCs and update the table
+  async function fetchPCs() {
+    try {
+      const response = await fetch(baseUrl + 'GET-All-PCs');
+      const pcs = await response.json(); // Convert response to JSON
+      pcList.innerHTML = ''; // Clear table before reloading
+      pcs.forEach(pc => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+                <td>${pc.id}</td>
+                <td>${pc.name}</td>
+                <td><button onclick="deletePC(${pc.id})">Delete</button></td>
+            `;
+        pcList.appendChild(row);
+      });
+    } catch (error) {
+      console.error("Error fetching PCs:", error);
+    }
+  }
+
+  // Add a new PC
+  addPcForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const pc = { name: pcNameInput.value }; // Create PC object
+
+    try {
+      const response = await fetch( baseUrl + 'CREATE_PCs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pc),
+      });
+
+      if (!response.ok) {
+        console.error("Failed to add PC:", response.statusText);
+        return;
+      }
+
+      pcNameInput.value = ''; // Clear input field
+      fetchPCs(); // Refresh the table
+    } catch (error) {
+      console.error("Error adding PC:", error);
+    }
+  });
+
+  // Delete a PC
+  async function deletePC(id) {
+    try {
+      await fetch(baseUrl + `delete/${id}`, { method: 'DELETE' });
+      fetchPCs(); // Refresh the table
+    } catch (error) {
+      console.error("Error deleting PC:", error);
+    }
+  }
+
+  // Load PCs when page loads
+  fetchPCs();
+
+
+</script>
+</body>
+</html>
