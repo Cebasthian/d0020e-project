@@ -1,8 +1,44 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0,width=device-width">
+    </head>
     <body>
-        <h1>Recycler</h1>
-        <a href="/edc-consumer/index.html">EDC Consumer</a>
-        <a href="/edc-provider/index.html">EDC Provider</a>
+        <div class="top">
+            <div class="logo">
+                <img src="edc/logo.png">
+            </div>
+            <a href="/edc">Edc Gui</a>
+        </div>
+        <div class="container">
+            <div class="entries-container">
+                <button id="refresh">Refresh</button>
+                <div class="entries" id="entries"></div>
+            </div>
+            <div class="editor-container">
+                <div class="create-container">
+                    <h1>Create Entry</h1>
+                    <label>
+                        <span>Material *</span>
+                        <input id="create-material" placeholder="e.g. iron, plastic, wood">
+                    </label>
+                    <button id="create-button">Create Entry</button>
+                </div>
+                <div class="divider"></div>
+                <div class="edit-container" id="edit-container" hidden>
+                    <h1>Edit Entry</h1>
+                    <h2 id="edit-material"></h2>
+                    <div class="edit-instructions" id="edit-instructions"></div>
+                    <div class="add-instruction">
+                        <input id="add-instruction-input" placeholder="Instruction">
+                        <button id="add-instruction-button">Add</button>
+                    </div>
+                    <button id="edit-save">Save</button>
+                </div>
+            </div>
+        </div>
+        <script defer src="index.js"></script>
     </body>
 </html>
