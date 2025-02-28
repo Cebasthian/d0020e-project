@@ -14,5 +14,4 @@ public class MetadataEndpointExtension implements ServiceExtension {
     public void initialize(ServiceExtensionContext context) {
         webService.registerResource(new MetadataController(context.getMonitor(), context.getConfig()));
     }
-
 }

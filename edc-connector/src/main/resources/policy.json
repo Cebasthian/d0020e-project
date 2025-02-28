@@ -1,0 +1,25 @@
+{
+  "@context": {
+    "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+  },
+  "@id": "ID-policy",
+  "policy": {
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "@type": "Set",
+    "permission": [
+      {
+        "action": "data-transfer process",
+        "constraint": {
+          "@type": "AtomicConstraint",
+          "leftOperand": "ID",
+          "operator": {
+            "@id": "odrl:in"
+          },
+          "rightOperand": ["manufacturer", "supplier", "recycler"]
+        }
+      }
+    ],
+    "prohibition": [],
+    "obligation": []
+  }
+}

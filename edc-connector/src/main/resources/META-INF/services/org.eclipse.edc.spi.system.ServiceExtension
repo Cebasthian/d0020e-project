@@ -1,2 +1,4 @@
 org.example.edc.extension.SeedVaultExtension
 org.example.edc.extension.MetadataEndpointExtension
+org.example.edc.extension.allowedIDconstraint
+org.example.edc.extension.PolicyExtension
