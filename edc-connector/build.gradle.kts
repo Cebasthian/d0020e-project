@@ -9,6 +9,9 @@ repositories {
 }
 
 dependencies {
+    api(libs.edc.data.plane.spi)
+    api(libs.edc.json.ld.spi)
+
     implementation(libs.edc.control.api.configuration)
     implementation(libs.edc.control.plane.api.client)
     implementation(libs.edc.control.plane.api)
@@ -40,44 +43,7 @@ dependencies {
     implementation(libs.slf4j.api)
     implementation(libs.logback.classic)
 
-//    implementation(libs.edc.boot)
 //    implementation(libs.edc.connector.core)
-//    implementation(libs.edc.http)
-//    implementation(libs.edc.configuration.filesystem)
-//
-//
-//     implementation(libs.edc.runtime.metamodel)
-//     implementation(libs.edc.configuration.filesystem)
-//     implementation(libs.edc.control.api.configuration)
-//     implementation(libs.edc.control.plane.api.client)
-//     implementation(libs.edc.control.plane.core)
-//     implementation(libs.edc.dsp)
-//     implementation(libs.edc.http)
-//     implementation(libs.edc.iam.mock)
-//     implementation(libs.edc.management.api)
-//     implementation(libs.edc.api.observability)
-//     implementation(libs.edc.token.core)
-//     implementation(libs.edc.transfer.data.plane.signaling)
-//     implementation(libs.edc.transfer.pull.http.receiver)
-//     implementation(libs.edc.validator.data.address.http.data)
-//
-//     implementation(libs.edc.edr.cache.api)
-//     implementation(libs.edc.edr.store.core)
-//     implementation(libs.edc.edr.store.receiver)
-//
-//     implementation(libs.edc.data.plane.selector.api)
-//     implementation(libs.edc.data.plane.selector.control.api)
-//     implementation(libs.edc.data.plane.selector.core)
-//
-//     implementation(libs.edc.data.plane.self.registration)
-//     implementation(libs.edc.data.plane.signaling.api)
-//     implementation(libs.edc.data.plane.public.api.v2)
-//     implementation(libs.edc.data.plane.core)
-//     implementation(libs.edc.data.plane.http)
-//     implementation(libs.edc.data.plane.iam)
-//
-//     implementation(libs.edc.federatedcatalog.core)
-//     implementation(libs.edc.federatedcatalog.api)
 }
 
 application {
