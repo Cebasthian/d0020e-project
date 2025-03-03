@@ -1,9 +1,9 @@
 {
   "@context": {
     "edc": "https://w3id.org/edc/v0.0.1/ns/",
-    "odrl": "http://www.w3.org/ns/odrl.jsonld"
+    "odrl": "http://www.w3.org/ns/odrl/2/"
   },
-  "@type": "PolicyDefinitionRequest",
+  "@type": "PolicyDefinition",
   "@id": "ID-policy",
   "policy": {
     "@type": "odrl:Set",
@@ -16,7 +16,7 @@
         "constraint": [
           {
           "@type": "odrl:Constraint",
-          "leftOperand": "ID",
+          "leftOperand": "id",
           "operator": {
             "@id": "odrl:IS_ANY_OF"
           },

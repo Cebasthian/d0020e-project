@@ -1,0 +1,27 @@
+{
+  "@context": {
+    "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+  },
+  "@type": "ContractRequest",
+  "counterPartyAddress": "http://localhost:10003/protocol",
+  "protocol": "dataspace-protocol-http",
+  "policy": {
+    "@context": "http://www.w3.org/ns/odrl/2/",
+    "@id": "1:test-asset:",
+    "@type": "Offer",
+    "permission": [
+      {
+        "action": "data-transfer process",
+        "target": "test-asset",
+        "constraint": {
+          "@type": "odrl:Constraint",
+          "leftOperand": "id",
+          "operator": "odrl:IS_ANY_OF",
+          "rightOperand": ["manufacturer", "supplier", "recycler"]
+        }
+      }
+    ],
+    "assigner": "manufacturer",
+    "target": "test-asset"
+  }
+}
