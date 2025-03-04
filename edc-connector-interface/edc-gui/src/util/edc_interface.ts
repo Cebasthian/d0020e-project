@@ -75,7 +75,7 @@ export async function negotiateContract(policy: OdrlHasPolicy, targetConnectorAd
         permission: undefined //Array.isArray(policy.permission)[jsonLd.fixPolicyRule(policy.permission)],
     }
 
-    const perm = jsonLd.removeNamespaceShallow(policy).permission;
+    const perm = jsonLd.removeNamespaceExtended(policy).permission;
     body.permission = perm;
 
     // if(perm !== undefined) {
