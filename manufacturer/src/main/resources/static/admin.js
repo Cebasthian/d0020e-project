@@ -2,10 +2,21 @@
 const baseUrl = 'http://localhost:8080/PCs/';
 const pcList = document.getElementById('pc-list');
 const pcForm = document.getElementById('pc-form');
+const productIdInput = document.getElementById('product-id');
 const pcIdInput = document.getElementById('pc-id');
 const pcNameInput = document.getElementById('pc-name');
 const energyClassInput = document.getElementById('energy-class');
+const dimensionInput = document.getElementById('dimension');
+const lifecycleInput = document.getElementById('lifecycle');
 const powerRatingInput = document.getElementById('power-rating');
+const installingInstructionsInput = document.getElementById('installing-instructions');
+const maintenanceInstructionsInput = document.getElementById('maintenance-instructions');
+const repairInstructionsInput = document.getElementById('repair-instructions');
+const assemblyCarbonFootprintInput = document.getElementById('assembly-carbon-footprint');
+const warrantyInput = document.getElementById('warranty');
+const componentTypeInput = document.getElementById('component-type');
+const componentIdInput = document.getElementById('component-id');
+const componentNameInput = document.getElementById('component-name');
 
 // Fetch all PCs and update the table
 async function fetchPCs() {
@@ -17,9 +28,20 @@ async function fetchPCs() {
             const row = document.createElement('tr');
             row.innerHTML = `
         <td>${pc.id}</td>
+        <td>${pc.pcName}</td>
         <td>${pc.productId}</td>
         <td>${pc.energyClass || '-'}</td>
         <td>${pc.powerRating || '-'}</td>
+        <td>${pc.dimension || '-'}</td>
+        <td>${pc.lifecycle || '-'}</td>
+        <td>${pc.installingInstructions || '-'}</td>
+        <td>${pc.maintenanceInstructions || '-'}</td>
+        <td>${pc.repairInstructions || '-'}</td>
+        <td>${pc.assemblyCarbonFootprint || '-'}</td>
+        <td>${pc.warranty || '-'}</td>
+        <td>${pc.componentType || '-'}</td>
+        <td>${pc.componentId || '-'}</td>
+        <td>${pc.componentName || '-'}</td>
         <td>
           <button class="edit-btn" onclick="loadPC(${pc.id})">Edit</button>
           <button class="delete-btn" onclick="deletePC(${pc.id})">Delete</button>
@@ -36,9 +58,21 @@ pcForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const pcId = pcIdInput.value.trim();
     const pc = {
-        productId: pcNameInput.value.trim() || null,
+        pcIdd: pcIdInput.value.trim() || null,
+        pcName: pcNameInput.value.trim() || null,
+        productId: productIdInput.value.trim() || null,
         energyClass: energyClassInput.value.trim() || null,
-        powerRating: powerRatingInput.value ? parseInt(powerRatingInput.value) : null
+        dimension: dimensionInput.value.trim() || null,
+        lifecycle: lifecycleInput.value.trim() || null,
+        powerRating: powerRatingInput.value ? parseInt(powerRatingInput.value) : null,
+        installingInstructions: installingInstructionsInput.value.trim() || null,
+        maintenanceInstructions: maintenanceInstructionsInput.value.trim() || null,
+        repairInstructions: repairInstructionsInput.value.trim() || null,
+        assemblyCarbonFootprint: assemblyCarbonFootprintInput.value.trim() || null,
+        warranty: warrantyInput.value.trim() || null,
+        componentType: componentTypeInput.value.trim() || null,
+        componentId: componentIdInput.value.trim() || null,
+        componentName: componentNameInput.value.trim() || null
     };
 
     const method = pcId ? 'PUT' : 'POST';
@@ -78,11 +112,22 @@ async function loadPC(id) {
         const response = await fetch(baseUrl + `GET/${id}`);
         if (!response.ok) throw new Error("PC not found");
         const pc = await response.json();
-
         pcIdInput.value = pc.id;
-        pcNameInput.value = pc.productId;
+        pcNameInput.value = pc.pcName;
+        productIdInput.value = productIdInput;
         energyClassInput.value = pc.energyClass || '';
+        dimensionInput.value = pc.dimension || '';
+        lifecycleInput.value = pc.lifecycle || '';
         powerRatingInput.value = pc.powerRating || '';
+        installingInstructionsInput.value = pc.installingInstructions || '';
+        maintenanceInstructionsInput.value = pc.maintenanceInstructions || '';
+        repairInstructionsInput.value = pc.repairInstructions || '';
+        assemblyCarbonFootprintInput.value = pc.assemblyCarbonFootprint || '';
+        warrantyInput.value = pc.warranty || '';
+        componentTypeInput.value = pc.componentType || '';
+        componentIdInput.value = pc.componentId || '';
+        componentNameInput.value = pc.componentName || '';
+
     } catch (error) {
         console.error("Error loading PC:", error);
     }
