@@ -38,12 +38,12 @@ public class ManufacturerService {
         }
 
         // Spara dator i listan/databas
-        public void addPC(String name, String productId, String energyClass, String dimensions, String lifecycle, int powerRating, String installingInstructions, String maintenanceInstructions, String repairInstructions, String assemblyCarbonFootprint, String warranty, String componentType, String componentId, String componentName){
+        public void addPC(String name, String productId, String energyClass, String dimension, String lifecycle, int powerRating, String installingInstructions, String maintenanceInstructions, String repairInstructions, String assemblyCarbonFootprint, String warranty, String componentType, String componentId, String componentName){
                 PC newPc = new PC();
                 newPc.setName(name);
                 newPc.setProductId(productId);
                 newPc.setEnergyClass(energyClass);
-                newPc.setDimensions(dimensions);
+                newPc.setDimension(dimension);
                 newPc.setLifecycle(lifecycle);
                 newPc.setPowerRating(powerRating);
                 newPc.setInstallingInstructions(installingInstructions);
@@ -60,7 +60,7 @@ public class ManufacturerService {
         }
 
         @Transactional
-        public void updatePCField(Long id, String name, String productId, String energyClass, String dimensions, String lifecycle, int powerRating, String installingInstructions, String maintenanceInstructions, String repairInstructions, String assemblyCarbonFootprint, String warranty, int idForComponent, String componentType, String componentId, String componentName) {
+        public void updatePCField(Long id, String name, String productId, String energyClass, String dimension, String lifecycle, int powerRating, String installingInstructions, String maintenanceInstructions, String repairInstructions, String assemblyCarbonFootprint, String warranty, int idForComponent, String componentType, String componentId, String componentName) {
 
                 PC pc = pcRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("PC not found"));
                 pc.setComponent(idForComponent, componentType, componentId, componentName);
@@ -74,8 +74,8 @@ public class ManufacturerService {
                 if(energyClass != null){
                         pc.setEnergyClass(energyClass);
                 }
-                if(dimensions != null){
-                        pc.setDimensions(dimensions);
+                if(dimension != null){
+                        pc.setDimension(dimension);
                 }
                 if(lifecycle != null){
                         pc.setLifecycle(lifecycle);

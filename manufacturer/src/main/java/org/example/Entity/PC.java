@@ -30,7 +30,7 @@ public class PC {
 
     private String energyClass;
 
-    private String dimensions; // kanske är rimligare med String av typen '20x40x10 cm'
+    private String dimension; // kanske är rimligare med String av typen '20x40x10 cm'
 
     private String lifecycle;
 
@@ -98,13 +98,13 @@ public class PC {
     }
 
     //@Schema(hidden = true)
-    public void setDimensions(String Dimensions){
-        this.dimensions = Dimensions;
+    public void setDimension(String Dimension){
+        this.dimension = Dimension;
     }
 
     //@Schema(hidden = true)
-    public String getDimensions(){
-        return this.dimensions;
+    public String getDimension(){
+        return this.dimension;
     }
 
     public void setLifecycle(String lifecycle){
