@@ -38,8 +38,9 @@ public class ManufacturerService {
         }
 
         // Spara dator i listan/databas
-        public void addPC(String productId, String energyClass, String dimensions, String lifecycle, int powerRating, String installingInstructions, String maintenanceInstructions, String repairInstructions, String assemblyCarbonFootprint, String warranty, String componentType, String componentId, String componentName){
+        public void addPC(String name, String productId, String energyClass, String dimensions, String lifecycle, int powerRating, String installingInstructions, String maintenanceInstructions, String repairInstructions, String assemblyCarbonFootprint, String warranty, String componentType, String componentId, String componentName){
                 PC newPc = new PC();
+                newPc.setName(name);
                 newPc.setProductId(productId);
                 newPc.setEnergyClass(energyClass);
                 newPc.setDimensions(dimensions);
@@ -59,10 +60,13 @@ public class ManufacturerService {
         }
 
         @Transactional
-        public void updatePCField(Long id, String productId, String energyClass, String dimensions, String lifecycle, int powerRating, String installingInstructions, String maintenanceInstructions, String repairInstructions, String assemblyCarbonFootprint, String warranty, int idForComponent, String componentType, String componentId, String componentName) {
+        public void updatePCField(Long id, String name, String productId, String energyClass, String dimensions, String lifecycle, int powerRating, String installingInstructions, String maintenanceInstructions, String repairInstructions, String assemblyCarbonFootprint, String warranty, int idForComponent, String componentType, String componentId, String componentName) {
 
                 PC pc = pcRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("PC not found"));
                 pc.setComponent(idForComponent, componentType, componentId, componentName);
+                if(name != null){
+                        pc.setName(name);
+                }
                 if(productId != null){
                         //pcRepository.updateProductid(id, productId);
                         pc.setProductId(productId);

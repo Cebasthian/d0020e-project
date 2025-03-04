@@ -19,6 +19,8 @@ public class PC {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     private String productId;
 
     //@NotNull
@@ -40,6 +42,14 @@ public class PC {
     private String assemblyCarbonFootprint;
 
     private String warranty;
+
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String Name){
+        this.name = Name;
+    }
 
     //@Schema(hidden = true)
     public Long getID(){
