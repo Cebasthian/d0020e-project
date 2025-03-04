@@ -1,28 +1,20 @@
 {
   "@context": {
-    "edc": "https://w3id.org/edc/v0.0.1/ns/",
-    "odrl": "http://www.w3.org/ns/odrl/2/"
+    "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
   },
-  "@type": "PolicyDefinition",
-  "@id": "ID-policy",
+  "@id": "id-policy",
   "policy": {
-    "@type": "odrl:Set",
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "@type": "Set",
     "permission": [
       {
-        "action": {
-          "@id": "odrl:use"
-        },
-        "target": "test-asset",
-        "constraint": [
-          {
-          "@type": "odrl:Constraint",
-          "leftOperand": "id",
-          "operator": {
-            "@id": "odrl:IS_ANY_OF"
-          },
-          "rightOperand": ["manufacturer", "supplier", "recycler"]
-          }
-        ]
+        "action": "use",
+        "constraint": {
+          "@type": "AtomicConstraint",
+          "leftOperand": "identity",
+          "operator": "odrl:eq",
+          "rightOperand": "manufacturer,supplier,recycler"
+        }
       }
     ],
     "prohibition": [],
