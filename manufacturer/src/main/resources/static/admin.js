@@ -23,12 +23,18 @@ async function fetchPCs() {
     try {
         const response = await fetch(baseUrl + 'GET-All-PCs');
         const pcs = await response.json();
+        console.log(pcs);
         pcList.innerHTML = '';
         pcs.forEach(pc => {
             const row = document.createElement('tr');
+
+            const componentType = pc.components && pc.components.length > 0 ? pc.components[0].componentType : '-';
+            const componentId = pc.components && pc.components.length > 0 ? pc.components[0].componentId : '-';
+            const componentName = pc.components && pc.components.length > 0 ? pc.components[0].name : '-';
+
             row.innerHTML = `
         <td>${pc.id}</td>
-        <td>${pc.pcName}</td>
+        <td>${pc.name}</td>
         <td>${pc.productId}</td>
         <td>${pc.energyClass || '-'}</td>
         <td>${pc.powerRating || '-'}</td>
@@ -39,9 +45,9 @@ async function fetchPCs() {
         <td>${pc.repairInstructions || '-'}</td>
         <td>${pc.assemblyCarbonFootprint || '-'}</td>
         <td>${pc.warranty || '-'}</td>
-        <td>${pc.componentType || '-'}</td>
-        <td>${pc.componentId || '-'}</td>
-        <td>${pc.componentName || '-'}</td>
+        <td>${pc.components[0].componentType || '-'}</td>
+        <td>${pc.components[0].componentId || '-'}</td>
+        <td>${pc.components[0].name || '-'}</td>
         <td>
           <button class="edit-btn" onclick="loadPC(${pc.id})">Edit</button>
           <button class="delete-btn" onclick="deletePC(${pc.id})">Delete</button>
@@ -58,8 +64,8 @@ pcForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const pcId = pcIdInput.value.trim();
     const pc = {
-        pcIdd: pcIdInput.value.trim() || null,
-        pcName: pcNameInput.value.trim() || null,
+        // pcIdd: pcIdInput.value.trim() || null,
+        name: pcNameInput.value.trim() || null,
         productId: productIdInput.value.trim() || null,
         energyClass: energyClassInput.value.trim() || null,
         dimension: dimensionInput.value.trim() || null,
@@ -78,8 +84,17 @@ pcForm.addEventListener('submit', async (e) => {
     const method = pcId ? 'PUT' : 'POST';
     const endpoint = pcId ? `update-pc/${pcId}` : 'CREATE_PCs';  // Corrected endpoint
 
+    const searchParams = new URLSearchParams()
+
+    for(const key in pc) {
+        const value = pc[key]
+        searchParams.set(key, value)
+    }
+
+    const url = baseUrl + endpoint + "?" + searchParams.toString()
+
     try {
-        const response = await fetch(baseUrl + endpoint, {  // Only baseUrl once
+        const response = await fetch(url, {  // Only baseUrl once
             method: method,
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(pc)
@@ -113,7 +128,7 @@ async function loadPC(id) {
         if (!response.ok) throw new Error("PC not found");
         const pc = await response.json();
         pcIdInput.value = pc.id;
-        pcNameInput.value = pc.pcName;
+        pcNameInput.value = pc.name;
         productIdInput.value = productIdInput;
         energyClassInput.value = pc.energyClass || '';
         dimensionInput.value = pc.dimension || '';
