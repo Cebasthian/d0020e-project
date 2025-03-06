@@ -2,6 +2,7 @@ package org.example.controller;
 
 // Swagger documentation
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -63,6 +64,41 @@ public class MaterialsController {
     @PostMapping
     public Materials createOrUpdateMaterial(@RequestBody Materials materials) {
         return materialService.saveMaterial(materials);
+    }
+
+    @Operation(summary = "Update a Material", description = "Update an existing material by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Material updated successfully",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = Materials.class))),
+            @ApiResponse(responseCode = "404", description = "Material not found"),
+            @ApiResponse(responseCode = "400", description = "Invalid input data"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @PutMapping("/{id}")
+    public ResponseEntity<Materials> updateMaterial(
+            @Parameter(description = "ID of the material to update") @PathVariable int id,
+            @RequestBody Materials updatedMaterial
+    ) {
+        Materials existingMaterial = materialService.getMaterialById(id);
+        if (existingMaterial == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        if (updatedMaterial.getMaterialType() != null) {
+            existingMaterial.setMaterialType(updatedMaterial.getMaterialType());
+        }
+        if (updatedMaterial.getOrigin() != null) {
+            existingMaterial.setOrigin(updatedMaterial.getOrigin());
+        }
+        if (updatedMaterial.getMaterialFlow() != null) {
+            existingMaterial.setMaterialFlow(updatedMaterial.getMaterialFlow());
+        }
+        if (updatedMaterial.getSupplier() != null) {
+            existingMaterial.setSupplier(updatedMaterial.getSupplier());
+        }
+
+        Materials savedMaterial = materialService.saveMaterial(existingMaterial);
+        return ResponseEntity.ok(savedMaterial);
     }
 
     @Operation(summary = "Delete Material", description = "Delete a material by its ID")

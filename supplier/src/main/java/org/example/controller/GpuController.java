@@ -2,6 +2,7 @@ package org.example.controller;
 
 // Swagger documentation
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -62,12 +63,26 @@ public class GpuController {
     })
     @PostMapping
     public GPU createOrUpdateGpu(@RequestBody GPU gpu) throws Exception {
-
-        /*if(gpu.getMaterials() != null) {
-            gpu.getMaterials().forEach(material -> material.setGpu(gpu));
-        }*/
         GPU savedGpu = gpuService.saveGpu(gpu);
         return ResponseEntity.ok(savedGpu).getBody();
+    }
+
+    @Operation(summary = "Update a GPU", description = "Update an existing GPU by ID, including its materials")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "GPU updated successfully",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = GPU.class))),
+            @ApiResponse(responseCode = "404", description = "GPU not found"),
+            @ApiResponse(responseCode = "400", description = "Invalid input or material not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @PutMapping("/{id}")
+    public ResponseEntity<GPU> updateGpu(
+            @Parameter(description = "ID of the GPU to update") @PathVariable Integer id,
+            @RequestBody GPU gpu
+    ) throws Exception {
+        gpu.setId(id);
+        GPU updatedGpu = gpuService.saveGpu(gpu);
+        return ResponseEntity.ok(updatedGpu);
     }
 
     @Operation(summary = "Delete GPU", description = "Delete a GPU by its ID")

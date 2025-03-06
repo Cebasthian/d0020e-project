@@ -22,7 +22,7 @@ public class MaterialService {
     }
 
     public Materials saveMaterial(Materials material) {
-        return materialRepository.save(material);
+        return materialRepository.saveAndFlush(material);
     }
 
     public void deleteMaterials(Integer id) {

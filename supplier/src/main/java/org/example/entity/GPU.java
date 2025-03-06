@@ -1,16 +1,17 @@
 package org.example.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "gpus")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class GPU {
 
     @Id
@@ -20,9 +21,13 @@ public class GPU {
     @NotNull
     private String componentId;
 
-    @NotNull
-    @OneToMany(mappedBy = "gpu", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "gpu_materials",
+            joinColumns = @JoinColumn(name = "gpu_id"),
+            inverseJoinColumns = @JoinColumn(name = "material_id")
+    )
+    @JsonIgnoreProperties("gpus")
     private List<Materials> materials = new ArrayList<>();
 
     private String name;
@@ -106,6 +111,5 @@ public class GPU {
     public String getAssemblyLine() {
         return assemblyLine;
     }
-
 
 }
