@@ -100,10 +100,37 @@ function fixConstraint<T>(constraint: T): T {
     return ret;
 }
 
+function removeNamespaceExtended<T>(json: T): T {
+    if(Array.isArray(json)) {
+        return json.map(e => removeNamespaceExtended(e as T))
+    }
+
+    const ret: any = {}
+    const keys = Object.keys(json)
+
+    if(keys.length === 1 && keys[0] === "@id") {
+        return splitNamespace(json[keys[0]])
+    }
+
+    for(let i = 0; i < keys.length; i++) {
+        const key = keys[i]
+        const k = splitNamespace(key)
+        let body = json[key]
+        if(body !== null && typeof body === "object") {
+            body = removeNamespaceExtended(body)
+        } else if(typeof body === "string") {
+            body = splitNamespace(body)
+        }
+        ret[k] = body;
+    }
+    return ret
+}
+
 export const jsonLd = {
     removeNamespace,
     removeNamespaceShallow,
     splitNamespace,
     fixConstraint,
     fixPolicyRule,
+    removeNamespaceExtended
 }

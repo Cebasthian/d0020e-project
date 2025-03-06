@@ -3,8 +3,8 @@
     "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
   },
   "@id": "1",
-  "accessPolicyId": "ID-policy",
-  "contractPolicyId": "ID-policy",
+  "accessPolicyId": "id-policy",
+  "contractPolicyId": "id-policy",
   "assetsSelector": [{
     "@type": "CriterionDto",
     "operandLeft": "https://w3id.org/edc/v0.0.1/ns/id",

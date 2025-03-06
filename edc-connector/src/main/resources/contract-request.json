@@ -3,21 +3,20 @@
     "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
   },
   "@type": "ContractRequest",
-  "counterPartyAddress": "http://localhost:10003/protocol",
+  "counterPartyAddress": "http://localhost:10004/protocol",
   "protocol": "dataspace-protocol-http",
   "policy": {
-    "@context": "http://www.w3.org/ns/odrl/2/",
-    "@id": "1:test-asset:",
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "@id": "MQ==:dGVzdC1hc3NldA==:YTA0ODNlNWUtMzU3YS00N2ZlLWE0YTEtYmIwODYyYTM4ZGJm",
     "@type": "Offer",
     "permission": [
       {
-        "action": "data-transfer process",
-        "target": "test-asset",
+        "action": "use",
         "constraint": {
-          "@type": "odrl:Constraint",
-          "leftOperand": "id",
-          "operator": "odrl:IS_ANY_OF",
-          "rightOperand": ["manufacturer", "supplier", "recycler"]
+          "@type": "AtomicConstraint",
+          "leftOperand": "identity",
+          "operator": "odrl:eq",
+          "rightOperand": "manufacturer,supplier,recycler"
         }
       }
     ],

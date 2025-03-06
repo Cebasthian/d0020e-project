@@ -19,6 +19,8 @@ public class PC {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     private String productId;
 
     //@NotNull
@@ -28,7 +30,7 @@ public class PC {
 
     private String energyClass;
 
-    private String dimensions; // kanske är rimligare med String av typen '20x40x10 cm'
+    private String dimension; // kanske är rimligare med String av typen '20x40x10 cm'
 
     private String lifecycle;
 
@@ -40,6 +42,14 @@ public class PC {
     private String assemblyCarbonFootprint;
 
     private String warranty;
+
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String Name){
+        this.name = Name;
+    }
 
     //@Schema(hidden = true)
     public Long getID(){
@@ -88,13 +98,13 @@ public class PC {
     }
 
     //@Schema(hidden = true)
-    public void setDimensions(String Dimensions){
-        this.dimensions = Dimensions;
+    public void setDimension(String Dimension){
+        this.dimension = Dimension;
     }
 
     //@Schema(hidden = true)
-    public String getDimensions(){
-        return this.dimensions;
+    public String getDimension(){
+        return this.dimension;
     }
 
     public void setLifecycle(String lifecycle){
