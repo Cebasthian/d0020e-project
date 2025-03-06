@@ -1,0 +1,84 @@
+.container {
+    padding: 2rem;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin: 20px;
+}
+
+.gpu-item,
+.material-item {
+    border: 2px dashed #0070f3;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.nested-material {
+    border: 1px solid #0070f3;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    background-color: #e6f7ff;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+input,
+textarea {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0070f3;
+    color: #fff;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+.materials-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+#cancelEditBtn {
+    background-color: #6c757d;
+}
+
+#cancelEditBtn:hover {
+    background-color: #5a6268;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #006200;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

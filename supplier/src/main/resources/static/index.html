@@ -1,8 +1,116 @@
 <!DOCTYPE html>
-<html>
-    <body>
-        <h1>Supplier</h1>
-        <a href="/edc-consumer/index.html">EDC Consumer</a>
-        <a href="/edc-provider/index.html">EDC Provider</a>
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>GPU Management Portal</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="edc/logo.png" alt="Logo" style="height: 50px" />
+      </div>
+      <div class="header-link">
+        <a href="/edc" style="color: white; text-decoration: none">Go to EDC</a>
+      </div>
+    </header>
+
+    <div class="container">
+      <form id="materialForm">
+        <h2>Create New Material</h2>
+        <label>
+          Material Type: <input type="text" id="newMaterialType" required />
+        </label>
+        <label> Origin: <input type="text" id="newOrigin" required /> </label>
+        <label>
+          Material Flow: <input type="text" id="newMaterialFlow" required />
+        </label>
+        <label>
+          Supplier: <input type="text" id="newSupplier" required />
+        </label>
+        <button type="submit">Create Material</button>
+      </form>
+
+      <form id="gpuForm">
+        <h2 id="gpuFormTitle">Create New GPU</h2>
+        <input type="hidden" id="gpuId" />
+
+        <label>
+          Component ID: <input type="text" id="componentId" required />
+        </label>
+        <label> Name: <input type="text" id="name" required /> </label>
+        <label>
+          Weight (grams): <input type="number" id="weight" required />
+        </label>
+        <label>
+          Dimensions: <input type="text" id="dimensions" required />
+        </label>
+        <label>
+          Power Rating (watts):
+          <input type="number" id="powerRating" required />
+        </label>
+        <label>
+          Installing Instructions:
+          <textarea id="installingInstructions" required></textarea>
+        </label>
+        <label>
+          Assembly Line: <input type="text" id="assemblyLine" required />
+        </label>
+
+        <h3>Add Materials</h3>
+        <div class="nested-material">
+          <label>
+            Material ID (existing): <input type="number" id="materialId" />
+          </label>
+          <label> Type: <input type="text" id="materialType" /> </label>
+          <label> Origin: <input type="text" id="origin" /> </label>
+          <label> Flow: <input type="text" id="materialFlow" /> </label>
+          <label> Supplier: <input type="text" id="supplier" /> </label>
+          <button type="button" id="addMaterialBtn">Add Material</button>
+        </div>
+
+        <h4>Selected Materials:</h4>
+        <ul id="materialsDisplay" class="materials-list"></ul>
+
+        <button type="submit" id="gpuSubmitBtn">Create GPU</button>
+        <button type="button" id="cancelEditBtn" style="display: none">
+          Cancel Edit
+        </button>
+      </form>
+
+      <div class="nested-material">
+        <h2>Edit Material</h2>
+        <form id="editMaterialForm">
+          <input type="hidden" id="editMaterialId" />
+          <label>
+            Type: <input type="text" id="editMaterialType" required />
+          </label>
+          <label>
+            Origin: <input type="text" id="editOrigin" required />
+          </label>
+          <label>
+            Flow: <input type="text" id="editMaterialFlow" required />
+          </label>
+          <label>
+            Supplier: <input type="text" id="editSupplier" required />
+          </label>
+          <button type="submit">Update Material</button>
+        </form>
+      </div>
+
+      <div class="module">
+        <h2>Existing GPUs</h2>
+        <button id="listGpusBtn">Refresh GPUs</button>
+        <div id="gpuList"></div>
+      </div>
+
+      <div class="module">
+        <h2>Existing Materials</h2>
+        <button id="listMaterialsBtn">Refresh Materials</button>
+        <div id="materialList"></div>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
 </html>
