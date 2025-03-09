@@ -110,7 +110,7 @@ export default function MyPolicies() {
                         <label>
                             <span>Value</span>
                             <input
-                                placeholder="ex. trusted"
+                                placeholder="ex. manufacturer"
                                 value={perm.right}
                                 onChange={(e) =>
                                     setPerm((p) => {
@@ -122,9 +122,9 @@ export default function MyPolicies() {
                         <span>Policy</span>
                         <span>
                             <b>
-                                {`${perm.left || "null"} ${jsonLd
-                                    .splitNamespace(perm.operator)
-                                    .toUpperCase()} ${perm.right || "null"}`}
+                                {
+                                    (!perm.left || !perm.right) ? "" : `${perm.left} ${jsonLd.splitNamespace(perm.operator).toUpperCase()} ${perm.right}`
+                                }
                             </b>
                         </span>
                     </label>

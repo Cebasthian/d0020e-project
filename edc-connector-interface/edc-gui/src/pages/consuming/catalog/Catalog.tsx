@@ -76,7 +76,6 @@ function AssetComponent({
         <>
         <div className={"card " + styles.asset}>
             <h3>{asset.name}</h3>
-            <span>TODO: Policy Rules</span>
             <Fields>
                 <Attribute icon="fingerprint" text="ASSET ID" value={asset.id} />
                 <Attribute icon="id_card" text="PARTICIPANT ID" value={asset.participantId} />
