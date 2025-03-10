@@ -2,6 +2,41 @@ const gpuApiUrl = "http://localhost:8083/gpus";
 const materialApiUrl = "http://localhost:8083/materials";
 let materialArray = [];
 
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("pasteGpuTestData").addEventListener("click", function () {
+    document.getElementById("componentId").value = "rtx3030";
+    document.getElementById("name").value = "rtx 3030";
+    document.getElementById("weight").value = 650;
+    document.getElementById("dimensions").value = "320x230x75";
+    document.getElementById("powerRating").value = 600;
+    document.getElementById("installingInstructions").value = "Refer to manual";
+    document.getElementById("assemblyLine").value = "Line C";
+  });
+
+  function fillMaterialTestData(prefix) {
+    if (prefix === "new") {
+      document.getElementById("newMaterialType").value = "Silicone";
+      document.getElementById("newOrigin").value = "Germany";
+      document.getElementById("newMaterialFlow").value = "Manufactured";
+      document.getElementById("newSupplier").value = "Supplier C";
+    } else {
+      document.getElementById("materialType").value = "Silicone";
+      document.getElementById("origin").value = "Germany";
+      document.getElementById("materialFlow").value = "Manufactured";
+      document.getElementById("supplier").value = "Supplier C";
+    }
+  }
+
+  document.getElementById("pasteMaterialTestData").addEventListener("click", function () {
+    fillMaterialTestData("new");
+  });
+
+  document.getElementById("pasteMaterialTestData_gpu").addEventListener("click", function () {
+    fillMaterialTestData("");
+  });
+});
+
+
 document
   .getElementById("materialForm")
   .addEventListener("submit", async (e) => {
