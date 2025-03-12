@@ -43,6 +43,7 @@ E.g the supplier admin webpage: [http://localhost:8083](http://localhost:8083).
 | Recycler     | 1             | 8081           |
 | Adversary    | 2             | 8082           |
 | Supplier     | 3             | 8083           |
+
 See
 [Edc Connectors](edc-connector/README.md)
 for information on which ports and IP addresses the EDC connectors have in the docker network.
